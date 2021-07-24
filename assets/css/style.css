@@ -1,0 +1,12 @@
+/* GENERAL */
+
+
+/* AUTRE */
+.invisible{
+    display: none;
+}
+.card{
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+}
