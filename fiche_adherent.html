@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style-mobile.css" />
+    <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
 </head>
 <body>
-    
+    <header>
+        <select name="nav-main" id="nav-main" class="invisible"></select>
+        <button id="retour" class="invisible">Retour</button>
+        <h1 class="invisible">BDthèque des Marmusots</h1>
+        <div id="compte">
+            <p id="identification" class="invisible">Bonjour</p>
+            <select name="nav" id="nav" class="invisible"></select>
+            <button id="connexion">Se connecter</button>
+        </div>
+    </header>
+
+    <container id="main">
+        <label>Fiche adhérent</label>
+        <form>
+            <label>NOM</label><div name="nom"></div>
+            <label>Prénom</label><div name="prenom"></div>
+            <label>Adresse</label><div name="adress"></div>
+            <label>Date de règlement de la cotisation annuelle</label>
+            <div name="datecot"></div>
+            <label class="invisible">Emprunts en cours</label><div name="emprunt" class="invisible"></div>
+            <label class="invisible">Amendes</label><div name="amende" class="invisible"></div>
+        </form>
+    </container>
+    <footer>
+        <p>Manon et Amandine, les BG - 2021</p>
+    </footer>
+
+
+    <script src="assets/script/script.js"></script>
 </body>
 </html>
