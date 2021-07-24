@@ -18,13 +18,14 @@
 }
 body{
     background-color: #dde4ed;
+
 }
 h1 {
     font-family: BadaBoom BB, Helvetica, sans-serif;
 }
 
 button{
-    max-width: 150px;
+    max-width: 120px;
 
     box-shadow: 0px 10px 14px -7px #276873;
     background:linear-gradient(to bottom, #b3c6cc 5%, #71adb0 100%);
@@ -34,7 +35,7 @@ button{
     display:inline-block;
 	cursor:pointer;
 	color:#151219;
-    padding:13px 32px;
+    padding:10px 20px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #3d768a;
 
@@ -68,9 +69,9 @@ header {
 /* SearchDiv */
 #searchDiv{
     background-color: darkgrey;
-    height: 300px;
+    height: 200px;
 
-    padding-top: 40px;
+    padding-top: 60px;
 
     display: flex;
     flex-direction: column;
@@ -81,10 +82,12 @@ header {
 
 #searchDiv h1 {
     font-size: 3em;
+    display: flex;
+    text-align: center;
 }
 #search{
     height: 30px;
-    width: 600px;
+    width: 300px;
     border: none;
     border-radius: 8px;
 }
