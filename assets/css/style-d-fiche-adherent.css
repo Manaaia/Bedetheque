@@ -1,0 +1,29 @@
+header {
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+#compte {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#identification {
+    font-size: 1.5em;
+}
+
+#form {
+    border: none;
+    border-radius: 8px;
+    background-color: darkgrey;
+}

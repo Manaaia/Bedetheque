@@ -6,23 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style-mobile.css" />
     <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <link rel="stylesheet" href="assets\css\style-d-fiche-adherent.css">
     <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
 </head>
 <body>
     <header>
         <select name="nav-main" id="nav-main" class="invisible"></select>
         <button id="retour" class="invisible">Retour</button>
-        <h1 class="invisible">BDthèque des Marmusots</h1>
+        <h1 class="visible">BDthèque des Marmusots</h1>
         <div id="compte">
-            <p id="identification" class="invisible">Bonjour</p>
-            <select name="nav" id="nav" class="invisible"></select>
-            <button id="connexion">Se connecter</button>
+            <p id="identification" class="visible">Bonjour</p>
+            <select name="nav" id="nav" class="visible">
+                <option value="" autofocus>Mon compte</option>
+                <option value="mafiche">Ma fiche adhérent</option>
+                <option value="logout">Se déconnecter</option>
+            </select>
+            <button id="connexion" class="invisible">Se connecter</button>
         </div>
     </header>
 
     <container id="main">
         <label>Fiche adhérent</label>
-        <form>
+        <form id="form">
             <label>NOM</label><div name="nom"></div>
             <label>Prénom</label><div name="prenom"></div>
             <label>Adresse</label><div name="adress"></div>
