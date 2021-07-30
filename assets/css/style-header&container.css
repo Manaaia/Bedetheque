@@ -1,0 +1,89 @@
+header {
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3em;
+    display: flex;
+    text-align: center;
+}
+
+#compte {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#compte>p {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+select {
+    padding: 7px 30px 7px 12px;
+    border: 1px solid #151219;
+    border-radius: 8px;
+    background: #b9ac8d;
+    box-shadow: 0 1px 3px -2px #968566;
+    cursor: pointer;
+    text-decoration:none;
+	text-shadow:0px 1px 0px #968566;
+    transition: all 150ms ease;
+}
+    
+option {
+    color:#151219;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+container {
+    display: flex;
+    justify-content: center;
+}
+
+#divform {
+    background-color: #b9ac8d;
+    box-shadow: 3px 3px 10px -2px #968566;
+    border-radius: 8px;
+    margin: 5%;
+    padding: 1.5%;
+    width:80%;
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    border-radius: 8px;
+    padding: 3%;
+    border-color: #dde4ed;
+    border: solid 1px;
+    width: 100%;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+th {
+    padding: 5%;
+    text-align: start;
+    font-weight: unset;
+    font-size: 1.5em;
+}
+
+.label {
+    font-weight: bold;
+}
+
