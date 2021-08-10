@@ -13,4 +13,10 @@
     #search{
         width: 600px;
     }
+    button {
+        min-width:120px;
+    }
+    #abandon {
+        
+    }
 }
