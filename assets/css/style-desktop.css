@@ -16,7 +16,8 @@
     button {
         min-width:120px;
     }
-    #abandon {
-        
+    .casegestion>p {
+        display: inline-block;
+        white-space: nowrap;
     }
 }
