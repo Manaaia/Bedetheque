@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style-mobile.css" />
+    <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <link rel="stylesheet" href="assets\css\style-header&container.css">
+    <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
+</head>
+<body>
+    <header>
+        <select name="nav-main" id="nav-main" class="invisible"></select>
+        <button id="retour" class="visible">Retour</button>
+        <h1 class="visible">Centre culturel des Marmusots</h1>
+        <div id="compte">
+            <p id="identification" class="visible">Bonjour Testitest !</p>      <!--Attention enlever Testitest-->
+            <select name="nav" id="nav" class="visible">
+                <option value="" disabled selected>Mon compte</option>
+                <option value="mafiche">Ma fiche adhérent</option>
+                <option value="logout">Se déconnecter</option>
+            </select>
+            <button id="connexion" class="invisible">Se connecter</button>
+        </div>
+    </header>
+
+    <container>
+        <div id="divform">
+        <fieldset class="form"><legend for="form">Fiche adhérent</legend>
+            <table>
+                <tr>
+                    <th class="label">Nom</th>
+                    <th class="nomadherent">Test</th>
+                </tr>
+                <tr>
+                    <th class="label">Prénom</th>
+                    <th class="prenomadherent">Testitest</th>
+                </tr>
+                <tr>
+                    <th class="label">Adresse</th>
+                    <th id="adresseadherent">42 rue des étoiles de mer<br/>23456<br/>
+                        MONCUL</th>
+                </tr>
+                <tr>
+                    <th class="label">Date de règlement de la cotisation annuelle</th>
+                    <th id="datecot">01/01/1999</th>
+                </tr>
+                <tr>
+                    <th class="label invisible">Emprunts en cours</th>
+                    <th id="emprunt" class="invisible"></th>
+                </tr>
+                <tr>
+                    <th class="label invisible">Amendes</th>
+                    <th id="amende" class="invisible"></th>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    </container>
+    <footer>
+        <p>Manon et Amandine, les BG - 2021</p>
+    </footer>
+
+
+    <script src="assets/script/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+@media screen and (min-width:600px){
+    /* GENERAL */
+
+    /* SearchDiv */
+    #searchDiv{
+        background-color: darkgrey;
+        height: 300px;
+    }
+    #searchDiv h1 {
+        font-size: 3em;
+    }
+    #search{
+        width: 600px;
+    }
+}

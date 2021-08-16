@@ -1,0 +1,137 @@
+/* GENERAL */
+@font-face {
+    font-family: 'ITC Avant Garde Gothic LT';
+    src: url('AvantGardeLT-Demi.woff2') format('woff2'),
+        url('AvantGardeLT-Demi.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'BadaBoom BB';
+    src: url('BadaBoomBB.woff2') format('woff2'),
+        url('BadaBoomBB.woff') format('woff');
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'ITC Avant Garde Gothic LT', Helvetica, sans-serif;
+    font-size: 10px;
+}
+body{
+    background-color: #dde4ed;
+
+}
+h1 {
+    font-family: BadaBoom BB, Helvetica, sans-serif;
+}
+
+button{
+    max-width: 120px;
+
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:linear-gradient(to bottom, #b3c6cc 5%, #71adb0 100%);
+	background-color:#b3c6cc;
+    border-radius:8px;
+    border: none;
+    display:inline-block;
+	cursor:pointer;
+	color:#151219;
+    padding:10px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+
+}
+button:hover{
+    background:linear-gradient(to bottom, #71adb0 5%, #b3c6cc 100%);
+	background-color:#71adb0;
+}
+
+/* Header */
+.invisible{
+    display: none;
+}
+header {
+    background-color: #a97a52;
+}
+#connexion{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    transition: all 1s ease-out;
+
+}
+#connexion:active{
+    top: 22px;
+
+}
+
+
+/* SearchDiv */
+#searchDiv{
+    background-color: darkgrey;
+    height: 200px;
+
+    padding-top: 60px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#searchDiv h1 {
+    font-size: 3em;
+    display: flex;
+    text-align: center;
+}
+#search{
+    height: 30px;
+    width: 300px;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* NewItems */
+#newItems h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+
+    font-size: 1.5em;
+
+}
+#newItems img{
+    height: 180px;
+    width: 134px;
+    margin-bottom: 10px;
+}
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    background-color: #b9ac8d;
+}
+#newItems button{
+    margin: 10px;
+}
+/* Footer */
+footer{
+    height: 10px;
+    padding: 10px;
+   text-align: center;
+   background-color: rgba(185, 172, 141, 0.2);
+}
