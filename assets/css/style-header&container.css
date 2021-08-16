@@ -72,7 +72,7 @@ option[disabled] {
     -webkit-appearance: none;
 }
 
-.divform {
+#divform {
     background-color: rgba(185, 172, 141, 0.719);
     box-shadow: 3px 3px 10px -2px #968566;
     border-radius: 8px;
