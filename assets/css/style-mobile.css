@@ -1,14 +1,14 @@
 /* GENERAL */
 @font-face {
     font-family: 'ITC Avant Garde Gothic LT';
-    src: url('AvantGardeLT-Demi.woff2') format('woff2'),
-        url('AvantGardeLT-Demi.woff') format('woff');
+    src: url('font/AvantGardeLT-Demi.woff2') format('woff2'),
+        url('font/AvantGardeLT-Demi.woff') format('woff');
 }
 
 @font-face {
     font-family: 'BadaBoom BB';
-    src: url('BadaBoomBB.woff2') format('woff2'),
-        url('BadaBoomBB.woff') format('woff');
+    src: url('font/BadaBoomBB.woff2') format('woff2'),
+        url('font/adaBoomBB.woff') format('woff');
 }
 * {
     margin: 0;
