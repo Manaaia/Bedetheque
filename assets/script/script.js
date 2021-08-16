@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/Manon
 $(document).ready(function() {
 
 
@@ -54,10 +50,5 @@ $(document).ready(function() {
     }
 
     console.log( "Load was performed." );
-<<<<<<< HEAD
+
 });
-=======
->>>>>>> 3236674d086cd47a0961e81606d1e085f76ee734
-=======
-});
->>>>>>> origin/Manon
