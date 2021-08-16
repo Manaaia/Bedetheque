@@ -8,7 +8,11 @@
 @font-face {
     font-family: 'BadaBoom BB';
     src: url('font/BadaBoomBB.woff2') format('woff2'),
+<<<<<<< HEAD
         url('font/BadaBoomBB.woff') format('woff');
+=======
+        url('font/adaBoomBB.woff') format('woff');
+>>>>>>> 3236674d086cd47a0961e81606d1e085f76ee734
 }
 * {
     margin: 0;
