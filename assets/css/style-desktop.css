@@ -16,3 +16,9 @@
     button {
         min-width:120px;
     }
+    .casegestion>p {
+        display: inline-block;
+        white-space: nowrap;
+    }
+}
+
