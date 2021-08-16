@@ -1,4 +1,5 @@
 header {
+
     height: 190px;
     box-shadow: 3px 3px 10px -2px #968566;
 
@@ -66,13 +67,14 @@ option[disabled] {
 
 #main-menu>select {
     border-radius: 8px 8px 0px 0px;
+
 }
 
 #fond {
     -webkit-appearance: none;
 }
 
-.divform {
+#divform {
     background-color: rgba(185, 172, 141, 0.719);
     box-shadow: 3px 3px 10px -2px #968566;
     border-radius: 8px;
@@ -98,7 +100,6 @@ legend {
 }
 
 th {
-
     padding: 20px 0px 20px 0px;
     text-align: start;
     font-weight: unset;
@@ -135,6 +136,7 @@ th>input::placeholder {
     display: flex;
     justify-content: space-between;
 }
+
 
 #recherche {
     text-align: center;

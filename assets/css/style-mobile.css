@@ -9,6 +9,7 @@
     font-family: 'BadaBoom BB';
     src: url('font/BadaBoomBB.woff2') format('woff2'),
         url('font/BadaBoomBB.woff') format('woff');
+
 }
 * {
     margin: 0;

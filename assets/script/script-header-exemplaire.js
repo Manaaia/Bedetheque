@@ -3,23 +3,23 @@ $(document).ready(function() {
 
     let header = `
     <header>
-        <button id="back" class="invisible">Retour</button>
+        <button id="retour" class="invisible">Retour</button>
             <h1 class="visible">Centre culturel des Marmusots</h1>
         <div id="main-menu" class="visible">
             <select name="fond" id="fond">
-                <option value="Catalogue" disabled selected>Catalogue</option>
-            </select>
-            <select name="nav-bibliothecaire" id="nav-bibliothecaire" class="visible">
-                <option value="Gestion adhérents" disabled selected>Gestion adhérents</option>
-                <option value="Nouvel adhérent">Nouvel adhérent</option>
-                <option value="Gestion compte">Gestion compte</option>
+                <option value="Fonds" disabled selected>Fonds</option>
             </select>
             <select name="nav-gestionnaire" id="nav-gestionnaire" class="invisible">
+                <option value="Gestion du Fond" disabled selected>Gestion du fond</option>
+                <option value="Ajouter une BD" >Ajouter une BD</option>
+                <option value="Ajouter un exemplaire" >Ajouter un exemplaire</option>
+            </select>
+            <select name="nav-gestionnaire" id="nav-gestionnaire" class="visible">
                 <option value="Gestion du fond" disabled selected>Gestion du fond</option>
                 <option value="Ajouter une BD">Ajouter une BD</option>
                 <option value="Rechercher une BD">Rechercher une BD</option>
             </select>
-            <select name="nav-gestion-emp" id="nav-gestion-emp" class="invisible">
+            <select name="nav-gestion-emp" id="nav-gestion-emp" class="visible">
                 <option value="Gestion des emplacements" disabled selected>Gestion des emplacements</option>
             </select>
             <select name="nav-responsable" id="nav-responsable" class="invisible">
