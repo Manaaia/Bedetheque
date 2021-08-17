@@ -1,4 +1,4 @@
-header {
+#header-div {
 
     height: 190px;
     box-shadow: 3px 3px 10px -2px #968566;
@@ -33,6 +33,9 @@ h1 {
 
 #compte {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 20px;
     right: 20px;
 }
@@ -43,7 +46,9 @@ h1 {
     margin-bottom: 5px;
     text-align: center;
 }
-
+#compte>select, #compte>button{
+    margin-bottom: 5px;
+}
 select {
     padding: 7px 30px 7px 12px;
     border: 1px solid #151219;
