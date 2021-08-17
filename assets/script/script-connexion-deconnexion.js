@@ -2,13 +2,20 @@
 var btnConnexion = document.querySelector("#btnConnexion");
 var idConnect = document.querySelector("#user-name");
 var mdpConnect = document.querySelector("#password");
-
+var mdpOublie = document.querySelector("#mdpOublie");
+var btnRetour = document.querySelector("#retour");
 
 // EVENTLISTENER
-var submit = btnConnexion.addEventListener('click',submit);
+var submit = btnConnexion.addEventListener('click',connexion);
+var oublie = mdpOublie.addEventListener('click', nouveauMdp);
+var retour = btnRetour.addEventListener('click', retourAcceuil);
 
 // FONCTIONS
-function submit () {
+function retourAcceuil () {
+    window.location.href = "index.html";
+}
+
+function connexion () {
 
     // VERIFIER IDENTIFIANT ET MOT DE PASSE
 
@@ -17,7 +24,10 @@ function submit () {
         var id;
         var bFlag = false;
         var bFalse = false;
-    // VERIFIER QUE L'IDENTIFIANT EXIXSTE DANS LA MAP USERS
+        var role = 0;
+        var bDirection = true;
+
+
         users.forEach(user => {
             if(user.idA != idConnect.value){
                 bFalse = true;
@@ -41,6 +51,7 @@ function submit () {
             bFalse=false;
             localStorage.setItem("role", role);
             localStorage.setItem("id", id);
+            bDirection = false;
     // console.log(localStorage)
         }
     }
@@ -52,35 +63,22 @@ function submit () {
     }
 
     // REDIRIGER VERS LA BONNE PAGE EN FONCTION DU ROLE
-    directionConnexion(role);
+    directionConnexion(bDirection);
 console.log(localStorage);
 }
 
 // FONCTIONS
 
-function directionConnexion (nbr) {
-    console.log(nbr);
-    switch (nbr){
-        case 1 : 
-console.log("Waou, vous êtes un.e bibliothéquaire");
-            window.location.href = "C:/Users/21041626/Desktop/BDtheque_AFPA/creer_adherent.html";
-            break;
-        case 2 :
-console.log("Waou, vous êtes un.e gestionnaire de fond");
-window.location.href = "C:/Users/21041626/Desktop/BDtheque_AFPA/ajouter_exemplaire.html";
-
-            break;
-        case 3 :
-console.log("Waou, vous êtes un.e adhérent.e");
-window.location.href = "C:/Users/21041626/Desktop/BDtheque_AFPA/fiche_adherent.html";
-
-            break;
-        case 4 :
-console.log("Waou, vous êtes un.e responsable");
-window.location.href = "C:/Users/21041626/Desktop/BDtheque_AFPA/gestion_adherent.html";
-
-            break;
-        default:
-console.log("T ki ?");
+function directionConnexion (bBool) {
+    if(bBool == false){
+        window.location.href = "index.html";
     }
+
+}
+/**
+ * Gérer le cas du mot de passe oublié
+ */
+function nouveauMdp () {
+    // ENVOYER UNE ALERTE
+    alert("Veuillez vous rapprocher de l'un.e de nos bibliothécaires pour récupérer un nouveau mot de passe");
 }
