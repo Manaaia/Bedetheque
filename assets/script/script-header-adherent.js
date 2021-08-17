@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     let header = `
     <header>
-        <button id="back" class="invisible">Retour</button>
+        <button id="retour" class="invisible">Retour</button>
             <h1 class="visible">Centre culturel des Marmusots</h1>
         <div id="main-menu" class="visible">
             <select name="fond" id="fond">
@@ -42,7 +42,7 @@ $(document).ready(function() {
         </select>
         <button id="connexion" class="invisible">Se connecter</button>
     </div>
-    `
+    `²
     
     $('body').prepend(header);
     if (true) {
@@ -50,5 +50,4 @@ $(document).ready(function() {
     }
 
     console.log( "Load was performed." );
-
 });

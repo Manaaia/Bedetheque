@@ -1,4 +1,5 @@
 header {
+
     height: 190px;
     box-shadow: 3px 3px 10px -2px #968566;
 
@@ -18,7 +19,7 @@ h1 {
     left: 0px;
 }
 
-#retour {
+#back {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -66,13 +67,14 @@ option[disabled] {
 
 #main-menu>select {
     border-radius: 8px 8px 0px 0px;
+
 }
 
 #fond {
     -webkit-appearance: none;
 }
 
-.divform {
+#divform {
     background-color: rgba(185, 172, 141, 0.719);
     box-shadow: 3px 3px 10px -2px #968566;
     border-radius: 8px;
@@ -98,7 +100,6 @@ legend {
 }
 
 th {
-
     padding: 20px 0px 20px 0px;
     text-align: start;
     font-weight: unset;
@@ -136,6 +137,7 @@ th>input::placeholder {
     justify-content: space-between;
 }
 
+
 #recherche {
     text-align: center;
 }
@@ -158,4 +160,76 @@ hr {
 #results {
     min-height: 100px;
     text-align: center;
+}
+
+.adherentselect {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#gestionEmpruntRetour {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.casegestion {
+    position: relative;
+    border-radius: 8px;
+    padding-top: 70px;;
+    padding-bottom: 25px;
+    border-color: #dde4ed;
+    border: solid 1px;
+
+    width: 45%;
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+.casegestion p {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.positiontitre {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+
+    border-color: #dde4ed;
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: solid 1px;
+
+    background-color: rgb(185, 172, 141);
+}
+
+.titre {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.list {
+    margin-left: 2%;
+    width: 80%;
+}
+
+.btngestion {
+    max-width: 100px;
+    min-width: 100px;
+
+    margin: 2% 2% 2% 2%;
+    white-space: nowrap;
+}
+
+#labeladh {
+    font-weight: bold;
+    font-size: 1.5em;
 }

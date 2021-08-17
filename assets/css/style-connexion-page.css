@@ -1,0 +1,45 @@
+/* TITLE */
+#connexion-title {
+    margin-top: 100px;
+    position: relative;
+    height: 300px;
+}
+#bubble-connexion-title {
+    position: absolute;
+    z-index: 1;
+    left: -200px;
+}
+#txt-connexion-title{
+    position: absolute;
+    height: 400px;
+    z-index: 2;
+    top: 30px;
+    left: -70px;
+}
+#connexion-title img{
+    width: 400px;
+}
+/* SECTION */
+#connexion-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#connexion-content div{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+#connexion-content input{
+    height: 20px;
+}
+#btnConnexion{
+    display: flex;
+    width: 500px;
+    align-items: center;
+}
+#comment-connexion{
+    width: 600px;
+}
