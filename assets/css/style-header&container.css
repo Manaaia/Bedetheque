@@ -1,6 +1,6 @@
 #header-div {
 
-    height: 400px;
+    height: 190px;
     box-shadow: 3px 3px 10px -2px #968566;
 
     position: sticky;
@@ -112,7 +112,7 @@ th {
     width: 400px;
 }
 
-#alerte {
+.alerte {
     color: red;
     font-style: italic;
 }
@@ -156,11 +156,11 @@ hr {
     margin-bottom: 30px;
 }
 
-#abandon {
+/* #abandon {
     position: absolute;
     bottom: 20px;
     left: 20px;
-}
+} */
 
 #results {
     min-height: 100px;

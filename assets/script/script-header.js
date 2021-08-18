@@ -3,14 +3,14 @@ $(document).ready(function() {
 
     let header = `
     <header>
-        <div class="invisible" id="header-div">
+        <div class="visible" id="header-div">
             <button id="back" class="invisible">Retour</button>
-                <h1 class="invisible">Centre culturel des Marmusots</h1>
-            <div id="main-menu" class="invisible">
+                <h1 class="visible">Centre culturel des Marmusots</h1>
+            <div id="main-menu" class="visible">
                 <select name="fond" id="fond">
                     <option value="Catalogue" disabled selected>Catalogue</option>
                 </select>
-                <select name="nav-bibliothecaire" id="nav-bibliothecaire" class="invisible">
+                <select name="nav-bibliothecaire" id="nav-bibliothecaire" class="visible">
                     <option value="Gestion adhérents" disabled selected>Gestion adhérents</option>
                     <option value="Nouvel adhérent">Nouvel adhérent</option>
                     <option value="Gestion compte">Gestion compte</option>
@@ -36,13 +36,13 @@ $(document).ready(function() {
 
     let compte = `
     <div id="compte" class = "visible">
-        <p id="identification" class="invisible">Bonjour Testitest !</p>      <!--Attention enlever Testitest-->
+        <p id="identification" class="visible">Bonjour Testitest !</p>      <!--Attention enlever Testitest-->
         <select name="nav" id="nav-adherent" class="invisible">
             <option value="" disabled selected>Mon compte</option>
             <option value="mafiche">Ma fiche adhérent</option>
         </select>
         <button id="deconnexion" class="invisible">Se déconnecter</button>
-        <button id="connexion" class="visible" >Se connecter</button>
+        <button id="connexion" class="invisible" >Se connecter</button>
     </div>
     `
     
