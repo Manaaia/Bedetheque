@@ -37,9 +37,9 @@ $(document).ready(function() {
     let compte = `
     <div id="compte" class = "visible">
         <p id="identification" class="visible">Bonjour Testitest !</p>      <!--Attention enlever Testitest-->
-        <select name="nav" id="nav-adherent" class="invisible">
+        <select name="nav" id="nav-adherent" class="visible">
             <option value="" disabled selected>Mon compte</option>
-            <option value="mafiche">Ma fiche adhérent</option>
+            <option id="mafiche" value="mafiche">Ma fiche adhérent</option>
         </select>
         <button id="deconnexion" class="invisible">Se déconnecter</button>
         <button id="connexion" class="invisible" >Se connecter</button>
