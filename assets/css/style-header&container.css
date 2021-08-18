@@ -1,22 +1,63 @@
+/* GENERAL */
 #header-div {
 
-    height: 400px;
+    height: 130px;
     box-shadow: 3px 3px 10px -2px #968566;
 
     position: sticky;
     top: 0;
 }
-
+#header-div button{
+    max-width: 600px;
+    width: 200px;
+    border-radius:2px;
+    margin:0px;
+    box-shadow: 0px -10px 14px -7px #968c7a;
+    background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
+	background-color:#c4bbab;
+}
 h1 {
     font-size: 3em;
     text-align: center;
     padding-top: 80px;
+
+}
+select {
+    padding: 7px 30px 7px 12px;
+    border: 1px solid #151219;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px -2px #968566;
+    cursor: pointer;
+    text-decoration:none;
+	text-shadow:0px 1px 0px #968566;
+    transition: all 150ms ease;
+    font-size: 1.2em;
+    width: 200px;
+}
+    
+option {
+    color:#151219;
 }
 
+option[disabled] {
+    
+    display: none;
+}
+#fond {
+    -webkit-appearance: none;
+}
+
+/* MAIN MENU */
 #main-menu {
     position:absolute;
     bottom: 0px;
     left: 0px;
+}
+
+#main-menu>select {
+    border-radius: 2px 2px 2px 2px;
+    background-color: #c4bbab;
+
 }
 
 #back {
@@ -27,10 +68,7 @@ h1 {
     transition: all 1s ease-out;
 }
 
-#retour:active {
-    top: 22px;
-}
-
+/* COMPTE */
 #compte {
     position: absolute;
     display: flex;
@@ -46,39 +84,8 @@ h1 {
     margin-bottom: 5px;
     text-align: center;
 }
-#compte>select, #compte>button{
-    margin-bottom: 5px;
-}
-select {
-    padding: 7px 30px 7px 12px;
-    border: 1px solid #151219;
-    border-radius: 8px;
-    background: #b9ac8d;
-    box-shadow: 0 1px 3px -2px #968566;
-    cursor: pointer;
-    text-decoration:none;
-	text-shadow:0px 1px 0px #968566;
-    transition: all 150ms ease;
-    font-size: 1.2em;
-}
-    
-option {
-    color:#151219;
-}
 
-option[disabled] {
-    display: none;
-}
-
-#main-menu>select {
-    border-radius: 8px 8px 0px 0px;
-
-}
-
-#fond {
-    -webkit-appearance: none;
-}
-
+/* FORMULAIRE */
 #divform {
     background-color: rgba(185, 172, 141, 0.719);
     box-shadow: 3px 3px 10px -2px #968566;
@@ -112,11 +119,6 @@ th {
     width: 400px;
 }
 
-#alerte {
-    color: red;
-    font-style: italic;
-}
-
 th>input {
     width: 100%;
     box-sizing: border-box;
@@ -135,16 +137,23 @@ th>input::placeholder {
     padding: 25px;
     vertical-align: text-top;
     text-align: center;
+    font-size:1.5em ;
 }
 
 #btns {
     display: flex;
     justify-content: space-between;
+    width: 300px;
+    margin: auto;
+    margin-top: 20px;
 }
-
 
 #recherche {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #rechercher {
@@ -157,14 +166,18 @@ hr {
 }
 
 #abandon {
-    position: absolute;
+    /* position: absolute;
     bottom: 20px;
-    left: 20px;
+    left: 20px; */
+    margin: auto;
 }
 
 #results {
     min-height: 100px;
+    max-height: 200px;
+    overflow-y: scroll;
     text-align: center;
+    border: 1px solid black;
 }
 
 .adherentselect {

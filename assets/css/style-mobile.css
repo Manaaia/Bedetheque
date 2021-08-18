@@ -28,7 +28,9 @@ body{
 h1 {
     font-family: BadaBoom BB, Helvetica, sans-serif;
 }
-
+ul {
+    list-style-type: none;
+}
 button{
     max-width: 120px;
 

@@ -2,28 +2,36 @@
 #rechercheExemplaire {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+
 }
-#rechercheExemplaire input {
-    width: 300px;
-    height: 20px;
+#rechercheExemplaire p:not(#msgExemplaire), h2{
+    font-size: 1.1em;
+    margin-right: 10px;
 }
-#rechercheExemplaire p {
-    color: red;
+#msgExemplaire{
+    color: brown;
 }
+
 /* FORMULAIRE */
+#container-bd {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
 
 select{
     height: 20px;
     padding: 0px;
     font-size: 1.1em;
-    width: 180px;
+    width: 195px;
 }
 #imgBD{
     background-color: white;
-    width: 200px;
-    height: 300px;
+    width: 300px;
+    height: 400px;
 }
 
 label {
@@ -50,4 +58,21 @@ label {
 }
 #th2 h2 {
     font-size: 1.2em;
+}
+ /* RESPONSIVE */
+ @media screen and (max-width:600px){
+    #rechercheExemplaire {
+        flex-direction: column;
+    }
+    #container-bd {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #imgBD{
+        background-color: white;
+        width: 250px;
+        height: 350px;
+        margin-bottom: 20px;
+    }
+    
 }
