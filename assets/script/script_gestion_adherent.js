@@ -1,16 +1,3 @@
-// Gestion retour
-// Remplir la map d'emprunt
-var emprunts = new Map();
-
-emprunts.set("1", {identifiant: users.get("2").idA, album: albums.get("35")});
-emprunts.set("2", {identifiant: users.get("2").idA, album: albums.get("30")});
-emprunts.set("3", {identifiant: users.get("2").idA, album: albums.get("163")});
-emprunts.set("4", {identifiant: users.get("6").idA, album: albums.get("102")});
-emprunts.set("5", {identifiant: users.get("7").idA, album: albums.get("98")});
-emprunts.set("6", {identifiant: users.get("7").idA, album: albums.get("2")});
-emprunts.set("7", {identifiant: users.get("20").idA, album: albums.get("58")});
-
-
 // Programme principal
 // Initialisation des variables
 var retour = document.getElementById("contenuretour");
@@ -19,17 +6,29 @@ var divretour = document.getElementById("divretour");
 var divemprunt = document.getElementById("divemprunt");
 var divtitreretour = document.getElementById("divtitreretour");
 var divtitreemprunt = document.getElementById("divtitreemprunt");
+var divempruntretour = document.getElementById("gestionEmpruntRetour");
+var btnvalide = document.getElementById("submit");
+var btnabandon = document.getElementById("abandon");
 var cle = window.location.search;
-var btnfiche = document.getElementById("fiche");
-
 // Récupère la clé valeur url
 cle = cle.split("=");
 cle = cle[1];
+var btnfiche = document.getElementById("fiche");
+var datecot = users.get(cle).datecot;
+var flag = false;
 
 afficheNom(cle);
+flag = checkDatecot(datecot);
+
+if (flag == true) {
+    divempruntretour.innerHTML = '<p class="alerte">Alerte : Emprunt impossible !<br/>Ce compte adhérent est bloqué.';
+    btnvalide.className = "invisible";
+}
+
 gestionRetourEmprunt();
 
 btnfiche.addEventListener("click", voirFiche);
+btnabandon.addEventListener("click", leRetour);
 
 // Fonctions
 // Afficher le nom de l'adhérent
@@ -65,7 +64,7 @@ function afficheRetour(unemprunt) {
     divtitreemprunt.setAttribute("style", "background-color : darkgrey");
 
     retour.innerHTML += '<p id="retour1" class="list">' + unemprunt.album.titre +
-    '</p><br/><button id="etat" class="btngestion">Modifier état</button><button id="perdu" class="btngestion">Perdu</button><button id="OK" class="btngestion">OK</button><br/><br/>';
+    '</p><br/><input type="checkbox" id="etat" class="btngestion">Modifier état</input><input type="checkbox" id="perdu" class="btngestion">Perdu</input><input type="checkbox" id="OK" class="btngestion">OK</input><br/><br/>';
 }
 
 // Afficher la div pour emprunter
@@ -82,6 +81,11 @@ function afficheEmprunt() {
 }
 
 // Redirection modifier fiche adhérent
-function voirFiche () {
+function voirFiche() {
     window.location = "modifier_adherent.html?var=" + cle;
+}
+
+// Redirection page recherche
+function leRetour() {
+    window.location = "recherche_adherent.html";
 }

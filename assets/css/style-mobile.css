@@ -10,9 +10,6 @@
     src: url('font/BadaBoomBB.woff2') format('woff2'),
 
         url('font/BadaBoomBB.woff') format('woff');
-
-        url('font/adaBoomBB.woff') format('woff');
-        url('font/BadaBoomBB.woff') format('woff');
 }
 
 * {

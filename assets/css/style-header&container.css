@@ -1,6 +1,5 @@
 /* GENERAL */
 #header-div {
-
     height: 130px;
     box-shadow: 3px 3px 10px -2px #968566;
 
@@ -124,6 +123,11 @@ th {
     width: 400px;
 }
 
+.alerte {
+    color: red;
+    font-style: italic;
+}
+
 th>input {
     width: 100%;
     box-sizing: border-box;
@@ -169,6 +173,7 @@ hr {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
 
 #abandon {
     /* position: absolute;

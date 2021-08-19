@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     let header = `
     <header>
-        <div class="invisible" id="header-div">
+        <div class="visible" id="header-div">
             <button id="back" class="invisible">Retour</button>
                 <h1 class="invisible">Centre culturel des Marmusots</h1>
             <div id="main-menu" class="invisible">
@@ -40,7 +40,7 @@ $(document).ready(function() {
     <div id="compte" class = "visible">
         <p id="identification" class="invisible"></p>     
         <button id="deconnexion" class="invisible">Se déconnecter</button>
-        <button id="connexion" class="visible" >Se connecter</button>
+        <button id="connexion" class="invisible" >Se connecter</button>
     </div>
     `
     
