@@ -19,6 +19,8 @@ var flag = false;
 /* REGEX ISBN */
 const REGEXPISBN = /^\d+$/;
 
+
+
 afficheNom(cle);
 flag = checkDatecot(datecot);
 
@@ -48,9 +50,12 @@ function afficheNom(key) {
 // Récupérer et afficher les maps d'emprunt
 function gestionRetourEmprunt() {
     var compt = 0;
+    var compt2 = 0;
+
     for (var [identifiant, emprunt] of emprunts.entries()) {
         if (emprunt.identifiant == users.get(cle).idA) {
-            afficheRetour(emprunt.album);
+            compt2++;
+            afficheRetour(emprunt.album, compt2);
             compt ++;
         }
     }
@@ -61,13 +66,19 @@ function gestionRetourEmprunt() {
 }
 
 // Afficher les emprunts en cours/retours possibles
-function afficheRetour(unemprunt) {
+function afficheRetour(unemprunt, compt) {
     emprunt.innerHTML = "<p>Emprunt impossible tant que l'emprunt précédent n'a pas été rendu</p>";
     divemprunt.setAttribute("style", "background-color : grey");
     divtitreemprunt.setAttribute("style", "background-color : darkgrey");
 
     retour.innerHTML += '<p id="retour1" class="list">' + unemprunt.titre +
-    '</p><br/><input type="checkbox" id="etat" class="btngestion">Modifier état</input><input type="checkbox" id="perdu" class="btngestion">Perdu</input><input type="checkbox" id="OK" class="btngestion">OK</input><br/><br/>';
+    '</p><br/><select name="etatBD">' +
+    '<option value="selectEtat">Modifier état</option>' +
+    '<option value="neuf">Neuf</option>' +
+    '<option value="abime">Abîmé</option>' +
+    '</select><br/>' +
+    '<div><input type="radio" id="perdu" name="status' + compt + '"><label for="perdu">Perdu</label></div>' +
+    '<div><input type="radio" id="OK" name="status' + compt + '"><label for="ok">OK</label></div><br/><br/>';
 }
 
 // Afficher la div pour emprunter
