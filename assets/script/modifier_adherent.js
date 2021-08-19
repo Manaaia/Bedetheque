@@ -3,7 +3,8 @@
 var cle = window.location.search;
 cle = cle.split("=");
 cle = cle[1];
-var id = users.get(cle).idA.split(".");
+var idBase = users.get(cle).idA;
+var id = idBase.split(".");
 var prenom = id[0][0].toUpperCase()+id[0].slice(1);
 var nom = id[1][0].toUpperCase()+id[1].slice(1);
 var caseprenom = document.getElementById("prenomadherent");
@@ -88,12 +89,28 @@ if (flag == true) {
 
 // Gestion boutons
 btnabandonner.addEventListener("click", retour);
-btnvalider.addEventListener("click", valide);
+btnvalider.addEventListener("click", function () {valide(idBase)});
+
+
+
 
 // Fonctions
-function valide() {
-    alert("Formulaire enregistré.");
-    window.location = "gestion_adherent.html?var=" + cle;
+function valide(idcle) {
+    var caseprenom = document.getElementById("prenomadherent");
+    var casenom = document.getElementById("nomadherent");
+    var checkprenom = caseprenom.value[0].toLowerCase()+caseprenom.value.slice(1);
+    var checknom = casenom.value[0].toLowerCase()+casenom.value.slice(1);
+    var checkId = checkprenom + "." + checknom;
+    var flag = false;
+
+    flag = verifDoublon(flag, checkId, idcle);
+
+    if (flag == false) {
+        alert("Formulaire enregistré.");
+        window.location = "gestion_adherent.html?var=" + cle;
+    } else {
+        alert("Cet identifiant est déjà pris.");
+    }
 }
 
 function retour() {

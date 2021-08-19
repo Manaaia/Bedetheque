@@ -19,3 +19,12 @@ function checkDatecot(date) {
     }
     return flag;
 }
+
+function verifDoublon(bool, newId, idorigin) {
+    for (var [idUser, user] of users.entries()) {
+        if(user.idA == newId && newId != idorigin) {
+            bool = true;
+        }
+    }
+    return bool;
+}

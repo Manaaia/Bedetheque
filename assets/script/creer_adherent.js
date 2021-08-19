@@ -59,17 +59,30 @@ function cleanChamps() {
 }
 
 function checkForm() {
+
     var compt = 0;
+    var flag = false;
 
     for (let i = 0; i < inputs.length; i++) {
-        if(inputs[i].value = "") {
+        console.log(inputs[i].value);
+        if(inputs[i].value == "") {
             alerte.innerHTML = "Veuillez remplir tous les champs";
             alerte.className ="alerte visible";
             compt ++;
         }
     }
 
-    if (compt == 0) {
+    var casenom = document.getElementById("nomadherent");
+    var caseprenom = document.getElementById("prenomadherent");
+    var checkprenom = caseprenom.value[0].toLowerCase()+caseprenom.value.slice(1);
+    var checknom = casenom.value[0].toLowerCase()+casenom.value.slice(1);
+    var checkId = checkprenom + "." + checknom;
+
+    flag = verifDoublon(flag, checkId);
+
+    if (flag == true) {
+        alert("Cet identifiant est déjà pris.");
+    } else if (compt == 0) {
         alert("Nouvel adhérent créé");
         cleanChamps();
     }
