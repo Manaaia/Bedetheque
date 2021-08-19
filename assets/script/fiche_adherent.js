@@ -1,7 +1,13 @@
 // Programme principal
 // Initialisation des variables
-// var cle = localStorage.getItem("id");
-var cle = "2";
+var cle = localStorage.getItem("id");
+
+for (var [idUser, user] of users.entries()) {
+    if (user.idA == cle) {
+        cle =idUser;
+    }
+}
+
 var casenom = document.getElementById("nomadh");
 var caseprenom = document.getElementById("prenomadh");
 var caseadress = document.getElementById("adresseadherent");

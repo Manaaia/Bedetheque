@@ -48,9 +48,7 @@ var compt = 0;
     for (var [role, user] of users.entries()) {
         if (user.role == 3) {
             var appel = user.idA.replace("."," ");
-            console.log(appel);
             if(appel.includes(lenom)) {
-                console.log("trouvé !");
                 afficheResult(appel, role);
                 compt ++;
             }
