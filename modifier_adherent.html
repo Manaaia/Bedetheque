@@ -15,16 +15,16 @@
 
     <div class="container">
         <div id="divform">
-            <fieldset class="form"><legend for="form">Créer un nouvel adhérent</legend>
+            <fieldset class="form"><legend for="form">Modifier adhérent</legend>
                 <table>
                     <tr id="alerte" class="invisible"></tr>
                     <tr>
                         <th class="label">Identité</th>
                         <th class="identite">
                             <label for="nomadherent">Nom</label><br/>
-                            <input type="text" class="nomadherent" placeholder="Veuillez renseigner un nom" required><br/>
+                            <input type="text" id="nomadherent" placeholder="Veuillez renseigner un nom" required><br/>
                             <label for="prenomadherent">Prénom</label><br/>
-                            <input type="text" class="prenomadherent" placeholder="Veuillez renseigner un prénom" required>
+                            <input type="text" id="prenomadherent" placeholder="Veuillez renseigner un prénom" required>
                         </th>
                     </tr>
                     <tr>
@@ -45,12 +45,8 @@
                         <th id="datecot"><input type="date" value=""></th>
                     </tr>
                     <tr>
-                        <th class="label invisible">Emprunts en cours</th>
-                        <th id="emprunt" class="invisible"></th>
-                    </tr>
-                    <tr>
-                        <th class="label invisible">Amendes</th>
-                        <th id="amende" class="invisible"></th>
+                        <th class="label">Amendes</th>
+                        <th id="amende">Aucune amende en attente</th>
                     </tr>
                 </table>
                 <div id="btns">
@@ -60,11 +56,12 @@
             </fieldset>
         </div>
     </div>
-
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/script/script-header.js"></script>
-    <script src="assets/script/script-general.js"></script>
+    <script src="assets\script\maps\albums.js"></script>
+    <script src="assets\script\maps\users.js"></script>
+    <script src="assets\script\modifier_adherent.js"></script>
 
 </body>
 </html>

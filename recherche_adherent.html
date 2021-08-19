@@ -15,17 +15,17 @@
     <div class="container">
         <div id="divform">
             <fieldset class="form"><legend for="form">Rechercher un adhérent</legend>
-                <div id="recherche">
+                <div class="recherche">
                 <table>
                     <tr>
                         <th class="label">Rechercher par nom et/ou prénom</th>
                     </tr>
                     <tr>
                         <th class="identite">
-                            <label for="nomadherent">Nom</label><br/>
-                            <input type="text" class="nomadherent" placeholder="Nom ou partie du nom"><br/>
-                            <label for="prenomadherent">Prénom</label><br/>
-                            <input type="text" class="prenomadherent" placeholder="Prénom ou partie du prénom">
+                            <!-- <label for="nomadherent">Nom</label><br/> -->
+                            <input type="text" id="nomcherche" class="nomadherent" placeholder="Nom/Prénom ou partie du nom/prénom"><br/>
+                            <!-- <label for="prenomadherent">Prénom</label><br/>
+                            <input type="text" id ="prenomcherche" class="prenomadherent" placeholder="Prénom ou partie du prénom"> -->
                         </th>
                     </tr>
                 </table>
@@ -36,18 +36,18 @@
                     <p>Aucun résultat</p>
                 </div>
                 <div id="btns">
-                    <button id="adandon">Abandonner</button>
+                    <button id="abandon">Abandonner</button>
                     <button id="submit" class="invisible">Valider</button>
                 </div>
             </fieldset>
         </div>
 
     </div>
-    <footer>
-        <p>Manon et Amandine, les BG - 2021</p>
-    </footer>
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="assets/script/script.js"></script>
+    <script src="assets/script/script-header.js"></script>
+    <script src="assets\script\maps\albums.js"></script>
+    <script src="assets\script\maps\users.js"></script>
+    <script src="assets\script\recherche_adherent.js"></script>
 </body>
 </html>

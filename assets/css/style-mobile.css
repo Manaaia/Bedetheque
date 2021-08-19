@@ -8,17 +8,13 @@
 @font-face {
     font-family: 'BadaBoom BB';
     src: url('font/BadaBoomBB.woff2') format('woff2'),
-<<<<<<< HEAD
-<<<<<<< HEAD
-        url('font/BadaBoomBB.woff') format('woff');
-=======
-        url('font/adaBoomBB.woff') format('woff');
->>>>>>> 3236674d086cd47a0961e81606d1e085f76ee734
-=======
+
         url('font/BadaBoomBB.woff') format('woff');
 
->>>>>>> origin/Manon
+        url('font/adaBoomBB.woff') format('woff');
+        url('font/BadaBoomBB.woff') format('woff');
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -32,11 +28,12 @@ body{
 h1 {
     font-family: BadaBoom BB, Helvetica, sans-serif;
 }
-
+ul {
+    list-style-type: none;
+}
 button{
     max-width: 120px;
 
-    box-shadow: 0px 10px 14px -7px #276873;
     background:linear-gradient(to bottom, #b3c6cc 5%, #71adb0 100%);
 	background-color:#b3c6cc;
     border-radius:8px;
@@ -58,8 +55,9 @@ button:hover{
 .invisible{
     display: none;
 }
-header {
-    background-color: #a97a52;
+header div {
+    background-color: #151219;
+    background-image: url(fond.png);
 }
 #connexion{
     position: absolute;
