@@ -11,21 +11,15 @@ $(document).ready(function() {
                 </button>
                 <select name="nav-bibliothecaire" id="nav-bibliothecaire" class="invisible">
                     <option value="Gestion adhérents" disabled selected>Gestion adhérents</option>
-                    <option value="Nouvel adhérent">Nouvel adhérent</option>
-                    <option value="Gestion compte">Gestion compte</option>
+                    <option id="nouvelAdherent" value="Nouvel adhérent">Nouvel adhérent</option>
+                    <option id="gestionAdherent" value="Gestion adhérents">Gestion adhérents</option>
                 </select>
-                <select name="nav-gestionnaire" id="nav-gestionnaire" class="invisible">
-                    <option value="Gestion du fond" disabled selected>Gestion du fond</option>
-                    <option value="Ajouter une BD">Ajouter une BD</option>
-                    <option value="Rechercher une BD">Rechercher une BD</option>
-                </select>
-                <select name="nav-gestion-emp" id="nav-gestion-emp" class="invisible">
-                    <option value="Gestion des emplacements" disabled selected>Gestion des emplacements</option>
-                </select>
+                <button name="nav-gestionnaire" id="nav-gestionnaire" class="invisible">Gestion du fond</button>
+                <button name="nav-gestion-emp" id="nav-gestion-emp" class="invisible">Gestion des emplacements</button>
                 <select name="nav-responsable" id="nav-responsable" class="invisible">
-                    <option value="Statistiques" disabled selected>Statistiques</option>
-                    <option value="BD empruntées">BD empruntées</option>
-                    <option value="Autres statistiques">Autres statistiques</option>
+                    <option id="stats" value="Statistiques" disabled selected>Statistiques</option>
+                    <option id="BdEmprunt" value="BD empruntées">BD empruntées</option>
+                    <option id="autresStats" value="Autres statistiques">Autres statistiques</option>
                 </select>
                 <button id="nav-adherent" class="invisible">
                     Ma fiche adhérent
@@ -40,7 +34,7 @@ $(document).ready(function() {
     <div id="compte" class = "visible">
         <p id="identification" class="invisible"></p>     
         <button id="deconnexion" class="invisible">Se déconnecter</button>
-        <button id="connexion" class="invisible" >Se connecter</button>
+        <button id="connexion" class="visible" >Se connecter</button>
     </div>
     `
     
@@ -56,7 +50,12 @@ $(document).ready(function() {
     var navBibliothecaire = document.querySelector("#nav-bibliothecaire");
     var navGestionnaire = document.querySelector("#nav-gestionnaire");
     var navResponsable = document.querySelector("#nav-responsable");
-    var navAdherent = document.querySelector("#nav-adherent")
+    var navAdherent = document.querySelector("#nav-adherent");
+    var btnGestionAdherent = document.querySelector("#gestionAdherent");
+    var btnNouvelAdherent = document.querySelector("#nouvelAdherent");
+    var btnStats = document.querySelector("#stats");
+    var btnBdEmprunt = document.querySelector("#BdEmprunt");
+    var btnAutresStats = document.querySelector("#autresStats");
 
     var idText = document.querySelector("#identification");
 
@@ -68,6 +67,7 @@ $(document).ready(function() {
     //EVENT LISTENERS
     btnConnexion.addEventListener("click", connexionMouv);
     btnDeconnexion.addEventListener("click",deconnexionMouv);
+    btnGestionAdherent.addEventListener("select", test);
 
     //FONCTIONS
     /**
@@ -157,4 +157,7 @@ $(document).ready(function() {
     // <p>Manon et Amandine, les BG - 2021</p>
     // </footer>
 
+    function test () {
+        console.log("tesy");
+    }
 });
