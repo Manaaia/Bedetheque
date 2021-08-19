@@ -10,7 +10,7 @@
     max-width: 600px;
     width: 200px;
     border-radius:2px;
-    margin:0px;
+    margin-right: 2px;
     background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
 	background-color:#c4bbab;
 }
@@ -54,14 +54,8 @@ header img {
     position:absolute;
     bottom: 0px;
     left: 0px;
-}
-
-#main-menu>select {
-    border-radius: 2px 2px 2px 2px;
-    background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
-	background-color:#c4bbab;
-    border: none;
-
+    display: flex;
+    flex-direction: row;
 }
 
 #back {
@@ -84,9 +78,9 @@ header img {
 
 #compte>p {
     font-size: 1.5em;
-    font-weight: bold;
     margin-bottom: 5px;
     text-align: center;
+    color: #c4bbab;
 }
 
 /* FORMULAIRE */
@@ -156,17 +150,14 @@ th>input::placeholder {
     margin: auto;
     margin-top: 20px;
 }
-
-#recherche {
-    text-align: center;
+.recherche{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 #rechercher {
-    margin-top: 20px;
+    margin: auto;
 }
 
 hr {
@@ -176,18 +167,17 @@ hr {
 
 
 #abandon {
-    /* position: absolute;
-    bottom: 20px;
-    left: 20px; */
     margin: auto;
 }
 
 #results {
     min-height: 100px;
     max-height: 200px;
+    max-width:800px;
     overflow-y: scroll;
     text-align: center;
     border: 1px solid black;
+    margin: auto;
 }
 
 .adherentselect {

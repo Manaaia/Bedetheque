@@ -6,24 +6,19 @@ $(document).ready(function() {
             <button id="back" class="invisible">Retour</button>
                 <h1 class="invisible">Centre culturel des Marmusots</h1>
             <div id="main-menu" class="invisible">
-                <button name="fond" id="fond" class ="btn-nav">
-                    Catalogue
-                </button>
-                <select name="nav-bibliothecaire" id="nav-bibliothecaire" class="invisible">
-                    <option value="Gestion adhérents" disabled selected>Gestion adhérents</option>
-                    <option id="nouvelAdherent" value="Nouvel adhérent">Nouvel adhérent</option>
-                    <option id="gestionAdherent" value="Gestion adhérents">Gestion adhérents</option>
-                </select>
+                <button name="fond" id="fond" class ="btn-nav">Catalogue</button>
+                <div id="nav-bibliothecaire" class="invisible">
+                    <button id="nouvelAdherent">Nouvel adhérent</button>
+                    <button id="gestionAdherent">Gestion adhérents</button>
+                </div>
                 <button name="nav-gestionnaire" id="nav-gestionnaire" class="invisible">Gestion du fond</button>
                 <button name="nav-gestion-emp" id="nav-gestion-emp" class="invisible">Gestion des emplacements</button>
-                <select name="nav-responsable" id="nav-responsable" class="invisible">
-                    <option id="stats" value="Statistiques" disabled selected>Statistiques</option>
-                    <option id="BdEmprunt" value="BD empruntées">BD empruntées</option>
-                    <option id="autresStats" value="Autres statistiques">Autres statistiques</option>
-                </select>
-                <button id="nav-adherent" class="invisible">
-                    Ma fiche adhérent
-                </button>
+                <div id="nav-responsable" class="invisible">
+                    <button id="stats">Statistiques</button>
+                    <button id="BdEmprunt">BD empruntées</button>
+                    <button id ="autresStats">Autres statistiques</button>
+                </div>
+                <button id="nav-adherent" class="invisible">Ma fiche adhérent</button>
             </div>
         </div>
         <!-- Compte placeholder-->
@@ -56,6 +51,7 @@ $(document).ready(function() {
     var btnStats = document.querySelector("#stats");
     var btnBdEmprunt = document.querySelector("#BdEmprunt");
     var btnAutresStats = document.querySelector("#autresStats");
+    var btnCatalogue = document.querySelector("#fond");
 
     var idText = document.querySelector("#identification");
 
@@ -65,11 +61,66 @@ $(document).ready(function() {
     var role = localStorage.role;
     var id = localStorage.id;
     //EVENT LISTENERS
-    btnConnexion.addEventListener("click", connexionMouv);
-    btnDeconnexion.addEventListener("click",deconnexionMouv);
-    btnGestionAdherent.addEventListener("select", test);
+    btnConnexion.addEventListener("click", function(){mouv("1")});
+    btnDeconnexion.addEventListener("click",function(){mouv("2")});
+    btnGestionAdherent.addEventListener("click", function(){mouv("3")});
+    btnNouvelAdherent.addEventListener("click", function(){mouv("4")});
+    btnStats.addEventListener("click", function(){mouv("5")});
+    btnBdEmprunt.addEventListener("click", function(){mouv("6")});
+    btnAutresStats.addEventListener("click", function(){mouv("7")});
+    navGestionnaire.addEventListener("click", function(){mouv("8")});
+    btnCatalogue.addEventListener("click", function(){mouv("9")});
+    navAdherent.addEventListener("click", function(){mouv("10")});
+
 
     //FONCTIONS
+
+    function mouv (nbr) {
+        var link = "";
+
+        switch(nbr){
+            case "1":
+                link = "connexion.html";
+                break;
+            case "2":
+                localStorage.removeItem('id');
+                localStorage.removeItem('role');
+
+                console.log("hello");
+                link="index.html";
+                break;
+            case "3":
+                link="recherche_adherent.html";
+                break;
+            case "4":
+                link="creer_adherent.html";
+                break;
+            case "5":
+                alert("Cette fonctionnalité sera bientôt disponible");
+                link="index.html"
+                break;
+            case "6":
+                alert("Cette fonctionnalité sera bientôt disponible");
+                link="index.html"
+                break;
+            case "7":
+                alert("Cette fonctionnalité sera bientôt disponible");
+                link="index.html"
+                break;
+            case "8":
+                link="recherche_ISBN.html"
+                break;
+            case "9":
+                link="index.html";
+                break;
+            case "10":
+                link="fiche_adherent.html";
+            default:
+                console.log("erreur de redirection");     
+        }
+        console.log(link);
+        window.location.href=link;
+    }
     /**
      * Switch permettant de charger le header en fonction du rôle lors de la connexion
      */
@@ -140,16 +191,13 @@ $(document).ready(function() {
     /**
      * Permet d'accéder à la page de connexion via  le bouton connecter
      */
-    function connexionMouv(){
-        window.location.href = "connexion.html";
-    }
+    // function connexionMouv(){
+    //     window.location.href = "connexion.html";
+    // }
     /**
      * Permet de déconnecter et de vider le localstorage des informations de connexion
      */
     function deconnexionMouv(){
-        localStorage.removeItem('id');
-        localStorage.removeItem('role');
-        window.location.reload();
     }
 
     // FOOTER A METTRE EN PLACE ? 

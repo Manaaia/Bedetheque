@@ -28,6 +28,9 @@ h1 {
 ul {
     list-style-type: none;
 }
+li{
+    cursor: pointer;
+}
 button{
     max-width: 120px;
 
