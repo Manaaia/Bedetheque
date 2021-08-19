@@ -78,7 +78,7 @@ function afficheRetour(unemprunt, compt) {
     '<option value="abime">Abîmé</option>' +
     '</select><br/>' +
     '<div><input type="radio" id="perdu" name="status' + compt + '"><label for="perdu">Perdu</label></div>' +
-    '<div><input type="radio" id="OK" name="status' + compt + '"><label for="ok">OK</label></div><br/><br/>';
+    '<div><input type="radio" id="OK" name="status' + compt + '"checked><label for="ok">OK</label></div><br/><br/>';
 }
 
 // Afficher la div pour emprunter
@@ -148,32 +148,41 @@ function verifISBN(val) {
 
 // Verifier validité champs
 function verifForm() {
-    var champs = document.getElementsByClassName("article");
-    var compt = 3;
-    var check;
 
-    for (let i = 0; i < champs.length; i++) {
-        var numicon = "icon" + (i+1);
-        var checker = 0;
-        check = document.getElementById(numicon);
+    if (retour.innerHTML.includes("<p>Pas d'emprunt en cours</p>")) {
+        var champs = document.getElementsByClassName("article");
+        var compt = 3;
+        var check;
 
-        if(champs[i].value == "") {
-            compt --;
-        } else if(check.className == "invisible icon") {
-            checker++;
-        } else {
-            localStorage.setItem(("ISBN"+(i+1)), champs[i].value);
+        for (let i = 0; i < champs.length; i++) {
+            var numicon = "icon" + (i+1);
+            var checker = 0;
+            check = document.getElementById(numicon);
+
+            if(champs[i].value == "") {
+                compt --;
+            } else if(check.className == "invisible icon") {
+                checker++;
+            } else {
+                localStorage.setItem(("ISBN"+(i+1)), champs[i].value);
+            }
         }
-    }
 
-    if (compt == 0) {
-        alert("Veuillez renseigner au moins un champ");
-    } else if (checker != 0) {
-        alert("Veuillez valider les champs saisis pour enregistrer");
+        if (compt == 0) {
+            alert("Veuillez renseigner au moins un champ");
+        } else if (checker != 0) {
+            alert("Veuillez valider les champs saisis pour enregistrer");
+        } else {
+            alert("Formulaire enregistré, merci.");
+            retour.innerHTML = "";
+            getEmprunts();
+        }
     } else {
         alert("Formulaire enregistré, merci.");
-        retour.innerHTML = "";
-        getEmprunts();
+
+        divemprunt.removeAttribute("style");
+        divtitreemprunt.removeAttribute("style");
+        afficheEmprunt();
     }
 }
 
@@ -206,5 +215,8 @@ function voirFiche() {
 
 // Redirection page recherche
 function leRetour() {
+    localStorage.removeItem("ISBN1");
+    localStorage.removeItem("ISBN2");
+    localStorage.removeItem("ISBN3");
     window.location = "recherche_adherent.html";
 }

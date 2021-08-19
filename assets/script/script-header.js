@@ -63,7 +63,11 @@ $(document).ready(function() {
     //EVENT LISTENERS
     btnConnexion.addEventListener("click", function(){mouv("1")});
     btnDeconnexion.addEventListener("click",function(){mouv("2")});
-    btnGestionAdherent.addEventListener("click", function(){mouv("3")});
+    btnGestionAdherent.addEventListener("click", function(){
+        localStorage.removeItem("ISBN1");
+        localStorage.removeItem("ISBN2");
+        localStorage.removeItem("ISBN3");
+        mouv("3")});
     btnNouvelAdherent.addEventListener("click", function(){mouv("4")});
     btnStats.addEventListener("click", function(){mouv("5")});
     btnBdEmprunt.addEventListener("click", function(){mouv("6")});
