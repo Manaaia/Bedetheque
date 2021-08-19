@@ -20,12 +20,16 @@
                     <div class="recherche">
                         <table>
                             <tr>
-                                <th class="label">Rechercher pas code ISBN</th>
+                                <th class="label">Rechercher par code ISBN</th>
                             </tr>
                             <tr>
                                 <th class="identite">
                                     <input type="text" id="isbnCherche" placeholder="XXX-X-XXXX-XXXX-X"><br/>
                                 </th>
+                                <div id="choixAjout" class="invisible">
+                                    <p>ISBN non trouvé, voulez-vous ajouter une BD ?</p>
+                                    <button id="AjoutBdOk">Ajouter une BD</button>
+                                </div>
                             </tr>
                         </table>
                         <button id="rechercher">Rechercher</button>
