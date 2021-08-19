@@ -27,3 +27,5 @@ emplacements.set("25", {code:"E06", idBibli:"5"});
 emplacements.set("26", {code:"E01", idBibli:"6"});
 emplacements.set("27", {code:"E02", idBibli:"6"});
 emplacements.set("28", {code:"E03", idBibli:"6"});
+emplacements.set("29", {code:"E04", idBibli:"6"});
+emplacements.set("30", {code:"E05", idBibli:"6"});
