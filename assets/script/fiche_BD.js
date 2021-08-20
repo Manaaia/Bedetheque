@@ -68,7 +68,7 @@ btnAjouterExemplaire.addEventListener("click", ajouterExemplaire);
 
 })();
 function modifierBD(){
-    
+    alert("Cette fonctionnalité arrive bientôt");
 }
 function ajouterExemplaire() {
     window.location.href= "ajouter_exemplaire.html";
