@@ -2,7 +2,7 @@ var albums = new Map();
 
 
 albums.set("1", {titre: "Croc vert", numero: "23", idSerie: "6", idAuteur: "13", idBibli:"0", prix: "24.50", isbn: "9782354260354", dateEntree:"2021-12-20", etat:"neuf", idEmplacement: "1"});
-albums.set("2", {titre: "Machin qui rêve", numero: "46", idSerie: "2", idAuteur: "14", idBibli:"1", prix: "23.50", isbn:"9791034709212", dateEntree:"2019-11-18",etat:"abîmé", idEmplacement: "2"});
+albums.set("2", {titre: "Machine qui rêve", numero: "46", idSerie: "2", idAuteur: "14", idBibli:"1", prix: "23.50", isbn:"9791034709212", dateEntree:"2019-11-18",etat:"abîmé", idEmplacement: "2"});
 albums.set("3", {titre: "La guerre des gloutons (II)", numero: "13", idSerie: "16", idAuteur: "11", idBibli:"2", prix: "14.50", isbn:"9782302011021", dateEntree:"2018-10-08",etat:"neuf", idEmplacement: "3"});
 albums.set("4", {titre: "Le jour du Mayflower", numero: "20", idSerie: "10", idAuteur: "16", idBibli:"3", prix: "12", isbn:"9782505067665", dateEntree:"2021-02-24", etat:"neuf", idEmplacement: "4"});
 albums.set("5", {titre: "La griffe de Rome", numero: "03", idSerie: "17", idAuteur: "9", idBibli:"4", prix: "14.50", isbn:"9782845650046", dateEntree:"2021-01-22", etat:"neuf", idEmplacement: "5"});
