@@ -59,7 +59,12 @@ btnAjouterExemplaire.addEventListener("click", ajouterExemplaire);
             }
         }
     }
-    imageBD.setAttribute("src", 'assets/image/albums/'+ serie1 + "-" + number + "-" + titre + ".jpg"); 
+    var lienImg = 'assets/image/albums/'+ serie1 + "-" + number + "-" + titre + ".jpg";
+    
+    lienImg = lienImg.replace("!", "");
+    lienImg = lienImg.replace("\'", "");
+    lienImg = lienImg.replace("\'", "");
+    imageBD.setAttribute("src",  lienImg); 
 
 })();
 function modifierBD(){
