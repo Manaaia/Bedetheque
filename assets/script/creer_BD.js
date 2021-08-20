@@ -1,11 +1,9 @@
+
 // TODO
 // -transformer les saisies en une fiche une fois le clique sur valider
 // -récupérer l'image rentrée dans le local storage
 // -ajouter la possibilité d'ajouter un auteur et une série quand celui-ci n'est pas dans la liste
 // -proposer cette recherche en tapant des lettres (meilleur UX, gain de temps)
-
-
-
 
 // Programme principal
 // Initialisation des variables
@@ -15,7 +13,9 @@ var btnabandon = document.getElementById("abandon");
 var btnvalid = document.getElementById("submit");
 var inputs = document.getElementsByTagName("input");
 var selects = document.getElementsByTagName("select");
+
 var isbnInput=document.querySelector("#isnbTap");
+
 
 var alerte = document.getElementById("alertesaisie");
 
@@ -26,6 +26,7 @@ const REGEXPA = /^[a-zA-ZÀ-ÿ- ]*$/;
 const REGEXP1 = /^[0-9]*$/;
 
  // EVENTS LISTENER
+
 btnabandon.addEventListener("click", cleanChamps);
 btnvalid.addEventListener("click", checkForm);
 
@@ -98,6 +99,7 @@ function checkForm() {
     }
     
     if(compt == 0){
+
         alert("Nouvelle BD ajoutée");
         console.log("isbn : "+isbnInput.value+",\ncodeBD :"+querySelector("#codeBD").value+",\ntitre :"+document.querySelector("#titreBD").value+",\nidAuteur:"+document.querySelector('#selectAuteur').selectedIndex+",\nidSerie:"+document.querySelector('#selectSerie').selectedIndex+",\netat"+document.querySelector('#etatBD').selectedIndex+",\commentaire:"+"blabla"+",\nbibliothèque:"+document.querySelector('#biblioExemplaire').selectedIndex+",\nemplacement:"+document.querySelector('#emplacementBD').selectedIndex+",\nresume:"+"blabla2")
         localStorage.setItem("isbn",isbnInput.value);
@@ -110,24 +112,29 @@ function checkForm() {
     }
 
 
+
 }
 // APERCU IMAGE
 /**
  * Permet de charger dynamiquement un aperçu de l'image choisi par l'utilisateur pour illustrer la couverture de la BD entrée
  */
+
 inputImage.onchange = function () {
     var reader = new FileReader();
 
     reader.onload = function (e) {
         //charge les datas
         previewImg.src = e.target.result;
+
         localStorage.setItem("urlImg", e.target.result);
+
 
     };
 
     // lis l'url de du fichier
     reader.readAsDataURL(this.files[0]);
 };
+
 /**
  * Permet de charger dynamiquement le contenu des select de se formulaire
  */
@@ -140,6 +147,7 @@ inputImage.onchange = function () {
     var empSelect = document.querySelector("#emplacementBD");
 
     // CHARGEMENT DU SELECT AUTEUR
+
     for(var[nom, auteur] of auteurs.entries()){
         nom = auteur.nom;
         id = auteur.id;
@@ -147,7 +155,9 @@ inputImage.onchange = function () {
         newElement.innerHTML = "<option value ="+"'"+id+"'>"+nom+"</option>";
         auteurSelect.appendChild(newElement);
     }
+
     // CHARGEMENT DU SELECT SERIE
+
     for(var[nom, serie] of series.entries()){
         nom = serie.nom;
         id = serie.id;
@@ -155,7 +165,9 @@ inputImage.onchange = function () {
         newElement.innerHTML = "<option value ="+"'"+id+"'>"+nom+"</option>";
         serieSelect.appendChild(newElement);
     }
+
     // CHARGEMENT DU SELECT BIBLIOTHEQUE
+
     for(var[nom, biblio] of biblios.entries()){
         nom = biblio.nom;
         bibli = biblio;
@@ -163,11 +175,13 @@ inputImage.onchange = function () {
         newElement.innerHTML = "<option value ="+"'"+bibli+"'>"+nom+"</option>";
         biblioSelect.appendChild(newElement);
     }
+
     // CHARGEMENT DU SELECT EMPLACEMENT
     //ce code ne se déclenche qu'en cas de changement sur le select bibliothèque
     biblioSelect.onchange = function () {
         var biblio = biblioSelect.selectedIndex;
         empSelect.options.length=1;
+
 
         for(var[code,emplacement] of emplacements.entries()){
             code = emplacement.code;

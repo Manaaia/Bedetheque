@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style-mobile.css" />
+    <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <link rel="stylesheet" href="assets\css\style-header&container.css">
+    <link rel="stylesheet" href="assets/css/style-exemplaire.css">
+
+
+    <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
+</head>
+<body>
+    <!-- Placeholder header -->
+    <div class="container">
+        <div  class="visible" id="divform" >
+                <fieldset class="form">
+                    <legend for="form">Fiche BD</legend>
+                    <div class="visible" id="container-bd" >
+                        <div id="ajoutBD" class="visible" >
+                            <div id="alertesaisie" class="alerte invisible"></div>
+                            <table>
+                                <tr>
+                                    <th class="label">Titre :</th>
+                                    <th id="titre"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label">Auteur :</th>
+                                    <th id="auteur"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label">Code exemplaire :</th>
+                                    <th id="numero"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label">Série :</th>
+                                    <th id="serie"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label invisible">Etat :</th>
+                                    <th id="etat" class="invisible"></th>
+                                </tr>                                
+                                <tr>
+                                    <th class="label invisible">Commentaires :</th>
+                                    <th id="commentaires" class="invisible"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label">Bibliothèque :</th>
+                                    <th id="bibliotheque"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label">Emplacement :</th>
+                                    <th id="emplacement"></th>
+                                </tr>
+                                <tr>
+                                    <th class="label invisible">Résumé :</th>
+                                    <th id="resume" class="invisible"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="th2">
+                            <h2>Aperçu</h2>
+                            <br>
+                            <img id="imgBD">
+                        </div>
+                    </div>
+                       
+                        <div id="btns">
+                            <button id="abandon">Retour</button>
+                            <!-- <button id="submit" class="invisible">Valider</button> -->
+                        </div>
+                    </div>
+                    
+                </fieldset>
+
+
+            
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/script/script-header.js"></script>
+    <script src="assets/script/maps/albums.js"></script>
+    <script src="assets/script/maps/auteurs.js"></script>
+    <script src="assets/script/maps/series.js"></script>
+    <script src="assets/script/maps/biblios.js"></script>
+    <script src="assets/script/maps/emplacements.js"></script>
+    <script src="assets/script/fiche_BD.js"></script>
+</body>
+</html>
