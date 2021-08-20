@@ -64,5 +64,5 @@ function createReco(key) {
 }
 
 function redirectFiche(cle) {
-    window.location = "fiche_BD.html?var=" + cle;
+    window.location = "fiche_BD_accueil.html?var=" + cle;
 }
