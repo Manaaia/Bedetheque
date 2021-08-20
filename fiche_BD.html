@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style-mobile.css" />
+    <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <link rel="stylesheet" href="assets\css\style-header&container.css">
+    <link rel="stylesheet" href="assets/css/style-exemplaire.css">
+
+
+    <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
+</head>
+<body>
+    <!-- Placeholder header -->
+    <div class="container">
+        <div  class="visible" id="divform" >
+                <fieldset class="form">
+                    <legend for="form">Fiche BD</legend>
+                    <div id="rechercheExemplaire">
+                            <h2>ISNB : </h2>
+                            <p id="isbn"></p>
+
+
+                    </div>
+                    <hr>
+                    <div class="visible" id="container-bd" >
+                        <div id="ajoutBD" class="visible" >
+                            <div id="alertesaisie" class="alerte invisible"></div>
+                            <div>
+                                <h2>Code exemplaire :</h2>
+                                <p id="codeBD"></p>
+                            </div>
+    
+                            <br>
+    
+                            <div>
+                                <h2>Titre :</h2>
+                                <p id="titreBD">
+                            </div>
+    
+                            <br/>
+    
+                            <div>
+                                <h2>Auteur :</h2>
+                                <p id="selectAuteur"></p>
+                            </div>
+    
+                            <br/>
+                                        
+                            <div>
+                                <h2>Série :</h2>
+                                <p id="selectSerie">
+                                </p>
+                            </div>
+    
+                            <br>
+                            <div>
+                                <h2>État :</h2>
+                                <p id="etatBD">
+                                </p>
+                            </div>
+    
+                            <br>
+                            <div>
+                                <h2>Commentaires :</h2>
+                                <p id="commentaireBD" ></p>
+                            </div>
+    
+                            <br>
+                            <div>
+                                <h2>Bibliothèque :</h2>
+                                <p id="biblioExemplaire"></p>
+                            </div>
+                            <br>
+                            <div>
+                                <h2>Emplacement :</h2>
+                                <p id="emplacementBD"></p>
+                            </div>
+                            <br>
+                            <div>
+                                <h2>Résumé :</h2>
+                                <p></p>
+                            </div>
+    
+                            <br>
+                        </div>
+                        <div id="th2">
+                            <h2>Couverture</h2>
+                            <br>
+                            <img id="imgBD">
+                        </div>
+                    </div>
+                       
+                        <div id="btns">
+                            <button id="modifierBD">Modifier</button>
+                            <button id="ajouterExemplaire">Ajouter Exemplaire</button>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+
+
+            
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/script/script-header.js"></script>
+    <script src="assets/script/maps/albums.js"></script>
+    <script src="assets/script/maps/auteurs.js"></script>
+    <script src="assets/script/maps/series.js"></script>
+    <script src="assets/script/maps/biblios.js"></script>
+    <script src="assets/script/maps/emplacements.js"></script>
+    <script src="assets\script\fiche_BD.js"></script>
+</body>
+</html>

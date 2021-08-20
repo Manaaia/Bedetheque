@@ -21,8 +21,7 @@
                     <legend for="form"> Ajouter un exemplaire </legend>
                     <div id="rechercheExemplaire">
                         <h2>ISNB : </h2>
-                        <p>XXX-X-XXXX-XXXX-X</p>
-                        <p id="msgExemplaire">ISBN existant. Renseignez le nouvel exemplaire</p>
+                        <p id="isbn">XXX-X-XXXX-XXXX-X</p>
                     </div>
                     <hr>
                     <div class="visible" id="container-bd">
@@ -35,14 +34,15 @@
                             <br>
     
                             <div>
-                                <h3>Titre :</h3> 
+                                <h3>Titre :</h3>
+                                <p id="titreBD"></p>
                             </div>
     
                             <br/>
 
                             <div>
                                 <label for="etatExemplaire">État :</label>
-                                <select name="etatExemplaire">
+                                <select name="etatExemplaire" id="etatExemplaire">
                                     <option value="selectEtat">Sélectionner un état</option>
                                     <option value="neuf">Neuf</option>
                                     <option value="abime">Abîmé</option>
@@ -54,23 +54,11 @@
                                 <label for="commentaireExemplaire">Commentaires :</label>
                                 <textarea name="commentaireExemplaire" cols="30" rows="10"></textarea>
                             </div>
-    
-                            <br>
-                            <div>
-                                <label for="emplacementExemplaire">Emplacement :</label>
-                                <select name="emplacementExemplaire">
-                                    <option value="selectEmplacement" selected>Sélectionner un emplacement :</option>
-                                    <option value="emplacement">E00</option>
-                                </select>
-                            </div>
-    
-                            <br>
-
                         </div>
                         <div id="th2">
                             <h2>Aperçu</h2>
                             <br>
-                            <div id="imgBD"></div>
+                            <img id="imgBD">
                                 
                         </div>
                     </div>
@@ -90,5 +78,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/script/script-header.js"></script>
+    <script src="assets/script/maps/albums.js"></script>
+    <script src="assets/script/maps/series.js"></script>
+    <script src="assets/script/script_ajouter_exemplaire.js"></script>
 </body>
 </html>
