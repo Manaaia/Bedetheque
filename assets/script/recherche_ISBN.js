@@ -15,19 +15,8 @@ btnAjoutBdOk.addEventListener("click", mouvAjoutBd);
 
 // FONCTIONS
 /**
- * Permet de lancer la recherche lorsque l'utilisateur clique sur le bouton rechercher
+ * Permet de clear le local-storage et d'engager une nouvelle recherche
  */
-function clickRecherche() {
-    var inputValue = parseInt(rechercheEx.value);
-    var bFlag = false;
-
-    bFlag = controleSaisie(bFlag, inputValue);
-
-    if(bFlag == true){
-        divResult.innerHTML = "";
-        rechercheMapAlbums(inputValue)
-    }
-}
 /**
  * Permet de controler la saisie du numero ISBN
  * @param {boolean} bool flag permettant de savoir si la recherche est valable 
@@ -53,6 +42,20 @@ function controleSaisie(bool, nbr){
     return bool;
 }
 /**
+ * Permet de lancer la recherche lorsque l'utilisateur clique sur le bouton rechercher
+ */
+ function clickRecherche() {
+    var inputValue = parseInt(rechercheEx.value);
+    var bFlag = false;
+
+    bFlag = controleSaisie(bFlag, inputValue);
+
+    if(bFlag == true){
+        divResult.innerHTML = "";
+        rechercheMapAlbums(inputValue)
+    }
+}
+/**
  * Lance la recherche de BD en fonction du numero ISBN saisi
  * @param {number} nbr représente le nombre saisie dans le recherche ISBN
  */
@@ -62,9 +65,8 @@ function rechercheMapAlbums(nbr){
     for (var [isbn, album] of albums.entries()){
         var appel = album.isbn;
         if(appel.includes(nbr)){
-            console.log("ok");
             var titre = album.titre; 
-            afficheResult(titre);
+            afficheResult(titre, isbn);
             compt++;
         }
     }
@@ -73,12 +75,22 @@ function rechercheMapAlbums(nbr){
         choixAjoutDiv.className ="visible";
     }
 }
-function afficheResult(str){
+function afficheResult(str, key){
     var newElement = document.createElement('ul');
     newElement.innerHTML = 
     "<li>" + str + "</li>";
+    newElement.addEventListener("click", function() {clickResult(key)});
     divResult.appendChild(newElement);
 }
 function mouvAjoutBd(){
+
+    localStorage.setItem('isbn',rechercheEx.value);
+
     window.location.href="ajouter_BD.html";
+}
+// Clique résultat pour redirection avec clé valeur dans url
+function clickResult(cle) {
+    localStorage.removeItem("isbn");
+    localStorage.setItem('isbn',rechercheEx.value);
+    window.location = "fiche_BD.html?var=" + cle;
 }

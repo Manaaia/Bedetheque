@@ -89,8 +89,7 @@ $(document).ready(function() {
             case "2":
                 localStorage.removeItem('id');
                 localStorage.removeItem('role');
-
-                console.log("hello");
+                localStorage.removeItem('isbn');
                 link="index.html";
                 break;
             case "3":

@@ -1,45 +1,69 @@
-// Programme principal
-// Initialisation des variables
-var casetitre = document.getElementById("titre");
-var caseauteur = document.getElementById("auteur");
-var casenumero = document.getElementById("numero");
-var caseserie = document.getElementById("serie");
-var casebibliotheque = document.getElementById("bibliotheque");
-var caseemplacement = document.getElementById("emplacement");
-var caseimg = document.getElementById("imgBD");
-var btnRetour = document.getElementById("abandon");
-var cle = window.location.search;
-// Récupère la clé valeur url
-cle = cle.split("=");
-cle = cle[1];
-var titre = albums.get(cle).titre;
-var idAuteur = albums.get(cle).idAuteur;
-var auteur = auteurs.get(idAuteur).nom;
-var numero = albums.get(cle).numero;
-var idSerie = albums.get(cle).idSerie;
-var serie = series.get(idSerie).nom;
-var idEmplacement = albums.get(cle).idEmplacement;
-var emplacement = emplacements.get(idEmplacement).code;
-var idBibliotheque = emplacements.get(idEmplacement).idBibli;
-var bibliotheque = biblios.get(idBibliotheque).nom;
-var img = 'assets/image/albums/' + serie + '-' + numero + '-' + titre + '.jpg';
+// TODO
+// - Gérer le cas de codes exemplaire
+// - Gérer les emplacements
 
-        img = img.replace("!", "");
-        img = img.replace("\'", "");
-        img = img.replace("\'", "");
 
-casetitre.innerHTML = titre;
-caseauteur.innerHTML = auteur;
-casenumero.innerHTML = numero;
-caseserie.innerHTML = serie;
-casebibliotheque.innerHTML = bibliotheque;
-caseemplacement.innerHTML = emplacement;
-caseimg.src = img;
+// INITIALISATION DES VARIABLES
+var cle = localStorage.isbn;
+var isbnP = document.querySelector("#isbn");
+var codeP = document.querySelector("#codeBD");
+var titreP = document.querySelector("#titreBD");
+var etatP = document.querySelector("#etatBD");
+var emplacementP = document.querySelector('#emplacementBD');
+var auteurP = document.querySelector("#selectAuteur");
+var serieP = document.querySelector("#selectSerie");
+var bibliP = document.querySelector("#biblioExemplaire");
+var imageBD = document.querySelector("#imgBD");
+var btnModifier = document.querySelector("#modifierBD");
+var btnAjouterExemplaire = document.querySelector("#ajouterExemplaire");
 
-btnRetour.addEventListener("click", redirectAcceuil);
+// EVENTLISTENER
+btnModifier.addEventListener("click", modifierBD);
+btnAjouterExemplaire.addEventListener("click", ajouterExemplaire);
 
-// Fonctions
-// Redirection Accueil
-function redirectAcceuil() {
-    window.location = "index.html";
+// FONCTIONS
+(function(){
+    var serie1 = "";
+    var titre = "";
+    
+    isbnP.innerHTML=cle;
+    for(var[isbn, album] of albums.entries()){
+        if(cle==album.isbn){
+            codeP.innerHTML="0000";
+            titreP.innerHTML = album.titre;
+            var titre = album.titre;
+            var idAuteur = album.idAuteur;
+            var idSerie = album.idSerie;
+            etatP.innerHTML = album.etat;
+            var idBibli = album.idBibli;
+            emplacementP.innerHTML = "E00"
+            var number = album.numero;
+
+            for(var[key, auteur] of auteurs){
+                if(idAuteur==key){
+                    auteurP.innerHTML = auteur.nom;
+                }
+            }
+            for(var[key, serie] of series){
+                if(idSerie==key){
+                    serieP.innerHTML = serie.nom;
+                    serie1 = serie.nom;
+
+                }
+            }
+            for(var[key, biblio] of biblios){
+                if(idBibli==key){
+                    bibliP.innerHTML = biblio.nom;
+                }
+            }
+        }
+    }
+    imageBD.setAttribute("src", 'assets/image/albums/'+ serie1 + "-" + number + "-" + titre + ".jpg"); 
+
+})();
+function modifierBD(){
+    
+}
+function ajouterExemplaire() {
+    window.location.href= "ajouter_exemplaire.html";
 }
