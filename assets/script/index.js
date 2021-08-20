@@ -41,6 +41,7 @@ function verifPresence(alea, tab, bool) {
     return bool;
 }
 
+// Créer contenu dynamiquement
 function createReco(key) {
     key = key.toString();
     var titre = albums.get(key).titre;
