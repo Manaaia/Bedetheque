@@ -91,6 +91,6 @@ function mouvAjoutBd(){
 // Clique résultat pour redirection avec clé valeur dans url
 function clickResult(cle) {
     localStorage.removeItem("isbn");
-    localStorage.setItem('isbn',rechercheEx.value);
-    window.location = "fiche_BD.html?var=" + cle;
+    localStorage.setItem('cle',cle);
+    window.location = "fiche_BD.html";
 }

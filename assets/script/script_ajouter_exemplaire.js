@@ -3,7 +3,7 @@
 
 
 // INITIALISATION DES VARIABLES
-var cle = localStorage.isbn;
+var cle = localStorage.cle;
 
 var titreP = document.querySelector("#titreBD");
 var isbnP = document.querySelector("#isbn");
@@ -21,14 +21,13 @@ btnAnnuler.addEventListener("click", annulation);
 
 // FONCTIONS
 (function(){
-    isbnP.innerHTML=cle;
-
-    for(var[isbn, album] of albums.entries()){
-        if(cle == album.isbn){
+    for(var[key, album] of albums.entries()){
+        if(cle == key){
             titre = album.titre;
             number = album.numero;
             var idSerie = album.idSerie;
             titreP.innerHTML = titre;
+            isbnP.innerHTML = album.isbn;
         }
         for(var[key, serie] of series){
             if(idSerie==key){
