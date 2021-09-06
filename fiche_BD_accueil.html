@@ -6,83 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style-mobile.css" />
     <link rel="stylesheet" href="assets/css/style-desktop.css">
-    <link rel="stylesheet" href="assets\css\style-header&container.css">
-    <link rel="stylesheet" href="assets/css/style-exemplaire.css">
-
 
     <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
 </head>
 <body>
     <!-- Placeholder header -->
     <div class="container">
-        <div  class="visible" id="divform" >
-                <fieldset class="form">
-                    <legend for="form">Fiche BD</legend>
-                    <div class="visible" id="container-bd" >
-                        <div id="ajoutBD" class="visible" >
-                            <div id="alertesaisie" class="alerte invisible"></div>
-                            <table>
-                                <tr>
-                                    <th class="label">Titre :</th>
-                                    <th id="titre"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Auteur :</th>
-                                    <th id="auteur"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Code exemplaire :</th>
-                                    <th id="numero"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Série :</th>
-                                    <th id="serie"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Etat :</th>
-                                    <th id="etat"></th>
-                                </tr>                                
-                                <tr>
-                                    <th class="label invisible">Commentaires :</th>
-                                    <th id="commentaires" class="invisible"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Bibliothèque :</th>
-                                    <th id="bibliotheque"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Emplacement :</th>
-                                    <th id="emplacement"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label invisible">Résumé :</th>
-                                    <th id="resume" class="invisible"></th>
-                                </tr>
-                                <tr>
-                                    <th class="label">Statut :</th>
-                                    <th id="statut"></th>
-                                </tr> 
-                            </table>
-                        </div>
-                        <div id="th2">
-                            <h2>Aperçu</h2>
-                            <br>
-                            <img id="imgBD">
-                        </div>
-                    </div>
-                       
-                        <div id="btns">
-                            <button id="abandon">Retour</button>
-                            <!-- <button id="submit" class="invisible">Valider</button> -->
-                        </div>
-                    </div>
-                    
-                </fieldset>
-
-
-            
-        </div>
-        
+        <fieldset class="form"><legend for="form">Fiche BD</legend>
+            <div id="ajoutBD" class="visible" >
+                <div>
+                    <h3 class="label">Titre :</h3>
+                    <p id="titre"></p>
+                </div>
+                <div>
+                    <h3 class="label">Auteur :</h3>
+                    <p id="auteur"></p>
+                </div>
+                <div>
+                    <h3 class="label">Code exemplaire :</h3>
+                    <p id="numero"></p>
+                </div>
+                <div>
+                    <h3 class="label">Série :</h3>
+                    <p id="serie"></p>
+                </div>
+                <div>
+                    <h3 class="label">Etat :</h3>
+                    <p id="etat"></p>
+                </div>                                
+                <div>
+                    <h3 class="label invisible">Commentaires :</h3>
+                    <p id="commentaires" class="invisible"></p>
+                </div>
+                <div>
+                    <h3 class="label">Bibliothèque :</h3>
+                    <p id="bibliotheque"></p>
+                </div>
+                <div>
+                    <h3 class="label">Emplacement :</h3>
+                    <p id="emplacement"></p>
+                </div>
+                <div>
+                    <h3 class="label invisible">Résumé :</h3>
+                    <p id="resume" class="invisible"></p>
+                </div>
+                <div>
+                    <h3 class="label">Statut :</h3>
+                    <p id="statut"></p>
+                </div>
+                <div id="th2">
+                    <h3 class="label">Aperçu</h3>
+                    <p><img id="imgBD"></p>
+                </div>
+            </div>
+            <div id="btns">
+                <button id="abandon">Retour</button>
+            </div>
+        </fieldset>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

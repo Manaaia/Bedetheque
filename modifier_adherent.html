@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style-mobile.css" />
     <link rel="stylesheet" href="assets/css/style-desktop.css">
-    <link rel="stylesheet" href="assets\css\style-header&container.css">
     <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
 </head>
 <body>
@@ -14,22 +13,21 @@
     <!-- Placeholder header -->
 
     <div class="container">
-        <div id="divform">
             <fieldset class="form"><legend for="form">Modifier adhérent</legend>
-                <table>
-                    <tr id="alertesaisie" class="alerte invisible"></tr>
-                    <tr>
-                        <th class="label">Identité</th>
-                        <th class="identite">
+                <div>
+                    <p id="alertesaisie" class="alerte invisible"></p>
+                    <div>
+                        <h3 class="label">Identité</h3>
+                        <p class="identite">
                             <label for="nomadherent">Nom</label><br/>
                             <input type="text" class="lettre" id="nomadherent" placeholder="Veuillez renseigner un nom" required><br/>
                             <label for="prenomadherent">Prénom</label><br/>
                             <input type="text" class="lettre" id="prenomadherent" placeholder="Veuillez renseigner un prénom" required>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="label">Adresse</th>
-                        <th id="adresseadherent">
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="label">Adresse</h3>
+                        <p id="adresseadherent">
                             <label for="numero">N°</label><br/>
                             <input type="text" class="chiffre" id="numero" placeholder="00"><br/>
                             <label for="rue">Nom de rue</label><br/>
@@ -38,26 +36,25 @@
                             <input type="text" class="chiffre" id="code" placeholder="00000"><br/>
                             <label for="ville">Ville</label><br/>
                             <input type="text" class="lettre" id="ville" placeholder="Veuillez renseigner une ville">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="label">Date de règlement de la cotisation annuelle</th>
-                        <th><input type="date" id="datecot" value="2021-02-06"></th>
-                    </tr>
-                    <tr id="alertcot" class= "alerte invisible">
-                        <th>Cotisation annuelle expirée</th>
-                    </tr>
-                    <tr>
-                        <th class="label invisible">Amendes</th>
-                        <th id="amende" class="invisible">Aucune amende en attente</th>
-                    </tr>
-                </table>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="label">Date de règlement de la cotisation annuelle</h3>
+                        <p><input type="date" id="datecot" value="2021-02-06"></p>
+                    </div>
+                    <div id="alertcot" class= "alerte invisible">
+                        Cotisation annuelle expirée
+                    </div>
+                    <div>
+                        <h3 class="label invisible">Amendes</h3>
+                        <p id="amende" class="invisible">Aucune amende en attente</p>
+                    </div>
+                </div>
                 <div id="btns">
                     <button id="abandon">Abandonner</button>
                     <button id="submit">Valider</button>
                 </div>
             </fieldset>
-        </div>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

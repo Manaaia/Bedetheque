@@ -4,7 +4,6 @@ $(document).ready(function() {
     <header>
         <div class="visible" id="header-div">
             <button id="back" class="invisible">Retour</button>
-                <h1 class="invisible">Centre culturel des Marmusots</h1>
             <div id="main-menu" class="invisible">
                 <button name="fond" id="fond" class ="btn-nav">Catalogue</button>
                 <div id="nav-bibliothecaire" class="invisible">
@@ -40,7 +39,7 @@ $(document).ready(function() {
 
     console.log( "Load was performed." );
 
-    var headerDiv = document.querySelector("#header-div");
+    // var headerDiv = document.querySelector("#header-div");
     var mainMenu = document.querySelector("#main-menu");
     var navBibliothecaire = document.querySelector("#nav-bibliothecaire");
     var navGestionnaire = document.querySelector("#nav-gestionnaire");
@@ -129,7 +128,7 @@ $(document).ready(function() {
      */
     switch(role){
         case "1" :
-            headerDiv.className = "visible";
+            // headerDiv.className = "visible";
             mainMenu.className = "visible";
             btnConnexion.className = "invisible";
             btnDeconnexion.className = "visible";
@@ -140,7 +139,7 @@ $(document).ready(function() {
             console.log('bibliothéquaire');
             break
         case "2" :
-            headerDiv.className = "visible";
+            // headerDiv.className = "visible";
             mainMenu.className = "visible";
             btnConnexion.className = "invisible";
             btnDeconnexion.className = "visible";
@@ -151,7 +150,7 @@ $(document).ready(function() {
             console.log('gestionnaire de fond');
             break
         case "3" :
-            headerDiv.className = "visible";
+            // headerDiv.className = "visible";
             mainMenu.className = "visible";
             btnConnexion.className = "invisible";
             btnDeconnexion.className = "visible";
@@ -162,7 +161,7 @@ $(document).ready(function() {
             console.log('adhérent');
             break
         case "4" :
-            headerDiv.className = "visible";
+            // headerDiv.className = "visible";
             mainMenu.className = "visible";
             btnConnexion.className = "invisible";
             btnDeconnexion.className = "visible";

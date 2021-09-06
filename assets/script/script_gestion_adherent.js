@@ -22,18 +22,17 @@ const REGEXPISBN = /^\d+$/;
 
 
 afficheNom(cle);
-flag = checkDatecot(datecot);
-
-if (flag == true) {
-    divempruntretour.innerHTML = '<p class="alerte">Alerte : Emprunt impossible !<br/>Ce compte adhérent est bloqué.';
-    btnvalide.className = "invisible";
-}
-
 gestionRetourEmprunt();
 
 btnfiche.addEventListener("click", voirFiche);
 btnabandon.addEventListener("click", leRetour);
 btnvalide.addEventListener("click", verifForm);
+
+flag = checkDatecot(datecot);
+if (flag == true) {
+    divempruntretour.innerHTML = '<p class="alerte">Alerte : Emprunt impossible !<br/>Ce compte adhérent est bloqué.';
+    btnvalide.className = "invisible";
+}
 
 // Fonctions
 // Afficher le nom de l'adhérent
