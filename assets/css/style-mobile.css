@@ -125,6 +125,12 @@ option[disabled] {
     display: none;
 }
 
+#retour {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
 /* HEADER ANIME */
 header img {
     width: 20px;
@@ -340,7 +346,7 @@ hr {
     justify-content: space-around;
 }
 
-#searchDiv h1 {
+h1 {
     font-size: 3em;
     display: flex;
     text-align: center;
@@ -395,37 +401,14 @@ hr {
 
 
 /*---------------------------------------------- SECTION PAGE CONNEXION ---------------------------------------*/
-/* TITLE PAGE CONNEXION*/
-#connexion-title {
-    margin-top: 100px;
-    position: relative;
-    height: 300px;
-}
-#bubble-connexion-title {
-    position: absolute;
-    z-index: 1;
-    left: -200px;
-}
-#txt-connexion-title{
-    position: absolute;
-    height: 400px;
-    z-index: 2;
-    top: 30px;
-    left: -70px;
-}
-#connexion-title img{
-    width: 400px;
-}
+
 
 /* SECTION */
 #connexion-section{
-    display: flex;
-    flex-direction: column;
+    padding: 15px;
     justify-content: center;
-    align-items: center;
 }
 #connexion-content div{
-    width: 400px;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -435,9 +418,26 @@ hr {
 }
 #btnConnexion{
     display: flex;
-    width: 500px;
     align-items: center;
 }
-#comment-connexion{
-    width: 600px;
+
+/* TITLE PAGE CONNEXION*/
+#connexion-title {
+    margin-top: 100px;
+    position: relative;
+    height: 250px;
+}
+#bubble-connexion-title {
+    position: absolute;
+    z-index: 1;
+    left: 50px;
+}
+#txt-connexion-title{
+    position: absolute;
+    z-index: 2;
+    top: 65px;
+    left: 110px;
+}
+#connexion-title img{
+    width: 300px;
 }
