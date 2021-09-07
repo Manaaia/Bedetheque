@@ -19,12 +19,19 @@
     font-size: 14px;
 }
 
+.invisible{
+    display: none;
+}
+
 body {
     background-color: #e3ded6;
 }
 
 h1 {
-    font-family: BadaBoom BB, Helvetica, sans-serif;
+    font-family: 'BadaBoom BB', Helvetica, sans-serif;
+    font-size: 3em;
+    display: flex;
+    text-align: center;
 }
 
 ul {
@@ -36,7 +43,7 @@ li {
 }
 
 button {
-    max-width: 120px;
+    /* max-width: 120px; */
 
     background:linear-gradient(to bottom, #b3c6cc 5%, #71adb0 100%);
 	background-color:#b3c6cc;
@@ -56,31 +63,55 @@ button:hover {
 	background-color:#71adb0;
 }
 
-#deconnexion {
-    max-width: 150px;
+input, textarea {
+    background-color: rgba(150, 133, 102, 0.445);
+    border: 1px solid #151219;
+}
+
+textarea {
+    width: 100%;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #151219;
+}
+
+select {
+    padding: 7px 30px 7px 12px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px -2px #968566;
+    border-bottom: 1px solid #151219;
+    background-color: rgba(150, 133, 102, 0.445);
+    cursor: pointer;
+    text-decoration:none;
+	text-shadow:0px 1px 0px #968566;
+    transition: all 150ms ease;
+    width: 100%;
+}
+    
+option {
+    color:#151219;
+}
+
+option[disabled] {
+    display: none;
+}
+
+.alerte {
+    color: brown;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 1em;
 }
 
 /*-------------------------------------------------- SECTION HEADER ---------------------------------------------*/
 /* HEADER */
-.invisible{
-    display: none;
-}
 
 header div {
     background-color: #151219;
     background-image: url(fond.png);
-}
-
-#connexion {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-    transition: all 1s ease-out;
-}
-
-#connexion:active {
-    top: 22px;
 }
 
 #header-div {
@@ -100,35 +131,30 @@ header div {
 	background-color:#c4bbab;
 }
 
-#fond {
-    box-shadow: none;
+#connexion {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    transition: all 1s ease-out;
 }
 
-select {
-    padding: 7px 30px 7px 12px;
-    border: none;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px -2px #968566;
-    cursor: pointer;
-    text-decoration:none;
-	text-shadow:0px 1px 0px #968566;
-    transition: all 150ms ease;
-    font-size: 1.2em;
-    width: 200px;
-}
-    
-option {
-    color:#151219;
+#connexion:active {
+    top: 22px;
 }
 
-option[disabled] {
-    display: none;
+#deconnexion {
+    max-width: 150px;
 }
 
 #retour {
     position: absolute;
     top: 15px;
     left: 15px;
+}
+
+#fond {
+    box-shadow: none;
 }
 
 /* HEADER ANIME */
@@ -143,14 +169,6 @@ header img {
     left: 0px;
     display: flex;
     flex-direction: row;
-}
-
-#back {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-
-    transition: all 1s ease-out;
 }
 
 /* COMPTE */
@@ -170,8 +188,8 @@ header img {
     color: #c4bbab;
 }
 
+/*-------------------------------------------------- SECTION GENERAL CONTAINER --------------------------------------------*/
 
-/*-------------------------------------------------- SECTION CONTAINER --------------------------------------------*/
 .container {
     background-color: rgba(185, 172, 141, 0.719);
     box-shadow: 3px 3px 10px -2px #968566;
@@ -185,7 +203,6 @@ header img {
     padding: 3%;
     border-color: #dde4ed;
     border: solid 1px;
-    text-align: center;
 }
 
 legend {
@@ -193,30 +210,16 @@ legend {
     font-size: 1.8em;
 }
 
-.alerte {
-    color: red;
-    font-style: italic;
-    text-align: center;
-    font-size: 1.2em;
-    margin: 1em;
-}
-
 p>input {
     width: 100%;
     border: 0; 
     padding: 7px 0; 
-    border-bottom: 1px solid #151219;
-    background-color: rgba(150, 133, 102, 0.445);
-}
-
-p>input::placeholder {
-    color: #151219;
 }
 
 .label {
     font-weight: bold;
     padding: 15px;
-    font-size:1.4em ;
+    font-size:1.2em ;
 }
 
 #btns {
@@ -225,6 +228,13 @@ p>input::placeholder {
     margin-top: 20px;
 }
 
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*------------------------------------------- SECTION PAGES RECHERCHE ------------------------------------------*/
+
 .recherche {
     display: flex;
     flex-direction: column;
@@ -232,14 +242,13 @@ p>input::placeholder {
     align-items: center;
 }
 
+#choixAjout {
+    text-align: center;
+}
+
 #rechercher {
     margin: auto;
     margin-top: 20px;
-}
-
-hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 #results {
@@ -255,6 +264,8 @@ hr {
 .adherentselect {
     text-align: center;
 }
+
+/*---------------------------------------------- SECTION GESTION ADH ----------------------------------------------*/
 
 #adherent {
     padding-bottom: 15px;
@@ -273,6 +284,10 @@ hr {
 
 #contenuemprunt {
     padding: 0 15px 0 15px;
+}
+
+#contenuretour>select {
+    width: 50%;
 }
 
 .positiontitre {
@@ -313,20 +328,54 @@ hr {
     width: 50px;
 }
 
-#rechercheExemplaire {
-    flex-direction: column;
+.list {
+    font-weight: bold;
 }
 
-#container-bd {
-    flex-direction: column-reverse;
-    align-items: center;
+/*---------------------------------------------- SECTION EXEMPLAIRE ----------------------------------------------------*/
+
+#rechercheExemplaire {
+    text-align: center;
+}
+
+#rechercheExemplaire p {
+    display:inline;
+}
+
+#container-bd>div>div {
+    padding: 10px;
+}
+
+#container-bd p {
+    display:inline;
+}
+
+#th2 {
+    text-align: center;
 }
 
 #imgBD {
-    background-color: white;
+    background-color: rgba(150, 133, 102, 0.445);
     width: 250px;
     height: 350px;
     margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#imageBD {
+    width: 100%;
+}
+
+#codeBD, #comments {
+    width: 100%;
+}
+
+#msgExemplaire{
+    color: brown;
+}
+
+#titreBD {
+    width: 100%;
 }
 
 
@@ -346,12 +395,6 @@ hr {
     justify-content: space-around;
 }
 
-h1 {
-    font-size: 3em;
-    display: flex;
-    text-align: center;
-}
-
 #search {
     height: 30px;
     width: 300px;
@@ -363,7 +406,6 @@ h1 {
 #newItems h2 {
     margin-left: 20px;
     margin-top: 20px;
-
     font-size: 1.5em;
 }
 
@@ -398,11 +440,7 @@ h1 {
     margin: 10px;
 }
 
-
-
 /*---------------------------------------------- SECTION PAGE CONNEXION ---------------------------------------*/
-
-
 /* SECTION */
 #connexion-section{
     padding: 15px;

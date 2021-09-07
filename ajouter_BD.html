@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style-mobile.css" />
     <link rel="stylesheet" href="assets/css/style-desktop.css">
-    <link rel="stylesheet" href="assets/css/style-exemplaire.css">
 
 
     <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
@@ -14,113 +13,82 @@
 <body>
     <!-- Placeholder header -->
     <div class="container">
-        <div  class="visible" id="divform" >
-                <fieldset class="form">
-                    <legend for="form">Ajouter une BD</legend>
-                    <div id="rechercheExemplaire">
-                            <h2>ISNB : </h2>
-                            <input type="text" id="isnbTap" placeholder="XXX-X-XXXX-XXXX-X" class="chiffre">
-                            <p id="msgExemplaire">ISBN non existant. Renseignez la nouvelle BD</p>
+        <fieldset class="form"><legend for="form">Ajouter une BD</legend>
+            <div id="rechercheExemplaire">
+                    <h2 class="label">ISNB : </h2>
+                    <input type="text" id="isnbTap" placeholder="XXX-X-XXXX-XXXX-X" class="chiffre"><br>
+                    <p id="msgExemplaire">ISBN non existant. Renseignez la nouvelle BD</p>
 
+            </div>
+            <hr>
+            <div class="visible" id="container-bd" >
+                <div id="ajoutBD" class="visible" >
+                    <div id="alertesaisie" class="alerte invisible"></div>
+                    <div>
+                        <label for="codeBD" class="label">Code exemplaire :</label>
+                        <input type="text" name="codeBD" id="codeBD" placeholder="00000" class="chiffre">
                     </div>
-                    <hr>
-                    <div class="visible" id="container-bd" >
-                        <div id="ajoutBD" class="visible" >
-                            <div id="alertesaisie" class="alerte invisible"></div>
-                            <div>
-                                <label for="codeBD">Code exemplaire :</label>
-                                <input type="text" name="codeBD" id="codeBD" placeholder="00000" class="chiffre">
-                            </div>
-    
-                            <br>
-    
-                            <div>
-                                <label for="titreBD">Titre :</label>
-                                <input type="text" id="titreBD" class="lettre">
-                            </div>
-    
-                            <br/>
-    
-                            <div>
-                                <label for="auteurBD">Auteur :</label>
-                                <select name="auteurBD" id="selectAuteur">
-                                    <option value="selectAuteur" selected>Sélectionner un auteur :</option>
-                                </select>
-                            </div>
-    
-                            <br/>
-                                        
-                            <div>
-                                <label for="serieBD">Série :</label>
-                                <select name="serieBD" id="selectSerie">
-                                    <option value="selectSerie" selected>Sélectionner une série</option>
-                                </select>
-                            </div>
-    
-                            <br>
-                            <div>
-                                <label for="etatBD">État :</label>
-                                <select name="etatBD" id="etatBD">
-                                    <option value="selectEtat">Sélectionner un état</option>
-                                    <option value="neuf">Neuf</option>
-                                    <option value="abime">Abîmé</option>
-                                </select>
-                            </div>
-    
-                            <br>
-                            <div>
-                                <label for="commentaireBD">Commentaires :</label>
-                                <textarea id="commentaireBD" cols="30" rows="10"></textarea>
-                            </div>
-    
-                            <br>
-                            <div>
-                                <label for="biblioExemplaire">Bibliothèque :</label>
-                                <select name="biblioExemplaire" id="biblioExemplaire">
-                                    <option value="selectBiblio" selected>Sélectionner une bibliothèque :</option>
-                                </select>
-                            </div>
-                            <br>
-                            <div>
-                                <label for="emplacementBD">Emplacement :</label>
-                                <select name="emplacementBD" id="emplacementBD">
-                                    <option value="selectEmplacement" selected>Sélectionner un emplacement :</option>
-                                </select>
-                            </div>
-    
-                            <br>
-                            <div>
-                                <label for="imageBD">Ajouter une image :</label>
-                                <input type="file" id="imageBD" accept="image/png, image/jpeg">
-                            </div>
-    
-                            <br>
-                            <div>
-                                <label for="resumeBD">Résumé :</label>
-                                <textarea name="resumeBD" cols="30" rows="10"></textarea>
-                            </div>
-    
-                            <br>
-                        </div>
-                        <div id="th2">
-                            <h2>Aperçu</h2>
-                            <br>
-                            <img id="imgBD">
-                        </div>
+                    <div>
+                        <label for="titreBD" class="label">Titre :</label>
+                        <input type="text" id="titreBD" class="lettre">
                     </div>
-                       
-                        <div id="btns">
-                            <button id="abandon">Abandonner</button>
-                            <button id="submit">Valider</button>
-                        </div>
+                    <div>
+                        <label for="auteurBD" class="label">Auteur :</label>
+                        <select name="auteurBD" id="selectAuteur">
+                            <option value="selectAuteur" selected>Sélectionner un auteur</option>
+                        </select>
+                    </div>        
+                    <div>
+                        <label for="serieBD" class="label">Série :</label>
+                        <select name="serieBD" id="selectSerie">
+                            <option value="selectSerie" selected>Sélectionner une série</option>
+                        </select>
                     </div>
-                    
-                </fieldset>
-
-
-            
-        </div>
-        
+                    <div>
+                        <label for="etatBD" class="label">État :</label>
+                        <select name="etatBD" id="etatBD">
+                            <option value="selectEtat">Sélectionner un état</option>
+                            <option value="neuf">Neuf</option>
+                            <option value="abime">Abîmé</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="commentaireBD" class="label">Commentaires :</label>
+                        <textarea id="commentaireBD" cols="30" rows="10"></textarea>
+                    </div>
+                    <div>
+                        <label for="biblioExemplaire" class="label">Bibliothèque :</label>
+                        <select name="biblioExemplaire" id="biblioExemplaire">
+                            <option value="selectBiblio" selected>Sélectionner une bibliothèque :</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="emplacementBD" class="label">Emplacement :</label>
+                        <select name="emplacementBD" id="emplacementBD">
+                            <option value="selectEmplacement" selected>Sélectionner un emplacement :</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="imageBD" class="label">Ajouter une image :</label>
+                        <input type="file" id="imageBD" accept="image/png, image/jpeg">
+                    </div>
+                    <div>
+                        <label for="resumeBD" class="label">Résumé :</label>
+                        <textarea name="resumeBD" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div id="th2" class="invisible">
+                    <h2>Aperçu</h2>
+                    <br>
+                    <img id="imgBD">
+                </div>
+            </div>
+                
+            <div id="btns">
+                <button id="abandon">Abandonner</button>
+                <button id="submit">Valider</button>
+            </div>
+        </fieldset>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
