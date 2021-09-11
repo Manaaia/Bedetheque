@@ -1,4 +1,4 @@
-/* GENERAL */
+/*-------------------------------------------------------------------- GENERAL -----------------------------------------------------------------*/
 
 @font-face {
     font-family: 'BadaBoom BB';
@@ -12,6 +12,10 @@
     src: url('font/Comic Book.otf') format('opentype');
 }
 
+html {
+    height: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -23,15 +27,31 @@
     display: none;
 }
 
-body {
-    background-color: #e3ded6;
-}
+body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: url('../image/fond_3_mob.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
 
 h1 {
     font-family: 'BadaBoom BB', Helvetica, sans-serif;
     font-size: 3em;
     display: flex;
     text-align: center;
+}
+
+#discover, #comment-connexion {
+    color: #c4bbab;
 }
 
 ul {
@@ -110,13 +130,13 @@ option[disabled] {
 /* HEADER */
 
 header div {
-    background-color: #151219;
+    background-color: #121219;
     background-image: url(fond.png);
 }
 
 #header-div {
-    height: 140px;
-    box-shadow: 3px 3px 10px -2px #968566;
+    height: 180px;
+    box-shadow: 3px 3px 10px -2px #0b0281;
 
     position: sticky;
     top: 0;
@@ -124,7 +144,7 @@ header div {
 
 #header-div button {
     max-width: 600px;
-    width: 200px;
+    min-width: 160px;
     border-radius:2px;
     margin-right: 2px;
     background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
@@ -145,6 +165,7 @@ header div {
 
 #deconnexion {
     max-width: 150px;
+    margin-right: 15px;
 }
 
 #retour {
@@ -191,8 +212,8 @@ header img {
 /*-------------------------------------------------- SECTION GENERAL CONTAINER --------------------------------------------*/
 
 .container {
-    background-color: rgba(185, 172, 141, 0.719);
-    box-shadow: 3px 3px 10px -2px #968566;
+    background-color: #c4bbab;
+    box-shadow: 3px 3px 10px -2px #4c6eca;
     border-radius: 8px;
     padding: 1.5%;
     margin: 20px;
@@ -384,9 +405,11 @@ hr {
 #searchDiv{
     background-color: #c8bcac;
     color: #202424;
-    height: 200px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    /* height: 200px; */
 
-    padding-top: 60px;
+    /* padding-top: 60px; */
 
     display: flex;
     flex-direction: column;
@@ -400,6 +423,7 @@ hr {
     width: 300px;
     border: none;
     border-radius: 8px;
+    margin: 10px;
 }
 
 /* NewItems */
@@ -453,10 +477,22 @@ hr {
 }
 #connexion-content input{
     height: 20px;
+    background-color: rgba(153, 144, 129, 0.904);
+}
+#connexion-content label {
+    color: #c4bbab;
 }
 #btnConnexion{
     display: flex;
     align-items: center;
+}
+
+#mdpOublie {
+    color: thistle;
+}
+
+#mdpOublie:active {
+    color: brown;
 }
 
 /* TITLE PAGE CONNEXION*/
@@ -474,7 +510,7 @@ hr {
     position: absolute;
     z-index: 2;
     top: 65px;
-    left: 110px;
+    left: 120px;
 }
 #connexion-title img{
     width: 300px;

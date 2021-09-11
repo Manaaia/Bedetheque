@@ -1,0 +1,24 @@
+@media screen and (width:320px){
+
+    /* TITLE PAGE CONNEXION*/
+    #bubble-connexion-title {
+        left: unset;
+    }
+    #txt-connexion-title{
+        left: 60px;
+    }
+    #connexion-title img{
+        width: 100%;
+    }
+
+}
+
+@media screen and (width:375px){
+    #txt-connexion-title {
+        top: 70px;
+        left: 95px;
+    }
+    #bubble-connexion-title {
+        left: 30px;
+    }
+}
