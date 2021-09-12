@@ -403,6 +403,9 @@ hr {
 /* --------------------------------------------- SECTION PAGE ACCUEIL ----------------------------------------*/
 /* SearchDiv */
 #searchDiv{
+    background-image: url('../image/banner_mob.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
     background-color: #c8bcac;
     color: #202424;
     padding-top: 20px;
@@ -421,9 +424,9 @@ hr {
 #search {
     height: 30px;
     width: 300px;
-    border: none;
     border-radius: 8px;
     margin: 10px;
+    background-color: #c8bcac;;
 }
 
 /* NewItems */
@@ -514,4 +517,28 @@ hr {
 }
 #connexion-title img{
     width: 300px;
+}
+@media screen and (width:320px){
+
+    /* TITLE PAGE CONNEXION*/
+    #bubble-connexion-title {
+        left: unset;
+    }
+    #txt-connexion-title{
+        left: 60px;
+    }
+    #connexion-title img{
+        width: 100%;
+    }
+
+}
+
+@media screen and (width:375px){
+    #txt-connexion-title {
+        top: 70px;
+        left: 95px;
+    }
+    #bubble-connexion-title {
+        left: 30px;
+    }
 }
