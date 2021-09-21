@@ -1,10 +1,15 @@
 @media screen and (min-width:600px){
     /*------------------------------------------------------------- GENERAL ----------------------------------------------------------------*/
+    html {
+        height: unset;
+    }
+    
     body {
         background-color: #e3ded6;
         background-image: url('../image/fond_3.jpg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
+        background-attachment: fixed;
     } 
 
     body:before {
