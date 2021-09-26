@@ -22,7 +22,11 @@
                     <h3 class="label">Rechercher par titre</h3>
                     <p class="identite">
                         <input type="text" id="titreCherche" placeholder="Tintin au Tibet"><br/>
+                    <h3 class="label">Rechercher par auteur</h3>
+                    <p class="identite">
                         <input type="text" id="autCherche" placeholder="Tom Jarny"><br/>
+                    <h3 class="label">Rechercher par série</h3>
+                    <p class="identite">
                         <input type="text" id="serCherche" placeholder="Les Aventures de Tintin"><br/>
                     </p>
                 </div>

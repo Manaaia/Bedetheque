@@ -32,7 +32,7 @@
                 </div>
 
                 <div id="btnConnexion">
-                    <button>Se connecter</button>
+                    <a href="index1.php?action=cptAccueil"><button>Se connecter</button></a>
                 </div>
 
             </div>

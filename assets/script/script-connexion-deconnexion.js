@@ -12,7 +12,7 @@ var retour = btnRetour.addEventListener('click', retourAcceuil);
 
 // FONCTIONS
 function retourAcceuil () {
-    window.location.href = "index.html";
+    window.location.href = "index1.php";
 }
 
 function connexion () {
@@ -71,7 +71,7 @@ console.log(localStorage);
 
 function directionConnexion (bBool) {
     if(bBool == false){
-        window.location.href = "index.html";
+        window.location.href = "index1.php?action=cpt1accueil";
     }
 
 }

@@ -83,40 +83,40 @@ $(document).ready(function() {
 
         switch(nbr){
             case "1":
-                link = "connexion.html";
+                link = "index1.php";
                 break;
             case "2":
                 localStorage.removeItem('id');
                 localStorage.removeItem('role');
                 localStorage.removeItem('isbn');
-                link="index.html";
+                link="index1.php";
                 break;
             case "3":
-                link="recherche_adherent.html";
+                link="index1.php?action=rechercheAdh";
                 break;
             case "4":
-                link="creer_adherent.html";
+                link="index1.php?action=createAdh";
                 break;
             case "5":
                 alert("Cette fonctionnalité sera bientôt disponible");
-                link="index.html"
+                link="index1.php?action=cptAccueil";
                 break;
             case "6":
                 alert("Cette fonctionnalité sera bientôt disponible");
-                link="index.html"
+                link="index1.php?action=cptAccueil";
                 break;
             case "7":
                 alert("Cette fonctionnalité sera bientôt disponible");
-                link="index.html"
+                link="index1.php?action=cptAccueil";
                 break;
             case "8":
-                link="recherche_ISBN.html"
+                link="index1.php?action=rechercheBD";
                 break;
             case "9":
-                link="index.html";
+                link="index1.php?action=cptAccueil";
                 break;
             case "10":
-                link="fiche_adherent.html";
+                link="index1.php?action=ficheAdh";
             default:
                 console.log("erreur de redirection");     
         }

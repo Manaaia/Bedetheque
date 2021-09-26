@@ -70,5 +70,5 @@ function afficheResult(nomutilisateur, key) {
 
 // Clique résultat pour redirection avec clé valeur dans url
 function clickResult(cle) {
-    window.location = "gestion_adherent.html?var=" + cle;
+    window.location = "index1.php?action=gestionAdh";
 }
