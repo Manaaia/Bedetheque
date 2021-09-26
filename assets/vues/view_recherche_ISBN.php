@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style-mobile.css" />
-    <link rel="stylesheet" href="assets/css/style-desktop.css">
+    <link rel="stylesheet" href="../css/style-mobile.css" />
+    <link rel="stylesheet" href="../css/style-desktop.css">
     <title>BDthèque des Marmusots par les plus stylées de toute la promo</title>
 </head>
 <body>
@@ -41,9 +41,9 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="assets/script/script-header.js"></script>
-    <script src="assets\script\maps\albums.js"></script>
-    <script src="assets\script\maps\users.js"></script>
-    <script src="assets\script\recherche_ISBN.js"></script>
+    <script src="../script/script-header.js"></script>
+    <script src="../script\maps\albums.js"></script>
+    <script src="../script\maps\users.js"></script>
+    <script src="../script\recherche_ISBN.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 // ISBN : XXX - X - XXXX - XXXX - X
 var rechercherBtn = document.querySelector("#rechercher");
 var divResult = document.querySelector("#results");
-var rechercheEx = document.querySelector("#isbnCherche");
+var rechercheEx = document.querySelector("#titreCherche");
 var choixAjoutDiv = document.querySelector("#choixAjout");
 var btnAjoutBdOk = document.querySelector("#AjoutBdOk");
 /* REGEX ISBN */
