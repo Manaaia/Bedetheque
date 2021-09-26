@@ -103,9 +103,31 @@ AND idBibli = 3
 -- reset à null l'emplacement de l'autre série 
 
 
-16
-17
-18
-22
-23
-24
+-- Rechercher une BD par série
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur 
+FROM album a
+    JOIN auteur au
+    ON a.idAuteur = au.idAuteur
+    JOIN serie s 
+    ON a.idSerie = s.idSerie 
+WHERE Nom_serie LIKE '%"$rechSerie"%';
+
+
+-- Rechercher une BD par auteur
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur
+FROM album a 
+    JOIN auteur au
+    ON a.idAuteur = au.idAuteur
+    JOIN serie s 
+    ON a.idSerie = s.idSerie 
+WHERE Nom_auteur LIKE '%"$rechAuteur"%';
+
+
+-- Rechercher une BD par titre
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur
+FROM album a 
+    JOIN auteur au
+    ON a.idAuteur = au.idAuteur
+    JOIN serie s 
+    ON a.idSerie = s.idSerie 
+WHERE Titre_album LIKE '%"$rechTitre"%';

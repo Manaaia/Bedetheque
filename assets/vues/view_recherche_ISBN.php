@@ -12,16 +12,18 @@
     <!-- Placeholder header -->
      
     <div class="container">
-        <fieldset class="form"><legend for="form">Rechercher un exemplaire</legend>
+        <fieldset class="form"><legend for="form">Rechercher une BD</legend>
             <div class="recherche">
                 <div id="choixAjout" class="invisible">
                     <p>ISBN non trouvé, voulez-vous ajouter une BD ?</p><br>
                     <button id="AjoutBdOk">Ajouter une BD</button>
                 </div>
                 <div>
-                    <h3 class="label">Rechercher par code ISBN</h3>
+                    <h3 class="label">Rechercher par titre</h3>
                     <p class="identite">
-                        <input type="text" id="isbnCherche" placeholder="XXX-X-XXXX-XXXX-X"><br/>
+                        <input type="text" id="titreCherche" placeholder="Tintin au Tibet"><br/>
+                        <input type="text" id="autCherche" placeholder="Tom Jarny"><br/>
+                        <input type="text" id="serCherche" placeholder="Les Aventures de Tintin"><br/>
                     </p>
                 </div>
                 <button id="rechercher">Rechercher</button>

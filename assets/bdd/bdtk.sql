@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bdtk`
 --
-
+CREATE DATABASE `bdtk`;
+USE `bdtk`;
 -- --------------------------------------------------------
 
 --
