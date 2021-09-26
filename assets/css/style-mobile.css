@@ -255,6 +255,10 @@ hr {
     margin-bottom: 20px;
 }
 
+#fiche {
+    text-align: center;
+}
+
 /*------------------------------------------- SECTION PAGES RECHERCHE ------------------------------------------*/
 
 .recherche {
