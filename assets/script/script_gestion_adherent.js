@@ -12,7 +12,7 @@ var btnabandon = document.getElementById("abandon");
 var cle = window.location.search;
 // Récupère la clé valeur url
 cle = cle.split("=");
-cle = cle[1];
+cle = cle[2];
 var btnfiche = document.getElementById("fiche");
 var datecot = users.get(cle).datecot;
 var flag = false;

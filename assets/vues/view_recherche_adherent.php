@@ -28,7 +28,7 @@
             </div>
             <div id="btns">
                 <button id="abandon">Abandonner</button>
-                <button id="submit" class="invisible">Valider</button>
+                <a href="index1.php?action=gestAdh"><button id="submit" class="invisible">Valider</button></a>
             </div>
         </fieldset>
     </div>

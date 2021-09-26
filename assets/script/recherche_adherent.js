@@ -63,12 +63,12 @@ var compt = 0;
 function afficheResult(nomutilisateur, key) {
     var newElement = document.createElement("ul");
     newElement.innerHTML =
-    "<li>" + nomutilisateur + "</li>";
-    newElement.addEventListener("click", function() {clickResult(key)});
+    "<a href='index1.php?action=gestAdh&var="+key+"'<li>" + nomutilisateur + "</li></a>";
+    // newElement.addEventListener("click", function() {clickResult(key)});
     divResult.appendChild(newElement);
 }
 
 // Clique résultat pour redirection avec clé valeur dans url
 function clickResult(cle) {
-    window.location = "index1.php?action=gestionAdh";
+    window.location = "index1.php?action=gestionAdh&var="+cle;
 }
