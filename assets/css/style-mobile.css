@@ -84,6 +84,13 @@ button:hover {
 	background-color:#71adb0;
 }
 
+.delete {
+    background:linear-gradient(to bottom, #ca9082 5%, #b12b0a 100%);
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
 input, textarea {
     background-color: rgba(150, 133, 102, 0.445);
     border: 1px solid #151219;

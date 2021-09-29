@@ -98,8 +98,7 @@ $(document).ready(function() {
                 link="creer_adherent.html";
                 break;
             case "5":
-                alert("Cette fonctionnalité sera bientôt disponible");
-                link="index.html"
+                link="stats.html"
                 break;
             case "6":
                 alert("Cette fonctionnalité sera bientôt disponible");

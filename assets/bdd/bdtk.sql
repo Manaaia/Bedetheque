@@ -271,58 +271,6 @@ INSERT INTO `bibliotheque` (`idBibli`, `Nom_bibli`) VALUES
 (5, 'Guérinière'),
 (6, 'Maladrerie');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `changer`
---
-
-DROP TABLE IF EXISTS `changer`;
-CREATE TABLE IF NOT EXISTS `changer` (
-  `Date_album` date NOT NULL,
-  `ISBN` bigint(13) NOT NULL,
-  `id_user` bigint(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`Date_album`,`ISBN`,`id_user`),
-  UNIQUE KEY `_Changer__Date_album_FK` (`Date_album`) USING BTREE,
-  KEY `_Changer__id_user_FK` (`id_user`),
-  KEY `_Changer__isbn_FK` (`ISBN`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `date_album`
---
-
-DROP TABLE IF EXISTS `date_album`;
-CREATE TABLE IF NOT EXISTS `date_album` (
-  `Date_album` date NOT NULL,
-  PRIMARY KEY (`Date_album`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `date_exemp`
---
-
-DROP TABLE IF EXISTS `date_exemp`;
-CREATE TABLE IF NOT EXISTS `date_exemp` (
-  `Date_exemp` date NOT NULL,
-  PRIMARY KEY (`Date_exemp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `date_mod`
---
-
-DROP TABLE IF EXISTS `date_mod`;
-CREATE TABLE IF NOT EXISTS `date_mod` (
-  `Date_user` date NOT NULL,
-  PRIMARY KEY (`Date_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -430,6 +378,7 @@ CREATE TABLE IF NOT EXISTS `etat` (
 INSERT INTO `etat` (`idEtat`, `Label etat`) VALUES
 (0, 'Neuf'),
 (1, 'Abîmé');
+(2, 'Détruit');
 
 -- --------------------------------------------------------
 
@@ -443,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `exemplaire` (
   `Date_entree_exemplaire` date NOT NULL,
   `Commentaire` varchar(500) NOT NULL,
   `idEmplacement` int(11) DEFAULT NULL,
-  `ID_Perdu` tinyint(1) NOT NULL,
+  `Statut` boolean NOT NULL,
   `idEtat` tinyint(1) NOT NULL,
   `ISBN` bigint(13) NOT NULL,
   PRIMARY KEY (`ID_exemplaire`),
@@ -457,7 +406,7 @@ CREATE TABLE IF NOT EXISTS `exemplaire` (
 -- Déchargement des données de la table `exemplaire`
 --
 
-INSERT INTO `exemplaire` (`ID_exemplaire`, `Date_entree_exemplaire`, `Commentaire`, `idEmplacement`, `ID_Perdu`, `idEtat`, `ISBN`) VALUES
+INSERT INTO `exemplaire` (`ID_exemplaire`, `Date_entree_exemplaire`, `Commentaire`, `idEmplacement`, `Statut`, `idEtat`, `ISBN`) VALUES
 ('9780312429621_1', '2016-11-23', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 12, 0, 1, 9780312429621),
 ('9780312429621_2', '2017-01-27', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 17, 0, 0, 9780312429621),
 ('9781849183635_1', '2021-07-26', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 12, 0, 0, 9781849183635),
@@ -582,60 +531,6 @@ CREATE TABLE IF NOT EXISTS `lettres` (
 INSERT INTO `lettres` (`ID_Lettre`, `Date_lettre`, `id_emprunt`) VALUES
 (1, '2021-11-05', 1);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `mettre_a_jour`
---
-
-DROP TABLE IF EXISTS `mettre_a_jour`;
-CREATE TABLE IF NOT EXISTS `mettre_a_jour` (
-  `Date_user` date NOT NULL,
-  `id_user` bigint(10) UNSIGNED NOT NULL,
-  `id_user__User` bigint(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`Date_user`,`id_user`,`id_user__User`),
-  KEY `FK_user_modifieur` (`id_user__User`),
-  KEY `FK_user_modifie` (`id_user`),
-  KEY `FK_date_mod` (`Date_user`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `modifier`
---
-
-DROP TABLE IF EXISTS `modifier`;
-CREATE TABLE IF NOT EXISTS `modifier` (
-  `Date_exemp` date NOT NULL,
-  `id_user` bigint(10) UNSIGNED NOT NULL,
-  `ID_exemplaire` varchar(15) NOT NULL,
-  PRIMARY KEY (`Date_exemp`,`id_user`,`ID_exemplaire`) USING BTREE,
-  UNIQUE KEY `_Modifier__Date_exemp_FK` (`Date_exemp`) USING BTREE,
-  KEY `_Modifier__Exemplaire0_FK` (`ID_exemplaire`) USING BTREE,
-  KEY `_Modifier__id_user_FK` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `perdu`
---
-
-DROP TABLE IF EXISTS `perdu`;
-CREATE TABLE IF NOT EXISTS `perdu` (
-  `ID_Perdu` tinyint(1) NOT NULL,
-  `Label perdu` varchar(10) NOT NULL,
-  PRIMARY KEY (`ID_Perdu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `perdu`
---
-
-INSERT INTO `perdu` (`ID_Perdu`, `Label perdu`) VALUES
-(0, 'Présent'),
-(1, 'Perdu');
 
 -- --------------------------------------------------------
 
@@ -859,14 +754,6 @@ ALTER TABLE `album`
   ADD CONSTRAINT `_Album__Serie0_FK` FOREIGN KEY (`idSerie`) REFERENCES `serie` (`idSerie`);
 
 --
--- Contraintes pour la table `changer`
---
-ALTER TABLE `changer`
-  ADD CONSTRAINT `Changer__Date_album_FK` FOREIGN KEY (`Date_album`) REFERENCES `date_album` (`Date_album`),
-  ADD CONSTRAINT `Changer__id_user_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `Changer__isbn_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`);
-
---
 -- Contraintes pour la table `emplacement`
 --
 ALTER TABLE `emplacement`
@@ -886,29 +773,12 @@ ALTER TABLE `exemplaire`
   ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`),
   ADD CONSTRAINT `Exemplaire__Emplacement0_FK` FOREIGN KEY (`idEmplacement`) REFERENCES `emplacement` (`idEmplacement`),
   ADD CONSTRAINT `Exemplaire__Etat2_FK` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`idEtat`),
-  ADD CONSTRAINT `Exemplaire__Perdu1_FK` FOREIGN KEY (`ID_Perdu`) REFERENCES `perdu` (`ID_Perdu`);
 
 --
 -- Contraintes pour la table `lettres`
 --
 ALTER TABLE `lettres`
   ADD CONSTRAINT `Lettres__Emprunt_FK` FOREIGN KEY (`id_emprunt`) REFERENCES `emprunt` (`id_emprunt`);
-
---
--- Contraintes pour la table `mettre_a_jour`
---
-ALTER TABLE `mettre_a_jour`
-  ADD CONSTRAINT `FK_date_mod` FOREIGN KEY (`Date_user`) REFERENCES `date_mod` (`Date_user`),
-  ADD CONSTRAINT `FK_user_modifie` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `FK_user_modifieur` FOREIGN KEY (`id_user__User`) REFERENCES `user` (`id_user`);
-
---
--- Contraintes pour la table `modifier`
---
-ALTER TABLE `modifier`
-  ADD CONSTRAINT `Modifier_ID_exemplaire_FK` FOREIGN KEY (`ID_exemplaire`) REFERENCES `exemplaire` (`ID_exemplaire`),
-  ADD CONSTRAINT `Modifier__Date_exemp_FK` FOREIGN KEY (`Date_exemp`) REFERENCES `date_exemp` (`Date_exemp`),
-  ADD CONSTRAINT `Modifier__User0_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Contraintes pour la table `user`
