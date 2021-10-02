@@ -1,5 +1,7 @@
-<container>
-            <button id="retour" class="visible">Retour</button>
+        <container>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+                <button id="retour" class="visible" name="action" value="accueil">Retour</button>
+            </form>
             <section id="connexion-section">
                 <div id="connexion-title">
                     <div id="bubble-connexion-title">
