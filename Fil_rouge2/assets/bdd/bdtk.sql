@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 21 sep. 2021 à 20:11
+-- Généré le : ven. 01 oct. 2021 à 10:37
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -271,7 +271,6 @@ INSERT INTO `bibliotheque` (`idBibli`, `Nom_bibli`) VALUES
 (5, 'Guérinière'),
 (6, 'Maladrerie');
 
-
 -- --------------------------------------------------------
 
 --
@@ -366,7 +365,7 @@ INSERT INTO `emprunt` (`id_emprunt`, `Date_emprunt`, `Date_retour`, `id_user`, `
 
 DROP TABLE IF EXISTS `etat`;
 CREATE TABLE IF NOT EXISTS `etat` (
-  `idEtat` tinyint(1) NOT NULL,
+  `idEtat` tinyint(1) UNSIGNED NOT NULL,
   `Label etat` varchar(10) NOT NULL,
   PRIMARY KEY (`idEtat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -377,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `etat` (
 
 INSERT INTO `etat` (`idEtat`, `Label etat`) VALUES
 (0, 'Neuf'),
-(1, 'Abîmé');
+(1, 'Abîmé'),
 (2, 'Détruit');
 
 -- --------------------------------------------------------
@@ -392,11 +391,10 @@ CREATE TABLE IF NOT EXISTS `exemplaire` (
   `Date_entree_exemplaire` date NOT NULL,
   `Commentaire` varchar(500) NOT NULL,
   `idEmplacement` int(11) DEFAULT NULL,
-  `Statut` boolean NOT NULL,
-  `idEtat` tinyint(1) NOT NULL,
+  `Statut` tinyint(1) NOT NULL,
+  `idEtat` tinyint(1) UNSIGNED NOT NULL,
   `ISBN` bigint(13) NOT NULL,
   PRIMARY KEY (`ID_exemplaire`),
-  KEY `_Exemplaire__Perdu1_FK` (`ID_Perdu`),
   KEY `_Exemplaire__Etat2_FK` (`idEtat`),
   KEY `_Exemplaire__Album3_FK` (`ISBN`),
   KEY `_Exemplaire__Emplacement0_AK` (`idEmplacement`) USING BTREE
@@ -530,7 +528,6 @@ CREATE TABLE IF NOT EXISTS `lettres` (
 
 INSERT INTO `lettres` (`ID_Lettre`, `Date_lettre`, `id_emprunt`) VALUES
 (1, '2021-11-05', 1);
-
 
 -- --------------------------------------------------------
 
@@ -772,7 +769,7 @@ ALTER TABLE `emprunt`
 ALTER TABLE `exemplaire`
   ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`),
   ADD CONSTRAINT `Exemplaire__Emplacement0_FK` FOREIGN KEY (`idEmplacement`) REFERENCES `emplacement` (`idEmplacement`),
-  ADD CONSTRAINT `Exemplaire__Etat2_FK` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`idEtat`),
+  ADD CONSTRAINT `Exemplaire__Etat2_FK` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`idEtat`);
 
 --
 -- Contraintes pour la table `lettres`
