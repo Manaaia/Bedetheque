@@ -1,4 +1,4 @@
-<container id="main">
+    <container id="main">
         <div id="searchDiv">
             <h1>Bienvenue au Centre Culturel des Marmusots</h1>
             <div>
