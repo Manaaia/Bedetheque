@@ -44,7 +44,7 @@ function searchBDByTitle($titleSearch) {
 
 
 /**
- * Recherche une BD par titre dans la liste des albums
+ * Recherche une BD par série dans la liste des albums
  * @param string $titleSearch
  * @return array or
  * @return bool
@@ -62,7 +62,7 @@ function searchBDBySerie($serieSearch) {
 
 
 /**
- * Recherche une BD par titre dans la liste des albums
+ * Recherche une BD par auteur dans la liste des albums
  * @param string $titleSearch
  * @return array or
  * @return bool
