@@ -1,5 +1,9 @@
 <?php
 
+spl_autoload_register(function($classe) {
+    include "Header/Models/" . $classe . ".class.php";
+});
+
 switch ($action) {
     case 'accueil' :
         require 'Views/view_accueil.php';
