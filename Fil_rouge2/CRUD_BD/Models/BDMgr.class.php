@@ -21,9 +21,9 @@ class BDMgr {
             $res = $connexionPDO->prepare($sql);
 
             $res->execute(array(":isbn"=>$bd->getISBN(), ":titre"=>$bd->getTitreAlbum(), 
-                ":num"=>$bd->getNumeroAlbum, ":prix"=>$bd->getPrix(), ":myresume"=>$bd->getResume(), 
+                ":num"=>$bd->getNumeroAlbum(), ":prix"=>$bd->getPrix(), ":myresume"=>$bd->getResume(), 
                 ":myimage"=>$bd->getImage(), ":miniature"=>$bd->getMiniImage(), ":serie"=>$bd->getSerie(),
-                ":auteur")=>$bd->getAuteur()));
+                ":auteur"=>$bd->getAuteur()));
 
             $nombre = $res->rowCount();
 
@@ -51,14 +51,22 @@ class BDMgr {
 
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` 1 
-            JOIN `auteur` 2 ON 1.idAuteur = 2.idAuteur 
-            JOIN `serie` 3 ON 1.idSerie = 2.idSerie WHERE `Titre_album` LIKE :titreVoulu";
+        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+            JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+            JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE :titreVoulu";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(":titreVoulu"=>"%".$titleSearch."%"));
+        $res->execute(array(':titreVoulu'=>'%'.$titleSearch.'%'));
         if ($choix === PDO::FETCH_CLASS) {
             $res->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,
-                                    'BD',array('titreAlbum','ISBN'));
+                                    'BD', array('ISBN',
+                                    'titreAlbum',
+                                    'numeroAlbum',
+                                    'prix',
+                                    'resume',
+                                    'idImage',
+                                    'idMiniImage',
+                                    'idSerie',
+                                    'idAuteur'));
         } else {
             $res->setFetchMode($choix);
         }  
