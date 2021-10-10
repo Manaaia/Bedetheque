@@ -1,14 +1,18 @@
 <?php
 
 class connexionBDD {
-	// variables statiques
+	// Static variable
 	private static $connexion;
 
-	// Pas de constructeur explicite
+	// No explicit constructor
 
-	// fonction de connexion à la BDD
+    /**
+    * Connection to BDD
+    * @param void
+    * @return object
+    */
     private static function connect() {
-        $file = '../Parameters/parameters.ini';
+        $file = 'Parameters/parameters.ini';
         if(file_exists($file)) {
             $aParam = parse_ini_file($file, true);
             extract($aParam['connexion bdd']);
@@ -25,11 +29,20 @@ class connexionBDD {
         }
     }
 
-	// fonction de 'déconnexion' de la BDD
+    /**
+    * Deconnection from BDD
+    * @param void
+    * @return void
+    */
     public static function disconnect(){
         connexionBDD::$connexion = null;
     }
 
+    /**
+    * Singleton Pattern : get connection and connect
+    * @param void
+    * @return void
+    */
     // Pattern singleton
     public static function getConnexion() {
         if (connexionBDD::$connexion != null) {
