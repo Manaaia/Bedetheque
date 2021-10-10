@@ -4,6 +4,11 @@
     // require_once('Models/user.class.php');
 
 class UserMgr {
+    /**
+     * Get full list of users from table users in database bdtk
+     * @param void
+     * @return array of objects
+     */
     public static function getListUsers() : array {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -27,6 +32,11 @@ class UserMgr {
         return $users;
     }
 
+    /**
+     * Get one user by ID from table user in database bdtk
+     * @param int $id
+     * @return object
+     */
     public static function getUserById($id) {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -48,6 +58,12 @@ class UserMgr {
         
     }
 
+    /**
+     * Get user(s) by name from table user in database bdtk
+     * @param string $name
+     * @return object or
+     * @return array of objects
+     */
     public static function getUsersByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -70,6 +86,11 @@ class UserMgr {
         
     }
 
+    /**
+     * Add user to table user in database bdtk and return confirmation message
+     * @param object $user
+     * @return string
+     */
     public static function addUser($user) {
         $connexionPDO = connexionBDD::getConnexion();
         
@@ -106,14 +127,18 @@ class UserMgr {
         return $message;
     }
 
-    public static function delUser($user) {
+    /**
+     * Delete user from table user in database bdtk and return confirmation message
+     * @param int $id
+     * @return string
+     */
+    public static function delUser($id) {
         $connexionPDO = connexionBDD::getConnexion();
-        $id_user = $user->getIdUser();
-        $sql = 'DELETE FROM user WHERE id_user =:pilVoulu';
+        $sql = 'DELETE FROM user WHERE id_user =:idVoulu';
         $result = $connexionPDO->prepare($sql);
 
         try {
-            $result->execute(array(':idVoulu'=>$id_user));
+            $result->execute(array(':idVoulu'=>$id));
             $count = $result->rowCount();
             if ($count == 0) {
                 $message = "Lignes affectées : ".$count.RC;
@@ -130,6 +155,12 @@ class UserMgr {
         return $message;
     }
 
+    /**
+     * Modify name of user from table user in database bdtk and return confirmation message
+     * @param object $user
+     * @param string $newNom
+     * @return string
+     */
     public static function modNomUser($user, $newNom) {
         $connexionPDO = connexionBDD::getConnexion();
         $id_user = $user->getIdUser();
