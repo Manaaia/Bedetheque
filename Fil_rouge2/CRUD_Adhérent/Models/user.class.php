@@ -38,7 +38,7 @@ class User {
      * @return void
      */
     private function setIdUser($id_user) {
-        if (preg_match("/[0-9]{9,10}/",$id_user)) {
+        if (preg_match("/[0-9]{10}/",$id_user)) {
             $this->id_user = $id_user;
         } else {
             throw new UserException ("L'id utilisateur doit contenir 10 chiffres.");
