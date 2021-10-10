@@ -122,7 +122,7 @@ class BD {
      * @return void
      */
     private function setTitreAlbum($titreAlbum) {
-        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/", $titreAlbum)) {
+        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $titreAlbum)) {
             $this->titreAlbum = $titreAlbum;
         } else {
             throw new BDException("Attention : Le titre est une chaine de caractères");
@@ -148,10 +148,10 @@ class BD {
      * @return void
      */
     private function setPrix($prix) {
-        if(preg_match("/^[0-9]{1,3}(?:,+([0-9]{2}))$/", $prix)) {
+        if(preg_match("/^\d+(?:[.]\d{2}|$)$/", $prix)) {
             $this->prix = $prix;
         } else {
-            throw new BDException("Attention : Le prix est nombre décimal");
+            throw new BDException("Attention : Le prix est nombre décimal inférieur à 1000");
         }    
     }
 
@@ -161,7 +161,7 @@ class BD {
      * @return void
      */
     private function setResume($resume) {
-        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/", $resume)) {
+        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $resume)) {
             $this->resume = $resume;
         } else {
             throw new BDException("Attention : Le résumé est une chaîne de caractères");
@@ -177,7 +177,7 @@ class BD {
         if(preg_match("/^[0-9]{1,3}$/", $idImage)) {
             $this->idImage = $idImage;
         } else {
-            throw new BDException ("Attention : l'id de l'image doit être un nombre entier");
+            throw new BDException ("Attention : l'id de l'image doit être un nombre entier inférieur à 1000");
         }
     }
 
@@ -190,7 +190,7 @@ class BD {
         if(preg_match("/^[0-9]{1,3}$/", $idMiniImage)) {
             $this->idMiniImage = $idMiniImage;
         } else {
-            throw new BDException ("Attention : l'id de l'image doit être un nombre entier");
+            throw new BDException ("Attention : l'id de l'image doit être un nombre entier inférieur à 1000");
         }
     }
 
@@ -200,10 +200,10 @@ class BD {
      * @return void
      */
     private function setSerie($idSerie) {
-        if(preg_match("/^[0-9]{1,3}$/", $idImage)) {
+        if(preg_match("/^[0-9]{1,3}$/", $idSerie)) {
            $this->idSerie = $idSerie;
         } else {
-            throw new BDException ("Attention : l'id de la série doit être un nombre entier");
+            throw new BDException ("Attention : l'id de la série doit être un nombre entier inférieur à 1000");
         }
         
     }
@@ -214,10 +214,10 @@ class BD {
      * @return void
      */
     private function setAuteur($idAuteur) {
-        if(preg_match("/^[0-9]{1,3}$/", $idImage)) {
+        if(preg_match("/^[0-9]{1,3}$/", $idAuteur)) {
             $this->idAuteur = $idAuteur;
         } else {
-            throw new BDException ("Attention : l'id de l'auteur doit être un nombre entier");
+            throw new BDException ("Attention : l'id de l'auteur doit être un nombre entier inférieur à 1000");
         }
         
     }
