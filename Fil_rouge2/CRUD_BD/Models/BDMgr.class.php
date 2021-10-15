@@ -75,7 +75,7 @@ class BDMgr {
      * @return bool
      */
 
-    function searchBDBySerie($serieSearch, $choix = PDO::FETCH_ASSOC) {
+    public static function searchBDBySerie($serieSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
@@ -105,7 +105,7 @@ class BDMgr {
      * @return bool
      */
 
-    function searchBDByAuthor($authorSearch, $choix = PDO::FETCH_ASSOC) {
+    public static function searchBDByAuthor($authorSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
@@ -126,24 +126,36 @@ class BDMgr {
         return $tBDs;
     }
 
-    // /**
-    //  * Modifie une BD dans la liste des albums
-    //  * @param int $newISBN, $newAuthorID, $newSerieID, $newNumber
-    //  * @param float $newPrice
-    //  * @param string $newTitle, $newImage, $newMiniImage, $newResume
-    //  * @param int $searchResultISBN
-    //  * @return bool
-    //  */
+    /**
+     * Modifie une BD dans la liste des albums
+     * @param int $newAuthorID, $newSerieID, $newNumber
+     * @param float $newPrice
+     * @param string $newTitle, $newImage, $newMiniImage, $newResume
+     * @param int $searchResultISBN
+     * @return bool
+     */
 
-    // function updateBD($newTitle, $newAuthorID, $newSerieID, $newPrice, $newNumber, 
-    //                     $newImage, $newMiniImage, $newResume, $searchResultISBN) {
-    //     $sql = mysqli_query("UPDATE `album` SET `Titre_album` = $newTitle, 
-    //                         `Numero_album` = $newNumber, `Prix` = $newPrice, 
-    //                         `Resume` = $newResume, `idSerie` = $newSerieID, `idAuteur` = $newAuthorID 
-    //                         WHERE `album`.`ISBN` = $searchResultISBN");
-    //     return true;
+    public static function updateBD($newTitle, $newAuthorID, $newSerieID, $newPrice, $newNumber, 
+                        $newImage, $newMiniImage, $newResume, $searchResultISBN) {
 
-    // }
+        $connexionPDO = connexionBDD::getConnexion();
+        $sql = "UPDATE `album` SET `Titre_album` = :titre, 
+                            `Numero_album` = :numero, `Prix` = :prix, 
+                            `Resume` = :resum, `idSerie` = :serie, `idAuteur` = :auteur, `ID_image` = :imag, 
+                            `Id_mini_image` = :miniImage
+                            WHERE `ISBN` = :idVoulue";
+        $res = $connexionPDO->prepare($sql);
+        $res->execute(array(':idVoulue'=>$searchResultISBN, ':titre'=>$newTitle, ':numero'=>$newNumber, 
+                            ':prix'=>$newPrice, ':resum'=>$newResume, ':serie'=>$newSerieID, ':auteur'=>$newAuthorID, 
+                            ':imag'=>$newImage, ':miniImage'=>$newMiniImage));
+         
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+        
+        return true;
+
+    }
 
 
     // /**

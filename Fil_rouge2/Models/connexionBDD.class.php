@@ -42,7 +42,7 @@ class connexionBDD {
     /**
     * Singleton Pattern : get connection and connect
     * @param void
-    * @return void
+    * @return object
     */
     // Pattern singleton
     public static function getConnexion() {
