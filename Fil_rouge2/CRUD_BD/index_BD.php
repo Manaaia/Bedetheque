@@ -1,5 +1,4 @@
 <?php 
-
 try {
     spl_autoload_register(function($classe) {
         include "Models/".$classe.".class.php";
@@ -8,7 +7,6 @@ try {
     echo $e->getMessage();
 }
 
-const CLASSE = PDO::FETCH_CLASS;
 const OBJET = PDO::FETCH_OBJ;
 const ASSOC = PDO::FETCH_ASSOC;
 
@@ -18,15 +16,12 @@ try {
     echo $bd1;
     echo "<br />";
     echo BDMgr::addNewBD($bd1);
-    echo "<br />";
-     
-     
+    echo "<br />";   
 } catch (BDException $e) {
     echo $e->getMessage();
 } catch (BDMgrException $e) {
     echo $e->getMessage();
 }
-
 
 var_dump(BDMgr::searchBDByTitle("Venise", OBJET)?BDMgr::searchBDByTitle("Venise", OBJET):
     "Il n'y a aucune BD correspondante");
@@ -36,5 +31,4 @@ var_dump(BDMgr::searchBDByTitle("Vunise", OBJET)?BDMgr::searchBDByTitle("Vunise"
 echo "<br />";
 var_dump(BDMgr::searchBDByTitle("V", OBJET)?BDMgr::searchBDByTitle("V", OBJET):
     "Il n'y a aucune BD correspondante");
-
 ?>

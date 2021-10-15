@@ -1,8 +1,6 @@
 <?php 
 require_once('../Models/connexionBDD.class.php');
-
 class BDMgr {
-
 
     /**
      * Ajoute une BD dans la liste des albums
@@ -32,7 +30,6 @@ class BDMgr {
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
                 throw new BDMgrException("Erreur : Il semble que la BD correspondant à cet ISBN existe déjà");
-                return 0;
             }
         }
         return $nombre;
@@ -46,7 +43,6 @@ class BDMgr {
      * @return array or
      * @return bool
      */
-
     public static function searchBDByTitle($titleSearch, $choix = PDO::FETCH_ASSOC) {
 
         $connexionPDO = connexionBDD::getConnexion();
@@ -56,20 +52,7 @@ class BDMgr {
             JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE :titreVoulu";
         $res = $connexionPDO->prepare($sql);
         $res->execute(array(':titreVoulu'=>'%'.$titleSearch.'%'));
-        if ($choix === PDO::FETCH_CLASS) {
-            $res->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,
-                                    'BD', array('ISBN',
-                                    'titreAlbum',
-                                    'numeroAlbum',
-                                    'prix',
-                                    'resume',
-                                    'idImage',
-                                    'idMiniImage',
-                                    'idSerie',
-                                    'idAuteur'));
-        } else {
             $res->setFetchMode($choix);
-        }  
 
         // Lit le résultat
         $tBDs = $res->fetchAll();
