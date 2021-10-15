@@ -68,39 +68,63 @@ class BDMgr {
 
 
 
-    // /**
-    //  * Recherche une BD par série dans la liste des albums
-    //  * @param string $serieSearch
-    //  * @return array or
-    //  * @return bool
-    //  */
+    /**
+     * Recherche une BD par série dans la liste des albums
+     * @param string $serieSearch
+     * @return array or
+     * @return bool
+     */
 
-    // function searchBDBySerie($serieSearch) {
-    //     $sql = mysqli_query("SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` WHERE `Nom_serie` LIKE '%"$serieSearch"%'");
-    //     $res = mysqli_fetch_array($sql);
-    //     if ($res !== NULL) {
-    //         return $res;
-    //     }
-    //     return false;
-    // }
+    function searchBDBySerie($serieSearch, $choix = PDO::FETCH_ASSOC) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE :serieVoulue";
+        $res = $connexionPDO->prepare($sql);
+        $res->execute(array(':serieVoulue'=>'%'.$serieSearch.'%'));
+        $res->setFetchMode($choix);
+
+        // Lit le résultat
+        $tBDs = $res->fetchAll();
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tBDs;
+    }
 
 
 
-    // /**
-    //  * Recherche une BD par auteur dans la liste des albums
-    //  * @param string $titleSearch
-    //  * @return array or
-    //  * @return bool
-    //  */
+    /**
+     * Recherche une BD par auteur dans la liste des albums
+     * @param string $titleSearch
+     * @return array or
+     * @return bool
+     */
 
-    // function searchBDByAuthor($authorSearch) {
-    //     $sql = mysqli_query("SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` WHERE `Nom_auteur` LIKE '%"$authorSearch"%'");
-    //     $res = mysqli_fetch_array($sql);
-    //     if ($res !== NULL) {
-    //         return $res;
-    //     }
-    //     return false;
-    // }
+    function searchBDByAuthor($authorSearch, $choix = PDO::FETCH_ASSOC) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE :auteurVoulu";
+        $res = $connexionPDO->prepare($sql);
+        $res->execute(array(':auteurVoulue'=>'%'.$authorSearch.'%'));
+        $res->setFetchMode($choix);
+
+        // Lit le résultat
+        $tBDs = $res->fetchAll();
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tBDs;
+    }
 
     // /**
     //  * Modifie une BD dans la liste des albums
