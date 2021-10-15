@@ -512,10 +512,14 @@ hr {
     text-decoration: underline;
     font-family: inherit;
     font-size: inherit;
+    box-shadow: unset;
+    text-shadow: unset;
 }
 
 .btn-link:hover {
     color: brown;
+    background: unset;
+	background-color: unset;
 }
 
 /* TITLE PAGE CONNEXION*/
@@ -566,5 +570,5 @@ hr {
 /*---------------------------------------------- SECTION PAGE MDP OUBLIE ---------------------------------------*/
 
 #mdp_oublie {
-    margin-bottom: 250px;
+    margin-top: 50px;
 }
