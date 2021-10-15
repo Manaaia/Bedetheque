@@ -502,11 +502,19 @@ hr {
     align-items: center;
 }
 
-#mdpOublie {
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
     color: thistle;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
 }
 
-#mdpOublie:active {
+.btn-link:hover {
     color: brown;
 }
 
@@ -553,4 +561,10 @@ hr {
     #bubble-connexion-title {
         left: 30px;
     }
+}
+
+/*---------------------------------------------- SECTION PAGE MDP OUBLIE ---------------------------------------*/
+
+#mdp_oublie {
+    margin-bottom: 250px;
 }

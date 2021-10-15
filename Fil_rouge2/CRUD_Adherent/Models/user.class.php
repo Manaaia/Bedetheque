@@ -1,7 +1,5 @@
 <?php 
 
-require_once('Models/connexionBDD.class.php');
-
 class User {
 
     // Proprieties

@@ -1,9 +1,5 @@
 <?php
 
-spl_autoload_register(function($classe) {
-    include "Header/Models/" . $classe . ".class.php";
-});
-
 switch ($action) {
     case 'accueil' :
         require 'Views/view_accueil.php';
@@ -12,6 +8,11 @@ switch ($action) {
     case 'connexion' :
         require 'Views/view_connexion.php';
         break;
+
+    case 'mdp_oublie' :
+        require 'Views/view_mdp_oublie.php';
+        break;
+
 }
 
 ?>

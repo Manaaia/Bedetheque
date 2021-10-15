@@ -1,5 +1,7 @@
 <?php
 
+require_once('connexionBDDException.class.php');
+
 class connexionBDD {
 	// Static variable
 	private static $connexion;
@@ -12,7 +14,7 @@ class connexionBDD {
     * @return object
     */
     private static function connect() {
-        $file = 'Parameters/parameters.ini';
+        $file = 'Contenu/Parameters/parameters.ini';
         if(file_exists($file)) {
             $aParam = parse_ini_file($file, true);
             extract($aParam['connexion bdd']);
@@ -41,7 +43,7 @@ class connexionBDD {
     /**
     * Singleton Pattern : get connection and connect
     * @param void
-    * @return void
+    * @return object
     */
     // Pattern singleton
     public static function getConnexion() {

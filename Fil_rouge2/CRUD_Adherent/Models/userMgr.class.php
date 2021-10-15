@@ -1,7 +1,6 @@
 <?php
 
-    require_once('Models/connexionBDD.class.php');
-    // require_once('Models/user.class.php');
+    require_once('userMgrException.class.php');
 
 class UserMgr {
     /**
@@ -38,6 +37,7 @@ class UserMgr {
      * @return object
      */
     public static function getUserById($id) {
+   
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT * FROM user WHERE id_user = ?';
@@ -46,16 +46,17 @@ class UserMgr {
 
         $result->execute(array($id));
 
-        $records = $result->fetch(PDO::FETCH_OBJ);
+        $record = $result->fetch(PDO::FETCH_ASSOC);
+
         $result->closeCursor();
         connexionBDD::disconnect();
 
-        if($records) {
-            return $records;
+        if($record) {
+            $user = new User (...(array_values($record)));
+            return $user;
         } else {
-            throw new UserMgrException("aucun utilisateur correspondant".RC);
+            throw new UserMgrException("aucun utilisateur correspondant");
         }
-        
     }
 
     /**
@@ -81,7 +82,7 @@ class UserMgr {
         if($records) {
             return $records;
         } else {
-            throw new UserMgrException("aucun utilisateur correspondant".RC);
+            throw new UserMgrException("aucun utilisateur correspondant");
         }
         
     }
@@ -115,10 +116,10 @@ class UserMgr {
             if ($count == 0) {
                 $message = "Lignes affectées : ".$count.RC;
             } else {
-                $message = "Confirmation : l'utilisateur a bien été ajouté à la BDD.".RC;
+                $message = "Confirmation : l'utilisateur a bien été ajouté à la BDD.";
             }
         } catch(PDOException $e) {
-            throw new UserMgrException("Cet identifiant est déjà dans la BDD.".RC);
+            throw new UserMgrException("Cet identifiant est déjà dans la BDD.");
         } finally {
             $result->closeCursor();
             connexionBDD::disconnect();
@@ -141,12 +142,12 @@ class UserMgr {
             $result->execute(array(':idVoulu'=>$id));
             $count = $result->rowCount();
             if ($count == 0) {
-                $message = "Lignes affectées : ".$count.RC;
+                $message = "Lignes affectées : ".$count;
             } else {
-                $message = "Confirmation : l'utilisateur a bien été supprimé de la BDD.".RC;
+                $message = "Confirmation : l'utilisateur a bien été supprimé de la BDD.";
             }
         } catch(PDOException $e) {
-            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.".RC);
+            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.");
         } finally {
             $result->closeCursor();
             connexionBDD::disconnect();
@@ -174,10 +175,10 @@ class UserMgr {
             if ($count == 0) {
                 $message = "Lignes affectées : ".$count.RC;
             } else {
-                $message = "Confirmation : l'utilisateur a bien été modifié.".RC;
+                $message = "Confirmation : l'utilisateur a bien été modifié.";
             }
         } catch(PDOException $e) {
-            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.".RC);
+            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.");
         } finally {
             $result->closeCursor();
             connexionBDD::disconnect();
