@@ -675,7 +675,7 @@ INSERT INTO `serie` (`idSerie`, `Nom_serie`) VALUES
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` bigint(10) UNSIGNED NOT NULL,
+  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL,
   `Nom_user` varchar(50) NOT NULL,
   `Prenom_user` varchar(50) NOT NULL,
   `MDP` varchar(50) NOT NULL,
@@ -695,10 +695,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user`, `Adresse_2_user`, `CP_user`, `Ville_user`, `Date_cotisation`, `id_role`) VALUES
-(218924837, 'Drax', 'Guillaume', 'sYfT!3$9', '29, avenue de Cohen', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', '2020-09-29', 5),
-(297380565, 'Goncalves', 'Vincent', '8A?mJv0!', 'Résidence Jean Moulin', 'rue Nicole Poulain', '76000', 'Rouen', NULL, 2),
-(436342955, 'Ecu', 'Sandrine', '5$4Nr$Bx', '93, avenue Astrid Jacques', NULL, '14000', 'Caen', '2021-08-24', 5),
-(624960766, 'Hebert', 'Jean', '$4?QcX2p', '6, chemin Marechal', NULL, '45816', 'Coulon', '2021-10-04', 5),
+(0218924837, 'Drax', 'Guillaume', 'sYfT!3$9', '29, avenue de Cohen', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', '2020-09-29', 5),
+(0297380565, 'Goncalves', 'Vincent', '8A?mJv0!', 'Résidence Jean Moulin', 'rue Nicole Poulain', '76000', 'Rouen', NULL, 2),
+(0436342955, 'Ecu', 'Sandrine', '5$4Nr$Bx', '93, avenue Astrid Jacques', NULL, '14000', 'Caen', '2021-08-24', 5),
+(0624960766, 'Hebert', 'Jean', '$4?QcX2p', '6, chemin Marechal', NULL, '45816', 'Coulon', '2021-10-04', 5),
 (1336977764, 'Lupin', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', NULL, '14123', 'Fleury-sur-Orne', '2020-06-25', 5),
 (1526943621, 'Merlot', 'Isabelle', '0?N7Ch$e', 'Résidence Les Hauts-bois 2B', 'chemin Fernandez', '14200', 'Hérouville-Saint-Clair', '2021-07-10', 5),
 (1598771384, 'Villard', 'Augustin', 'Y5?j_0Cj', '44, rue du Vent', NULL, '14000', 'Caen', '2020-03-23', 5),
