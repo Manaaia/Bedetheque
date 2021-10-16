@@ -65,16 +65,17 @@ class UserMgr {
      * @return object or
      * @return array of objects
      */
-    public static function getUsersByName($name) {
+    public static function getAdherentByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT * FROM user WHERE Nom_user = :nomVoulu';
+        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu AND id_role = 5 OR
+         Prenom_user LIKE :nomVoulu AND id_role = 5';
 
         $result = $connexionPDO->prepare($sql);
 
-        $result->execute(array(':nomVoulu'=>$name));
+        $result->execute(array(':nomVoulu'=>"%".$name."%"));
 
-        $records = $result->fetch(PDO::FETCH_OBJ);
+        $records = $result->fetchAll(PDO::FETCH_ASSOC);
 
         $result->closeCursor();
         connexionBDD::disconnect();
@@ -82,9 +83,36 @@ class UserMgr {
         if($records) {
             return $records;
         } else {
-            throw new UserMgrException("aucun utilisateur correspondant");
+            throw new UserMgrException("Aucun adhérent correspondant");
         }
-        
+    }
+
+    /**
+     * Get user(s) by name from table user in database bdtk
+     * @param string $name
+     * @return object or
+     * @return array of objects
+     */
+    public static function getEmployeByName($name) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu OR Prenom_user LIKE :nomVoulu AND
+         id_role <> 5';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':nomVoulu'=>"%".$name."%"));
+
+        $records = $result->fetchAll();
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        if($records) {
+            return $records;
+        } else {
+            throw new UserMgrException("Aucun adhérent correspondant");
+        }
     }
 
     /**

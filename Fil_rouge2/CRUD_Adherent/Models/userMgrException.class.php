@@ -1,4 +1,5 @@
-<?php // classes/PiloteMgrException.class.php
+<?php
+
 class UserMgrException extends Exception
 {
 }

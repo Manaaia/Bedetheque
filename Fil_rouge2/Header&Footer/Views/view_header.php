@@ -36,11 +36,11 @@
                             <button type="submit" id="fond" name="action" value="accueil" class ="btn-nav">Catalogue</button>
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                            <input type="hidden" name="type" value="Adhérent">
+                            <input type="hidden" name="type" value="Adherent">
                             <button type="submit" id="nouvelAdherent" name="action" value="addAdherent">Nouvel adhérent</button>
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                            <input type="hidden" name="type" value="Adhérent">
+                            <input type="hidden" name="type" value="Adherent">
                             <button type="submit" id="gestionAdherent" name="action" value="searchAdherent">Gestion adhérents</button>
                         </form>
                     </div>
@@ -62,7 +62,7 @@
                             <button type="submit" id="fond" name="action" value="accueil" class ="btn-nav">Catalogue</button>
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                            <input type="hidden" name="type" value="Adhérent">
+                            <input type="hidden" name="type" value="Adherent">
                             <button type="submit" id="nav-adherent" name="action" value="displayAdherent">Ma fiche adhérent</button>
                         </form>
                     </div>

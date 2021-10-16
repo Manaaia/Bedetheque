@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 01 oct. 2021 à 10:37
+-- Généré le : sam. 16 oct. 2021 à 15:36
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -88,9 +88,18 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 DROP TABLE IF EXISTS `amendes`;
 CREATE TABLE IF NOT EXISTS `amendes` (
   `ID_Amende` int(11) NOT NULL,
-  `Tarif_base` decimal(10,0) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `Tarif_base` decimal(4,2) NOT NULL,
   PRIMARY KEY (`ID_Amende`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `amendes`
+--
+
+INSERT INTO `amendes` (`ID_Amende`, `label`, `Tarif_base`) VALUES
+(1, 'Retard', '0.50'),
+(2, 'Perte', '10.00');
 
 -- --------------------------------------------------------
 
@@ -355,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `emprunt` (
 --
 
 INSERT INTO `emprunt` (`id_emprunt`, `Date_emprunt`, `Date_retour`, `id_user`, `ID_exemplaire`) VALUES
-(1, '2021-09-17', NULL, 218924837, '9780312429621_1');
+(1, '2021-09-17', NULL, 1336977764, '9780312429621_1');
 
 -- --------------------------------------------------------
 
@@ -711,7 +720,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (3378180016, 'Weiss', 'Henriette', 'Ze!?8uU7', 'Résidence des hirondelles, appartement 42', '21 rue Pierre Cassin', '14000', 'Caen', '2021-01-27', 5),
 (3534247901, 'Noir', 'Mireille', 'P9!1$Zyi', '50, avenue du Maréchal Juin', NULL, '14000', 'Caen', NULL, 3),
 (4126127561, 'Lebrec', 'Audrey', 'Sv_09x?N', '70, rue Devaux', NULL, '14000', 'Caen', '2021-04-17', 5),
-(4146021295, 'Tartrin', 'Sarah', 'iE9$!7pH', '15, chemin Nath Michel', NULL, '14000', 'Caen', '2020-11-26', 5),
+(4146021295, 'Tartrin', 'Sarah', 'iE9$!7pH', '15, chemin Nath Michel', NULL, '14000', 'Caen', '2020-10-23', 5),
 (4223351145, 'Lupin', 'Bernard', 'Gy5v3M_?', '9, place Denise Boyer', NULL, '14123', 'Fleury-sur-Orne', '2020-09-16', 5),
 (4238885261, 'Jouan', 'Zoé', 'pt!0WW7?', '54, place Bourgeois', NULL, '14000', 'Caen', '2020-07-25', 5),
 (4450752613, 'Djouadi', 'Ibrahim', '5Jk!?Ly4', '6 avenue Foch', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', NULL, 2),
@@ -761,7 +770,7 @@ ALTER TABLE `emplacement`
 --
 ALTER TABLE `emprunt`
   ADD CONSTRAINT `Emprunt_Exemplaire_FK` FOREIGN KEY (`ID_exemplaire`) REFERENCES `exemplaire` (`ID_exemplaire`),
-  ADD CONSTRAINT `Emprunt__User_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `Emprunt_User_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Contraintes pour la table `exemplaire`

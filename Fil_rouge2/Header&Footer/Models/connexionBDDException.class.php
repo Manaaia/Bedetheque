@@ -1,4 +1,5 @@
-<?php // classes/PiloteMgrException.class.php
+<?php
+
 class ConnexionBDDException extends Exception
 {
 }
