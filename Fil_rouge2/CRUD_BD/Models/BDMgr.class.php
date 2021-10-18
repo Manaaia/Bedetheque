@@ -13,9 +13,7 @@ class BDMgr {
         $connexionPDO = connexionBDD::getConnexion(); 
    
         try {
-            $sql = "INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, 
-                `Prix`, `Resume`, `ID_image`, `Id_mini_image`, `idSerie`, `idAuteur`) 
-                VALUES (:isbn, :titre, :num, :prix, :myresume, :myimage, :miniature, :serie, :auteur)";
+            $sql = "CALL prcAddBd(:isbn, :titre, :num, :prix, :myresume, :myimage, :miniature, :serie, :auteur)";
             $res = $connexionPDO->prepare($sql);
 
             $res->execute(array(":isbn"=>$bd->getISBN(), ":titre"=>$bd->getTitreAlbum(), 
@@ -28,7 +26,7 @@ class BDMgr {
             $res->closeCursor();
             connexionBDD::disconnect();
         } catch (PDOException $e) {
-            if ($e->getCode() == 23000) {
+            if ($e->getCode() == 23000 || $e->getCode() == 45000) {
                 throw new BDMgrException("Erreur : Il semble que la BD correspondant à cet ISBN existe déjà");
             }
         }
@@ -104,11 +102,9 @@ class BDMgr {
     public static function searchBDByAuthor($authorSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE :auteurVoulu";
+        $sql = "CALL prcSearchAuthor(:auteurVoulu)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':auteurVoulue'=>'%'.$authorSearch.'%'));
+        $res->execute(array(':auteurVoulu'=>'%'.$authorSearch.'%'));
         $res->setFetchMode($choix);
 
         // Lit le résultat

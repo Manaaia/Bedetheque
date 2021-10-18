@@ -11,7 +11,7 @@ const OBJET = PDO::FETCH_OBJ;
 const ASSOC = PDO::FETCH_ASSOC;
 
 try {
-    $bd1 = new BD (9780269887516, "Le club des cinq : à Venise !", 16, "8.50", 
+    $bd1 = new BD (9780269887518, "Le club des cinq : à Venise !", 16, "8.50", 
     "Blablabla, ils trouvent toujours la solution parce que c'est les zéros.", 1, 1, 3, 11);
     echo $bd1;
     echo "<br />";
@@ -40,6 +40,16 @@ var_dump(BDMgr::searchBDBySerie("Spurou", OBJET)?BDMgr::searchBDBySerie("Spurou"
     "Il n'y a aucune BD correspondante");
 echo "<br />";
 var_dump(BDMgr::searchBDBySerie("S", OBJET)?BDMgr::searchBDBySerie("S", OBJET):
+    "Il n'y a aucune BD correspondante");
+
+
+var_dump(BDMgr::searchBDByAuthor("Tom", OBJET)?BDMgr::searchBDByAuthor("Tom", OBJET):
+    "Il n'y a aucune BD correspondante");
+echo "<br />";
+var_dump(BDMgr::searchBDByAuthor("Frikolin", OBJET)?BDMgr::searchBDByAuthor("Frikolin", OBJET):
+    "Il n'y a aucune BD correspondante");
+echo "<br />";
+var_dump(BDMgr::searchBDByAuthor("T", OBJET)?BDMgr::searchBDByAuthor("T", OBJET):
     "Il n'y a aucune BD correspondante");
 
 ?>
