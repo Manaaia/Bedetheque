@@ -22,8 +22,8 @@
             <div id="results">
                 <?php if (isset($aNomCherche)) { ?>
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
-                    <input type="hidden" name="action" value="modifyAdherent">
-                    <input type="hidden" name="type" value="Adherent">
+                    <input type="hidden" name="action" value="emprunt&retour">
+                    <input type="hidden" name="type" value="Emprunt">
                     <ul>
                     <?php for ($i=0;$i<count($aNomCherche);$i++) {?>
                         <li><button type="submit" class="btn-link" name="idAdherent" value="<?php echo $aNomCherche[$i]["id_user"]?>">

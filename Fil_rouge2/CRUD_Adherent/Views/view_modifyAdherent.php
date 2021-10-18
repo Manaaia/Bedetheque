@@ -58,9 +58,9 @@
                     <button type="submit" id="submit">Valider</button>
             </form>
             <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-                <input type="hidden" name="action" value="searchAdherent">
-                <input type="hidden" name="type" value="Adherent">
-                <!-- <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>"> -->
+                <input type="hidden" name="action" value="emprunt&retour">
+                <input type="hidden" name="type" value="Emprunt">
+                <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>">
                 <button id="abandon">Retour</button>
             </form>
             </div>

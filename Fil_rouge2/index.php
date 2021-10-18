@@ -75,5 +75,13 @@ switch ($type) {
 
         break;
 
+    case 'Emprunt' :
+        require 'Header&Footer/Views/view_head.php';
+        require 'Header&Footer/index_header.php';
+        require 'Emprunt&Retour/index_emprunt&retour.php';
+        require 'Header&Footer/Views/view_footer.php';
+
+        break;
+
     
 }

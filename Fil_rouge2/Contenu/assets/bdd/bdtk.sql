@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 18 oct. 2021 à 09:37
+-- Généré le : lun. 18 oct. 2021 à 18:24
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -21,7 +21,6 @@ SET time_zone = "+00:00";
 -- Base de données : `bdtk`
 --
 
--- --------------------------------------------------------
 DELIMITER $$
 --
 -- Procédures
@@ -67,6 +66,9 @@ UPDATE `album` SET `Titre_album` = title,
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `album`
 --
@@ -152,9 +154,9 @@ getExemplaire:LOOP
 END LOOP;
 CLOSE exemplaires;
 END IF;
-END$$
+END
+$$
 DELIMITER ;
-
 DROP TRIGGER IF EXISTS `avant_insert_BD`;
 DELIMITER $$
 CREATE TRIGGER `avant_insert_BD` BEFORE INSERT ON `album` FOR EACH ROW BEGIN
@@ -163,7 +165,8 @@ IF (NEW.isbn IN (SELECT isbn FROM album)) THEN
     SET MESSAGE_TEXT = 'ISBN déjà existant',
     MYSQL_ERRNO = 2004;
 END IF;
-END$$
+END
+$$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `avant_update_BD`;
 DELIMITER $$
@@ -177,8 +180,10 @@ ELSEIF (NEW.idSerie NOT IN(SELECT idSerie FROM serie)) THEN
     SET MESSAGE_TEXT = 'Série inexistante',
     MYSQL_ERRNO = 2006;
 END IF;
-END$$
+END
+$$
 DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -627,7 +632,8 @@ CREATE TRIGGER `avant_delete_exemplaire` BEFORE DELETE ON `exemplaire` FOR EACH 
     	SET MESSAGE_TEXT = "emprunt en cours",
     	MYSQL_ERRNO = 2008;
     END IF;
-END$$
+END
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -811,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `MDP` (`MDP`),
   KEY `_User__Role_FK` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=9724349539 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9724349540 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -860,7 +866,8 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (9438246098, 'Mimi', 'Florient', 'r?3cO_6I', '80, rue Roland Guichard', NULL, '81856', 'Dupuis', '2020-12-31', 5),
 (9583161311, 'Yvetot', 'Pierre', 'Z_S!ms91', '40, rue Marchal', NULL, '45816', 'Coulon', NULL, 3),
 (9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5),
-(9724349538, 'Menestrelle', 'Aurélie', '@J35u15dr0l3', '6 impasse de la cambrousse', '', '16852', 'Cambrousse', '2021-01-04', 5);
+(9724349538, 'Menestrelle', 'Aurélie', '@J35u15dr0l3', '6 impasse de la cambrousse', '', '16852', 'Cambrousse', '2021-01-04', 5),
+(9724349539, 'Lepecheur', 'Clément', 'Gp3t3d3s0l3.', '4 rue des poissons', 'Résidence des Cannes', '14500', 'Vire', NULL, 3);
 
 --
 -- Contraintes pour les tables déchargées
