@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 01 oct. 2021 à 10:37
+-- Généré le : lun. 18 oct. 2021 à 09:37
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,9 +20,49 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bdtk`
 --
-
+CREATE DATABASE IF NOT EXISTS `bdtk` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bdtk`;
 -- --------------------------------------------------------
+DELIMITER $$
+--
+-- Procédures
+--
+DROP PROCEDURE IF EXISTS `prcAddBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
+	INSERT INTO album VALUES (newisbn, title, num, price, newresume, image, miniImage, newserie, newauthor);
+END$$
 
+DROP PROCEDURE IF EXISTS `prcSearchAuthor`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchAuthor` (IN `author` VARCHAR(50))  BEGIN
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE CONCAT('%', author, '%');
+END$$
+
+DROP PROCEDURE IF EXISTS `prcSearchSerie`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchSerie` (IN `serie` VARCHAR(100))  BEGIN
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE CONCAT('%', serie, '%');
+END$$
+
+DROP PROCEDURE IF EXISTS `prcSearchTitle`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchTitle` (IN `title` VARCHAR(100))  BEGIN 
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+            JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+            JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE CONCAT("%", title, "%");
+END$$
+
+DROP PROCEDURE IF EXISTS `prcUpdateBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcUpdateBd` (IN `title` VARCHAR(50), `num` CHAR(3), `price` DECIMAL(4,2), `newresume` VARCHAR(1500), `newserie` INT, `newauthor` INT, `image` VARCHAR(100), `miniImage` VARCHAR(100), `id` BIGINT(13))  BEGIN
+UPDATE `album` SET `Titre_album` = title, 
+                            `Numero_album` = num, `Prix` = price, 
+                            `Resume` = newresume, `idSerie` = newserie, `idAuteur` = newauthor, `ID_image` = image, 
+                            `Id_mini_image` = miniImage
+                            WHERE `ISBN` = id;
+END$$
+
+DELIMITER ;
 --
 -- Structure de la table `album`
 --
@@ -79,6 +119,33 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 (9791034709182, 'Vito la déveine', '43', '10.42', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Spirou et Fantasio-43-Vito la déveine.jpg', 'Spirou et Fantasio-43-Vito la déveine.jpg', 2, 6),
 (9791034709212, 'Machine qui rêve', '46', '23.50', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 2, 6);
 
+--
+-- Déclencheurs `album`
+--
+DROP TRIGGER IF EXISTS `avant_insert_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_insert_BD` BEFORE INSERT ON `album` FOR EACH ROW BEGIN
+IF (NEW.isbn IN (SELECT isbn FROM album)) THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'ISBN déjà existant',
+    MYSQL_ERRNO = 2004;
+END IF;
+END$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `avant_update_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_update_BD` BEFORE UPDATE ON `album` FOR EACH ROW BEGIN
+IF (NEW.idAuteur NOT IN(SELECT idAuteur FROM auteur)) THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Auteur inexistant',
+    MYSQL_ERRNO = 2005;
+ELSEIF (NEW.idSerie NOT IN(SELECT idSerie FROM serie)) THEN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Série inexistante',
+    MYSQL_ERRNO = 2006;
+END IF;
+END$$
+DELIMITER ;
 -- --------------------------------------------------------
 
 --
@@ -88,9 +155,18 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 DROP TABLE IF EXISTS `amendes`;
 CREATE TABLE IF NOT EXISTS `amendes` (
   `ID_Amende` int(11) NOT NULL,
-  `Tarif_base` decimal(10,0) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `Tarif_base` decimal(4,2) NOT NULL,
   PRIMARY KEY (`ID_Amende`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `amendes`
+--
+
+INSERT INTO `amendes` (`ID_Amende`, `label`, `Tarif_base`) VALUES
+(1, 'Retard', '0.50'),
+(2, 'Perte', '10.00');
 
 -- --------------------------------------------------------
 
@@ -355,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `emprunt` (
 --
 
 INSERT INTO `emprunt` (`id_emprunt`, `Date_emprunt`, `Date_retour`, `id_user`, `ID_exemplaire`) VALUES
-(1, '2021-09-17', NULL, 218924837, '9780312429621_1');
+(1, '2021-09-17', NULL, 1336977764, '9780312429621_1');
 
 -- --------------------------------------------------------
 
@@ -675,7 +751,7 @@ INSERT INTO `serie` (`idSerie`, `Nom_serie`) VALUES
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL,
+  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
   `Nom_user` varchar(50) NOT NULL,
   `Prenom_user` varchar(50) NOT NULL,
   `MDP` varchar(50) NOT NULL,
@@ -688,7 +764,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `MDP` (`MDP`),
   KEY `_User__Role_FK` (`id_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9724349539 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -699,7 +775,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (0297380565, 'Goncalves', 'Vincent', '8A?mJv0!', 'Résidence Jean Moulin', 'rue Nicole Poulain', '76000', 'Rouen', NULL, 2),
 (0436342955, 'Ecu', 'Sandrine', '5$4Nr$Bx', '93, avenue Astrid Jacques', NULL, '14000', 'Caen', '2021-08-24', 5),
 (0624960766, 'Hebert', 'Jean', '$4?QcX2p', '6, chemin Marechal', NULL, '45816', 'Coulon', '2021-10-04', 5),
-(1336977764, 'Lupin', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', NULL, '14123', 'Fleury-sur-Orne', '2020-06-25', 5),
+(1336977764, 'Lupine', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', '', '14123', 'Fleury-sur-Orne', '2021-10-17', 5),
 (1526943621, 'Merlot', 'Isabelle', '0?N7Ch$e', 'Résidence Les Hauts-bois 2B', 'chemin Fernandez', '14200', 'Hérouville-Saint-Clair', '2021-07-10', 5),
 (1598771384, 'Villard', 'Augustin', 'Y5?j_0Cj', '44, rue du Vent', NULL, '14000', 'Caen', '2020-03-23', 5),
 (1781032377, 'Gouvier', 'Lucie', '1r!w$U1Q', '62, rue Pelletier', NULL, '14000', 'Caen', '2020-12-21', 5),
@@ -711,7 +787,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (3378180016, 'Weiss', 'Henriette', 'Ze!?8uU7', 'Résidence des hirondelles, appartement 42', '21 rue Pierre Cassin', '14000', 'Caen', '2021-01-27', 5),
 (3534247901, 'Noir', 'Mireille', 'P9!1$Zyi', '50, avenue du Maréchal Juin', NULL, '14000', 'Caen', NULL, 3),
 (4126127561, 'Lebrec', 'Audrey', 'Sv_09x?N', '70, rue Devaux', NULL, '14000', 'Caen', '2021-04-17', 5),
-(4146021295, 'Tartrin', 'Sarah', 'iE9$!7pH', '15, chemin Nath Michel', NULL, '14000', 'Caen', '2020-11-26', 5),
+(4146021295, 'Tartrin', 'Sarah', 'iE9$!7pH', '15, chemin Nath Michel', NULL, '14000', 'Caen', '2020-10-23', 5),
 (4223351145, 'Lupin', 'Bernard', 'Gy5v3M_?', '9, place Denise Boyer', NULL, '14123', 'Fleury-sur-Orne', '2020-09-16', 5),
 (4238885261, 'Jouan', 'Zoé', 'pt!0WW7?', '54, place Bourgeois', NULL, '14000', 'Caen', '2020-07-25', 5),
 (4450752613, 'Djouadi', 'Ibrahim', '5Jk!?Ly4', '6 avenue Foch', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', NULL, 2),
@@ -724,7 +800,6 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (6665531746, 'Fournier', 'Maggie', '9A$k7lV_', '223, impasse de Delahaye', NULL, '14530', 'Luc-sur-Mer', '2020-12-16', 5),
 (7066785097, 'Boucher', 'Frédérique', 'u8?Vx!2F', '15, rue de Faure', NULL, '44427', 'Maury', NULL, 4),
 (7115589590, 'Petit', 'Marion', 'ZSu!g1_8', '6, rue du Paradis', NULL, '14530', 'Luc-sur-Mer', '2021-08-25', 5),
-(7216447766, 'Lebreuil', 'Valentin', 't_A7C3b$', '7, avenue Petitjean', NULL, '14200', 'Hérouville-Saint-Clair', '2020-05-29', 5),
 (7874843335, 'Parent', 'Thérèse', '!1z0yV!O', '77, rue Grondin', NULL, '17364', 'Perretbourg', '2021-01-21', 5),
 (8710381536, 'Fray', 'Hugo', 't0$6Vd$V', '48, avenue Lamy', NULL, '45816', 'Coulon', NULL, 4),
 (8710555894, 'Aubusson', 'Ludivine', '$g1rV8?C', '6, rue des Orfèvres', NULL, '14000', 'Caen', '2020-12-18', 5),
@@ -737,7 +812,8 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (9288270246, 'Rivière', 'Charlotte', 'Nh?t8C3_', '8, boulevard Becker', NULL, '14000', 'Caen', '2020-08-14', 5),
 (9438246098, 'Mimi', 'Florient', 'r?3cO_6I', '80, rue Roland Guichard', NULL, '81856', 'Dupuis', '2020-12-31', 5),
 (9583161311, 'Yvetot', 'Pierre', 'Z_S!ms91', '40, rue Marchal', NULL, '45816', 'Coulon', NULL, 3),
-(9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5);
+(9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5),
+(9724349538, 'Menestrelle', 'Aurélie', '@J35u15dr0l3', '6 impasse de la cambrousse', '', '16852', 'Cambrousse', '2021-01-04', 5);
 
 --
 -- Contraintes pour les tables déchargées
@@ -761,7 +837,7 @@ ALTER TABLE `emplacement`
 --
 ALTER TABLE `emprunt`
   ADD CONSTRAINT `Emprunt_Exemplaire_FK` FOREIGN KEY (`ID_exemplaire`) REFERENCES `exemplaire` (`ID_exemplaire`),
-  ADD CONSTRAINT `Emprunt__User_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `Emprunt_User_FK` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Contraintes pour la table `exemplaire`
