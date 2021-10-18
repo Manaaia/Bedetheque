@@ -843,7 +843,7 @@ ALTER TABLE `emprunt`
 -- Contraintes pour la table `exemplaire`
 --
 ALTER TABLE `exemplaire`
-  ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`),
+  ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`) ON DELETE CASCADE,
   ADD CONSTRAINT `Exemplaire__Emplacement0_FK` FOREIGN KEY (`idEmplacement`) REFERENCES `emplacement` (`idEmplacement`),
   ADD CONSTRAINT `Exemplaire__Etat2_FK` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`idEtat`);
 
