@@ -1,5 +1,5 @@
 <?php 
-require_once('../Models/connexionBDD.class.php');
+require_once('../Header&Footer/Models/connexionBDD.class.php');
 class BDMgr {
 
     /**
