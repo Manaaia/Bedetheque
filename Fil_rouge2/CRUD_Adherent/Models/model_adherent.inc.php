@@ -113,22 +113,33 @@ function getListAdherent($nom) {
 * @return string 
 */
 function updateAdherent() {
-    $idAdherent = $_POST["idAdherent"];
-    $user = UserMgr::getUserById($idAdherent);
-    $user->setNomUser($_POST["newNom"]);
-    $user->setPrenomUser($_POST["newPrenom"]);
-    $user->setAdresse1($_POST["newAdresse1"]);
-    if (isset($_POST["newAdresse2"])) {
-        $user->setAdresse2($_POST["newAdresse2"]);
-    }
-    $user->setCpUser($_POST["newCp"]);
-    $user->setVilleUser($_POST["newVille"]);
-    $user->setDateCot($_POST["newDateCot"]);
+    $flag = true;
     try {
-        $message = UserMgr::modUser($user);
-        return $message;
-    } catch (UserMgrException $e) {
-        echo "Erreur :".$e->getMessage();
+        $idAdherent = $_POST["idAdherent"];
+        $user = UserMgr::getUserById($idAdherent);
+        $user->setNomUser($_POST["newNom"]);
+        $user->setPrenomUser($_POST["newPrenom"]);
+        $user->setAdresse1($_POST["newAdresse1"]);
+        if (isset($_POST["newAdresse2"])) {
+            $user->setAdresse2($_POST["newAdresse2"]);
+        }
+        $user->setCpUser($_POST["newCp"]);
+        $user->setVilleUser($_POST["newVille"]);
+        $user->setDateCot($_POST["newDateCot"]);
+    } catch (UserException $e) {
+        echo "Erreur : ".$e->getMessage();
+        return $flag = false;
+    }
+
+    if($flag) {
+        try {
+            $check = UserMgr::modUser($user);
+            if(isset($check)) {
+                return $flag = true;
+            }
+        } catch (UserMgrException $e) {
+            echo "Erreur :".$e->getMessage();
+        }
     }
 }
 
@@ -152,20 +163,30 @@ function deleteAdherent($id) {
 * @return string 
 */
 function addAdherent() {
-    if(isset($_POST["adresse2"])) {
-        $adresse2 = $_POST["adresse2"];
-    } else {
-        $adresse2 = null;
-    }
-    $user = new User (null, $_POST["nom"], $_POST["prenom"], $_POST["mdp"],
-    $_POST["adresse1"], $adresse2, $_POST["cp"], $_POST["ville"], 
-    $_POST["dateCo"],5);
-
     try {
-        $check = UserMgr::addUser($user);
-        return $check;
-    } catch (UserMgrException $e) {
-        echo "Erreur :".$e->getMessage();
+        if(isset($_POST["adresse2"])) {
+            $adresse2 = $_POST["adresse2"];
+        } else {
+            $adresse2 = null;
+        }
+        $user = new User (null, $_POST["nom"], $_POST["prenom"], $_POST["mdp"],
+        $_POST["adresse1"], $adresse2, $_POST["cp"], $_POST["ville"], 
+        $_POST["dateCo"],5);
+    } catch (UserException $e) {
+        echo "Erreur : ".$e->getMessage();
+    }
+
+    if(isset($user)) {
+        try {
+            $check = UserMgr::addUser($user);
+            if(isset($check)) {
+                return $flag = true;
+            }
+        } catch (UserMgrException $eMgr) {
+            echo "Erreur : ".$eMgr->getMessage();
+        }
+    } else {
+        return $flag = false;
     }
 }
 

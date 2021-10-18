@@ -3,9 +3,12 @@
         <fieldset class="form"><legend for="form">Modifier adhérent</legend>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                 <div>
-                    <?php if(isset($modMessage)) { ?>
+                    <?php if(isset($modMessage)) { 
+                        if($modMessage) {?>
                     <p class="success">Adhérent mis à jour avec succès.</p>
-                    <?php } ?>
+                    <?php } else { ?>
+                    <p class="alerte">Erreur : champs renseignés incorrects.</p>
+                    <?php }} ?>
                     <p id="alertesaisie" class="alerte invisible"></p>
                     <div>
                         <h3 class="label">Identité</h3>

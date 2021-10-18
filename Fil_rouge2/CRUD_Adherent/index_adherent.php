@@ -5,9 +5,7 @@ require_once 'Models/model_adherent.inc.php';
 switch ($action) {
     case 'addAdherent' :
         if (isset( $_POST["nom"])) {
-            echo "Check one";
             $addMessage = addAdherent($_POST);
-            echo $addMessage;
         }
         require 'Views/view_addAdherent.php';
         break;
@@ -41,7 +39,6 @@ switch ($action) {
         if (isset($_POST["idAdherent"])) {
             $idAdherent = $_POST["idAdherent"];
             $adherent = UserMgr::getUserById($idAdherent);
-            print_r($adherent);
         }
         $nom = afficheNom($adherent);
         $prenom = affichePrenom($adherent);
