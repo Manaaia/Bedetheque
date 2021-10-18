@@ -31,4 +31,15 @@ var_dump(BDMgr::searchBDByTitle("Vunise", OBJET)?BDMgr::searchBDByTitle("Vunise"
 echo "<br />";
 var_dump(BDMgr::searchBDByTitle("V", OBJET)?BDMgr::searchBDByTitle("V", OBJET):
     "Il n'y a aucune BD correspondante");
+
+
+var_dump(BDMgr::searchBDBySerie("Spirou", OBJET)?BDMgr::searchBDBySerie("Spirou", OBJET):
+    "Il n'y a aucune BD correspondante");
+echo "<br />";
+var_dump(BDMgr::searchBDBySerie("Spurou", OBJET)?BDMgr::searchBDBySerie("Spurou", OBJET):
+    "Il n'y a aucune BD correspondante");
+echo "<br />";
+var_dump(BDMgr::searchBDBySerie("S", OBJET)?BDMgr::searchBDBySerie("S", OBJET):
+    "Il n'y a aucune BD correspondante");
+
 ?>

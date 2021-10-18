@@ -49,7 +49,7 @@ class BDMgr {
 
         $sql = "CALL prcSearchTitle(:titreVoulu)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':titreVoulu'=>'%'.$titleSearch.'%'));
+        $res->execute(array(':titreVoulu'=>$titleSearch));
             $res->setFetchMode($choix);
 
         // Lit le résultat
@@ -76,11 +76,9 @@ class BDMgr {
     public static function searchBDBySerie($serieSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE :serieVoulue";
+        $sql = "CALL prcSearchSerie(:serieVoulue)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':serieVoulue'=>'%'.$serieSearch.'%'));
+        $res->execute(array(':serieVoulue'=>$serieSearch));
         $res->setFetchMode($choix);
 
         // Lit le résultat
