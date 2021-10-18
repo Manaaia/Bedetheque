@@ -1,6 +1,9 @@
 
 <div class="container">
         <fieldset class="form"><legend for="form">Rechercher un adhérent</legend>
+            <?php if(isset($delMessage)) { ?>
+            <p class="success">L'adhérent a bien été supprimé</p>
+            <?php } ?>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">    
                 <div class="recherche">
                     <div>

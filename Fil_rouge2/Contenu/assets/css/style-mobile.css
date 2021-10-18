@@ -84,6 +84,26 @@ button:hover {
 	background-color:#71adb0;
 }
 
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #151219;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    box-shadow: unset;
+    text-shadow: unset;
+}
+
+.btn-link:hover {
+    color: #0b0281;
+    background: unset;
+	background-color: unset;
+}
+
 .delete {
     background:linear-gradient(to bottom, #ca9082 5%, #b12b0a 100%);
     display: block;
@@ -128,6 +148,14 @@ option[disabled] {
 
 .alerte {
     color: brown;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 1em;
+}
+
+.success {
+    color: green;
     font-style: italic;
     text-align: center;
     font-size: 1.2em;
@@ -502,7 +530,7 @@ hr {
     align-items: center;
 }
 
-.btn-link {
+.mdp_oublie {
     border: none;
     outline: none;
     background: none;
@@ -516,7 +544,7 @@ hr {
     text-shadow: unset;
 }
 
-.btn-link:hover {
+.mdp_oublie:hover {
     color: brown;
     background: unset;
 	background-color: unset;

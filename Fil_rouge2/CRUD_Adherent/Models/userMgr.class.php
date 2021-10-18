@@ -11,8 +11,6 @@ class UserMgr {
     public static function getListUsers() : array {
         $connexionPDO = connexionBDD::getConnexion();
 
-        echo "Connexion réussie".RC;
-
         $sql = 'SELECT * FROM user';
         
         $resPDOstt = $connexionPDO->query($sql);
@@ -123,7 +121,6 @@ class UserMgr {
     public static function addUser($user) {
         $connexionPDO = connexionBDD::getConnexion();
         
-        $id_user = $user->getIdUser();
         $nom_user = $user->getNomUser();
         $prenom_user = $user->getPrenomUser();
         $mdp = $user->getMdp();
@@ -134,15 +131,16 @@ class UserMgr {
         $dateCot = $user->getDateCot();
         $id_role = $user->getIdRole();
         
-        $sql = 'INSERT INTO user VALUES(:idVoulu,:nomVoulu,:prenomVoulu,:mdpVoulu,:adr1Voulu,:adr2Voulu,:cpVoulu,:villeVoulu,:dateCotVoulu,:idRoleVoulu)';
+        $sql = 'INSERT INTO user (Nom_user, Prenom_user, MDP, Adresse_1_user, Adresse_2_user, CP_user, Ville_user, Date_cotisation, id_role)
+         VALUES (:nomVoulu,:prenomVoulu,:mdpVoulu,:adr1Voulu,:adr2Voulu,:cpVoulu,:villeVoulu,:dateCotVoulu,:idRoleVoulu)';
         $result = $connexionPDO->prepare($sql);
         
         try {
-            $result->execute(array(':idVoulu'=>$id_user,':nomVoulu'=>$nom_user,':prenomVoulu'=>$prenom_user,':mdpVoulu'=>$mdp,':adr1Voulu'=>$adresse1,
+            $result->execute(array(':nomVoulu'=>$nom_user,':prenomVoulu'=>$prenom_user,':mdpVoulu'=>$mdp,':adr1Voulu'=>$adresse1,
             ':adr2Voulu'=>$adresse2,':cpVoulu'=>$cp_user,':villeVoulu'=>$ville_user,':dateCotVoulu'=>$dateCot,':idRoleVoulu'=>$id_role));
             $count = $result->rowCount();
             if ($count == 0) {
-                $message = "Lignes affectées : ".$count.RC;
+                $message = "Lignes affectées : ".$count;
             } else {
                 $message = "Confirmation : l'utilisateur a bien été ajouté à la BDD.";
             }
@@ -193,7 +191,6 @@ class UserMgr {
     public static function modNomUser($user, $newNom) {
         $connexionPDO = connexionBDD::getConnexion();
         $id_user = $user->getIdUser();
-        $nom_user = $user->getNomUser();
         $sql = 'UPDATE user SET Nom_user = :nomVoulu WHERE id_user = :idVoulu';
         $result = $connexionPDO->prepare($sql);
 
@@ -201,7 +198,51 @@ class UserMgr {
             $result->execute(array(':idVoulu'=>$id_user,':nomVoulu'=>$newNom));
             $count = $result->rowCount();
             if ($count == 0) {
-                $message = "Lignes affectées : ".$count.RC;
+                $message = "Lignes affectées : ".$count;
+            } else {
+                $message = "Confirmation : l'utilisateur a bien été modifié.";
+            }
+        } catch(PDOException $e) {
+            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.");
+        } finally {
+            $result->closeCursor();
+            connexionBDD::disconnect();
+        }
+
+        return $message;
+    }
+
+    /**
+     * Update user from table user in database bdtk and return confirmation message
+     * @param object $user
+     * @return string
+     */
+    public static function modUser($user) {
+        $connexionPDO = connexionBDD::getConnexion();
+        $id_user = $user->getIdUser();
+        $nom = $user->getNomUser();
+        $prenom = $user->getPrenomUser();
+        $adresse1 = $user->getAdresse1();
+        $adresse2 = $user->getAdresse2();
+        $cp = $user->getCpUser();
+        $ville = $user->getVilleUser();
+        $dateCot = $user->getDateCot();
+
+        $sql = 'UPDATE user 
+        SET Nom_user = :nomVoulu, Prenom_user = :prenomVoulu,
+        Adresse_1_user = :adresse1Voulu, Adresse_2_user = :adresse2Voulu,
+        CP_user = :cpVoulu, Ville_user = :villeVoulu,
+        Date_cotisation = :dateVoulu 
+        WHERE id_user = :idVoulu';
+        $result = $connexionPDO->prepare($sql);
+
+        try {
+            $result->execute(array(':idVoulu'=>$id_user,':nomVoulu'=>$nom,
+            ':prenomVoulu'=>$prenom,':adresse1Voulu'=>$adresse1,':adresse2Voulu'=>$adresse2,
+            ':cpVoulu'=>$cp,':villeVoulu'=>$ville,'dateVoulu'=>$dateCot));
+            $count = $result->rowCount();
+            if ($count == 0) {
+                $message = "Lignes affectées : ".$count;
             } else {
                 $message = "Confirmation : l'utilisateur a bien été modifié.";
             }

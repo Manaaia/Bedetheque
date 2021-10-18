@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 16 oct. 2021 à 15:36
+-- Généré le : lun. 18 oct. 2021 à 09:37
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -684,7 +684,7 @@ INSERT INTO `serie` (`idSerie`, `Nom_serie`) VALUES
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL,
+  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
   `Nom_user` varchar(50) NOT NULL,
   `Prenom_user` varchar(50) NOT NULL,
   `MDP` varchar(50) NOT NULL,
@@ -697,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `MDP` (`MDP`),
   KEY `_User__Role_FK` (`id_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9724349539 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -708,7 +708,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (0297380565, 'Goncalves', 'Vincent', '8A?mJv0!', 'Résidence Jean Moulin', 'rue Nicole Poulain', '76000', 'Rouen', NULL, 2),
 (0436342955, 'Ecu', 'Sandrine', '5$4Nr$Bx', '93, avenue Astrid Jacques', NULL, '14000', 'Caen', '2021-08-24', 5),
 (0624960766, 'Hebert', 'Jean', '$4?QcX2p', '6, chemin Marechal', NULL, '45816', 'Coulon', '2021-10-04', 5),
-(1336977764, 'Lupin', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', NULL, '14123', 'Fleury-sur-Orne', '2020-06-25', 5),
+(1336977764, 'Lupine', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', '', '14123', 'Fleury-sur-Orne', '2021-10-17', 5),
 (1526943621, 'Merlot', 'Isabelle', '0?N7Ch$e', 'Résidence Les Hauts-bois 2B', 'chemin Fernandez', '14200', 'Hérouville-Saint-Clair', '2021-07-10', 5),
 (1598771384, 'Villard', 'Augustin', 'Y5?j_0Cj', '44, rue du Vent', NULL, '14000', 'Caen', '2020-03-23', 5),
 (1781032377, 'Gouvier', 'Lucie', '1r!w$U1Q', '62, rue Pelletier', NULL, '14000', 'Caen', '2020-12-21', 5),
@@ -733,7 +733,6 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (6665531746, 'Fournier', 'Maggie', '9A$k7lV_', '223, impasse de Delahaye', NULL, '14530', 'Luc-sur-Mer', '2020-12-16', 5),
 (7066785097, 'Boucher', 'Frédérique', 'u8?Vx!2F', '15, rue de Faure', NULL, '44427', 'Maury', NULL, 4),
 (7115589590, 'Petit', 'Marion', 'ZSu!g1_8', '6, rue du Paradis', NULL, '14530', 'Luc-sur-Mer', '2021-08-25', 5),
-(7216447766, 'Lebreuil', 'Valentin', 't_A7C3b$', '7, avenue Petitjean', NULL, '14200', 'Hérouville-Saint-Clair', '2020-05-29', 5),
 (7874843335, 'Parent', 'Thérèse', '!1z0yV!O', '77, rue Grondin', NULL, '17364', 'Perretbourg', '2021-01-21', 5),
 (8710381536, 'Fray', 'Hugo', 't0$6Vd$V', '48, avenue Lamy', NULL, '45816', 'Coulon', NULL, 4),
 (8710555894, 'Aubusson', 'Ludivine', '$g1rV8?C', '6, rue des Orfèvres', NULL, '14000', 'Caen', '2020-12-18', 5),
@@ -746,7 +745,8 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (9288270246, 'Rivière', 'Charlotte', 'Nh?t8C3_', '8, boulevard Becker', NULL, '14000', 'Caen', '2020-08-14', 5),
 (9438246098, 'Mimi', 'Florient', 'r?3cO_6I', '80, rue Roland Guichard', NULL, '81856', 'Dupuis', '2020-12-31', 5),
 (9583161311, 'Yvetot', 'Pierre', 'Z_S!ms91', '40, rue Marchal', NULL, '45816', 'Coulon', NULL, 3),
-(9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5);
+(9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5),
+(9724349538, 'Menestrelle', 'Aurélie', '@J35u15dr0l3', '6 impasse de la cambrousse', '', '16852', 'Cambrousse', '2021-01-04', 5);
 
 --
 -- Contraintes pour les tables déchargées

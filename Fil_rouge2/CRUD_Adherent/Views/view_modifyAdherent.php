@@ -1,7 +1,11 @@
-<div class="container">
-            <fieldset class="form"><legend for="form">Modifier adhérent</legend>
+
+    <div class="container">
+        <fieldset class="form"><legend for="form">Modifier adhérent</legend>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                 <div>
+                    <?php if(isset($modMessage)) { ?>
+                    <p class="success">Adhérent mis à jour avec succès.</p>
+                    <?php } ?>
                     <p id="alertesaisie" class="alerte invisible"></p>
                     <div>
                         <h3 class="label">Identité</h3>
@@ -43,17 +47,29 @@
                         <h3 class="label invisible">Amendes</h3>
                         <p id="amende" class="invisible">Aucune amende en attente</p>
                     </div>
-                    <input type="hidden" name="action" value="modifyAdherentUpdate">
+                    <input type="hidden" name="action" value="modifyAdherent">
                     <input type="hidden" name="type" value="Adherent">
+                    <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>">
                 </div>
                 <div id="btns">
-                    <button id="abandon">Abandonner</button>
                     <button type="submit" id="submit">Valider</button>
-                </div>
-                    </form>
-                <br/><hr><br/>
-                <div>
-                    <button class="delete">Supprimer ce compte adhérent ?</button>
-                </div>
-            </fieldset>
+            </form>
+            <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <input type="hidden" name="action" value="searchAdherent">
+                <input type="hidden" name="type" value="Adherent">
+                <!-- <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>"> -->
+                <button id="abandon">Retour</button>
+            </form>
+            </div>
+            <br/><hr><br/>
+            <div>
+            <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <input type="hidden" name="action" value="searchAdherent">
+                <input type="hidden" name="type" value="Adherent">
+                <input type="hidden" name="do" value="delete">
+                <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>">
+                <button class="delete">Supprimer ce compte adhérent ?</button>
+            </form>
+            </div>
+        </fieldset>
     </div>

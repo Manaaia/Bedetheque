@@ -5,7 +5,7 @@
             <section id="connexion-section">
                 <div id="connexion-title">
                     <div id="bubble-connexion-title">
-                        <img src="assets/image/comic-bubble.png" alt="bulle">
+                        <img src="Contenu/assets/image/comic-bubble.png" alt="bulle">
                     </div>
                     <div id="txt-connexion-title">
                         <h1>Connexion</h1>
@@ -13,7 +13,7 @@
 
                 </div>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                    <button type="submit" name="action" value="mdp_oublie" class="btn-link">Mot de passe oublié ?</button>
+                    <button type="submit" name="action" value="mdp_oublie" class="mdp_oublie">Mot de passe oublié ?</button>
                 </form>
                 <div id="connexion-content">
                     <?php if(isset($checkConnexion)) {
@@ -23,11 +23,11 @@
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
                         <div>
                             <label for="user-name">Nom d'utilisateur</label>
-                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant" value="1526943621">
+                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant" value="3060048688">
                         </div>
                         <div>
                             <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" placeholder="Renseignez votre mot de passe" value="0?N7Ch$e"> 
+                            <input type="password" name="password" id="password" placeholder="Renseignez votre mot de passe" value="Ae4z!0?D"> 
                             <input type="hidden" name="action" value="accueil">
                             <input type="hidden" name="type" value="Accueil">    
                         </div>

@@ -1,15 +1,30 @@
 <?php 
 
+/**
+* Retourne le nom de l'utilisateur donnée en paramètre
+* @param object
+* @return string
+*/
 function afficheNom($person) {
     $nom = $person->getNomUser();
     return $nom;
 }
 
+/**
+* Retourne le prénom de l'utilisateur donnée en paramètre
+* @param object
+* @return string
+*/
 function affichePrenom($person) {
     $prenom = $person->getPrenomUser();
     return $prenom;
 }
 
+/**
+* Retourne l'adresse complète de l'utilisateur donnée en paramètre
+* @param object
+* @return string
+*/
 function afficheAdresse($person) {
     $adresse1 = $person->getAdresse1();
     $adresse2 = $person->getAdresse2();
@@ -23,17 +38,32 @@ function afficheAdresse($person) {
     return $strAdresse;
 }
 
+/**
+* Retourne la date de cotisation de l'utilisateur donnée en paramètre
+* @param object
+* @return date
+*/
 function afficheDateCo($person) {
     $dateCo = $person->getDateCot();
     $dateCo = date("Y-m-d", strtotime($dateCo));
     return $dateCo;
 }
 
+/**
+* Calcule et retourne la date d'expiration de la cotisation de l'utilisateur donnée en paramètre
+* @param date
+* @return date
+*/
 function afficheDateEndCo($dateStartCo) {
     $dateEndCo = date('Y-m-d', strtotime('+365 days', strtotime($dateStartCo)));
     return $dateEndCo;
 }
 
+/**
+* Retourne l'interval en jours entre aujourd'hui et la date d'expiration de la cotisation de l'utilisateur donnée en paramètre
+* @param date
+* @return int
+*/
 function getInterval($dateEndCo) {
     $dateEndCo = new DateTime($dateEndCo);
     $today = new DateTime(date('Y-m-d'));
@@ -42,6 +72,11 @@ function getInterval($dateEndCo) {
     return $interval;
 }
 
+/**
+* Vérifie le statut de la cotisation de l'utilisateur donnée en paramètre
+* @param date
+* @return int
+*/
 function checkDateCo($dateStartCo) {
     $dateEndCo = afficheDateEndCo($dateStartCo);
     $interval = getInterval($dateEndCo);
@@ -58,14 +93,11 @@ function checkDateCo($dateStartCo) {
     return $validity;
 }
 
-function afficheEmprunts($person) {
-    
-}
-
-function afficheAmendes($person) {
-    
-}
-
+/**
+* Retourne la liste des adhérents recherchés
+* @param string
+* @return array of objects
+*/
 function getListAdherent($nom) {
     try {
         $aUsers = UserMgr::getAdherentByName($nom);
@@ -74,3 +106,73 @@ function getListAdherent($nom) {
         "Erreur :".$e->getMessage();
     }
 }
+
+/**
+* Met à jour un adhérent en récupérant les données en $_POST et retourne une confirmation
+* @param void
+* @return string 
+*/
+function updateAdherent() {
+    $idAdherent = $_POST["idAdherent"];
+    $user = UserMgr::getUserById($idAdherent);
+    $user->setNomUser($_POST["newNom"]);
+    $user->setPrenomUser($_POST["newPrenom"]);
+    $user->setAdresse1($_POST["newAdresse1"]);
+    if (isset($_POST["newAdresse2"])) {
+        $user->setAdresse2($_POST["newAdresse2"]);
+    }
+    $user->setCpUser($_POST["newCp"]);
+    $user->setVilleUser($_POST["newVille"]);
+    $user->setDateCot($_POST["newDateCot"]);
+    try {
+        $message = UserMgr::modUser($user);
+        return $message;
+    } catch (UserMgrException $e) {
+        echo "Erreur :".$e->getMessage();
+    }
+}
+
+/**
+* Supprime un adhérent et retourne une confirmation
+* @param int
+* @return string 
+*/
+function deleteAdherent($id) {
+    try {
+        $check = UserMgr::delUser($id);
+        return $check;
+    } catch (UserMgrException $e) {
+        echo "Erreur :".$e->getMessage();
+    }
+}
+
+/**
+* Ajoute un adhérent via données en $_POST et retourne une confirmation
+* @param int
+* @return string 
+*/
+function addAdherent() {
+    if(isset($_POST["adresse2"])) {
+        $adresse2 = $_POST["adresse2"];
+    } else {
+        $adresse2 = null;
+    }
+    $user = new User (null, $_POST["nom"], $_POST["prenom"], $_POST["mdp"],
+    $_POST["adresse1"], $adresse2, $_POST["cp"], $_POST["ville"], 
+    $_POST["dateCo"],5);
+
+    try {
+        $check = UserMgr::addUser($user);
+        return $check;
+    } catch (UserMgrException $e) {
+        echo "Erreur :".$e->getMessage();
+    }
+}
+
+// function afficheEmprunts($person) {
+    
+// }
+
+// function afficheAmendes($person) {
+    
+// }

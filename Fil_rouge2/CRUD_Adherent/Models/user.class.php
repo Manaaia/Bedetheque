@@ -15,8 +15,8 @@ class User {
     private $id_role;
 
     // Constructor
-    public function __construct ($id_user,$nom_user,$prenom_user,$mdp,
-    $adresse_1_user,$adresse_2_user = null,$cp_user,$ville_user,$date_cotisation = "0000/00/00",$id_role) {
+    public function __construct ($id_user = null,$nom_user,$prenom_user,$mdp,
+    $adresse_1_user,$adresse_2_user = null,$cp_user,$ville_user,$date_cotisation = null,$id_role) {
         $this->setIdUser($id_user);
         $this->setNomUser($nom_user);
         $this->setPrenomUser($prenom_user);
@@ -36,7 +36,7 @@ class User {
      * @return void
      */
     private function setIdUser($id_user) {
-        if (preg_match("/[0-9]{10}/",$id_user)) {
+        if (preg_match("/[0-9]{10}/",$id_user) || $id_user == null) {
             $this->id_user = $id_user;
         } else {
             throw new UserException ("L'id utilisateur doit contenir 10 chiffres.");
@@ -57,7 +57,7 @@ class User {
      * @param string $nom_user
      * @return void
      */
-    private function setNomUser($nom_user) {
+    public function setNomUser($nom_user) {
         if (preg_match("/^[a-zA-Z-'ëäïéàçêâûôîèù ]+$/",$nom_user)) {
             $this->nom_user = $nom_user;
         } else {
@@ -79,7 +79,7 @@ class User {
      * @param string $prenom_user
      * @return void
      */
-    private function setPrenomUser($prenom_user) {
+    public function setPrenomUser($prenom_user) {
         if (preg_match("/^[a-zA-Z-'ëäïéàçêâûôîèù ]+$/",$prenom_user)) {
             $this->prenom_user = $prenom_user;
         } else {

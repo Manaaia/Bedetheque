@@ -2,21 +2,23 @@
 
 require_once 'Models/model_adherent.inc.php';
 
-// if (isset($_POST["dateCo"])) {
-//     $newDateCo = $_POST["dateCo"];
-//     $adherent->setDateCot($newDateCo);
-// }
-
 switch ($action) {
     case 'addAdherent' :
+        if (isset( $_POST["nom"])) {
+            echo "Check one";
+            $addMessage = addAdherent($_POST);
+            echo $addMessage;
+        }
         require 'Views/view_addAdherent.php';
         break;
 
     case 'searchAdherent' :
+        if (isset($_POST["do"])) {
+            $delMessage = deleteAdherent($_POST["idAdherent"]);
+        }
         if (isset($_POST["nomCherche"])) {
             $nomCherche = $_POST["nomCherche"];
             $aNomCherche = getListAdherent($nomCherche);
-            print_r($aNomCherche);
         }
         require 'Views/view_searchAdherent.php';
         break;
@@ -33,16 +35,17 @@ switch ($action) {
         break;
 
     case 'modifyAdherent' :
+        if (isset( $_POST["newNom"])) {
+            $modMessage = updateAdherent();
+        }
         if (isset($_POST["idAdherent"])) {
             $idAdherent = $_POST["idAdherent"];
             $adherent = UserMgr::getUserById($idAdherent);
             print_r($adherent);
         }
         $nom = afficheNom($adherent);
-        echo $nom;
         $prenom = affichePrenom($adherent);
         $adresse = afficheAdresse($adherent);
-        echo $adresse;
         $aAdress = explode("<br/>",$adresse);
         $nEtRue = $aAdress[0];
         if (count($aAdress) == 4) {
@@ -59,8 +62,5 @@ switch ($action) {
         $checkDateCo = checkDateCo($dateCo);
         require 'Views/view_modifyAdherent.php';
         break;
-
-    case 'modifyAdherentUpdate' :
-
-
+        
 }
