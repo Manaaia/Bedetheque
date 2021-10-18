@@ -1,0 +1,602 @@
+/*-------------------------------------------------------------------- GENERAL -----------------------------------------------------------------*/
+
+@font-face {
+    font-family: 'BadaBoom BB';
+    src: url('font/BadaBoomBB.woff2') format('woff2'),
+
+        url('font/BadaBoomBB.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Comic Book';
+    src: url('font/Comic Book.otf') format('opentype');
+}
+
+html {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Book', Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.invisible{
+    display: none;
+}
+
+body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: url('../image/fond_3_mob.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+h1 {
+    font-family: 'BadaBoom BB', Helvetica, sans-serif;
+    font-size: 3em;
+    display: flex;
+    text-align: center;
+}
+
+#discover, #comment-connexion {
+    color: #c4bbab;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    cursor: pointer;
+}
+
+button {
+    /* max-width: 120px; */
+
+    background:linear-gradient(to bottom, #b3c6cc 5%, #71adb0 100%);
+	background-color:#b3c6cc;
+    border-radius:8px;
+    border: none;
+    display:inline-block;
+	cursor:pointer;
+	color:#151219;
+    padding:10px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+    box-shadow: 0px 8px 15px rgb(0 0 0 / 25%);
+
+}
+
+button:hover {
+    background:linear-gradient(to bottom, #71adb0 5%, #b3c6cc 100%);
+	background-color:#71adb0;
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #151219;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    box-shadow: unset;
+    text-shadow: unset;
+}
+
+.btn-link:hover {
+    color: #0b0281;
+    background: unset;
+	background-color: unset;
+}
+
+.delete {
+    background:linear-gradient(to bottom, #ca9082 5%, #b12b0a 100%);
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+input, textarea {
+    background-color: rgba(150, 133, 102, 0.445);
+    border: 1px solid #151219;
+}
+
+textarea {
+    width: 100%;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #151219;
+}
+
+select {
+    padding: 7px 30px 7px 12px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px -2px #968566;
+    border-bottom: 1px solid #151219;
+    background-color: rgba(150, 133, 102, 0.445);
+    cursor: pointer;
+    text-decoration:none;
+	text-shadow:0px 1px 0px #968566;
+    transition: all 150ms ease;
+    width: 100%;
+}
+    
+option {
+    color:#151219;
+}
+
+option[disabled] {
+    display: none;
+}
+
+.alerte {
+    color: brown;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 1em;
+}
+
+.success {
+    color: green;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 1em;
+}
+
+/*-------------------------------------------------- SECTION HEADER ---------------------------------------------*/
+/* HEADER */
+
+header div {
+    background-color: #121219;
+    background-image: url('../image/2799006.jpg');
+    /* background: linear-gradient(to bottom, rgb(54 53 133), rgb(0 111 190)); */
+}
+
+#header-div {
+    height: 180px;
+    box-shadow: 3px 3px 10px -2px #0b0281;
+
+    position: sticky;
+    top: 0;
+}
+
+#header-div button {
+    max-width: 600px;
+    min-width: 160px;
+    border-radius:2px;
+    margin-right: 2px;
+    background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
+	background-color:#c4bbab;
+    box-shadow: none;
+}
+
+#connexion {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    transition: all 1s ease-out;
+}
+
+#connexion:active {
+    top: 22px;
+}
+
+#deconnexion {
+    max-width: 150px;
+    margin-right: 15px;
+}
+
+#retour {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+/* HEADER ANIME */
+header img {
+    width: 20px;
+}
+
+/* MAIN MENU */
+#main-menu {
+    position:absolute;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: row;
+    background: unset;
+}
+
+/* COMPTE */
+#compte {
+    position: absolute;
+    width: 100%;
+    top: 20px;
+
+    display: flex;
+    justify-content: space-around;
+    background: unset;
+}
+
+#compte>p {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #c4bbab;
+}
+
+/*-------------------------------------------------- SECTION GENERAL CONTAINER --------------------------------------------*/
+
+.container {
+    background-color: #c4bbab;
+    box-shadow: 3px 3px 10px -2px #4c6eca;
+    border-radius: 8px;
+    padding: 1.5%;
+    margin: 20px;
+}
+
+.form {
+    border-radius: 8px;
+    padding: 3%;
+    border-color: #dde4ed;
+    border: solid 1px;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.8em;
+}
+
+p>input {
+    width: 100%;
+    border: 0; 
+    padding: 7px 0; 
+}
+
+.label {
+    font-weight: bold;
+    padding: 15px;
+    font-size:1.2em ;
+}
+
+#btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#fiche {
+    text-align: center;
+}
+
+/*------------------------------------------- SECTION PAGES RECHERCHE ------------------------------------------*/
+
+.recherche {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#choixAjout {
+    text-align: center;
+}
+
+#rechercher {
+    margin: auto;
+    margin-top: 20px;
+}
+
+#results {
+    min-height: 100px;
+    max-height: 200px;
+    max-width:800px;
+    overflow-y: scroll;
+    text-align: center;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.adherentselect {
+    text-align: center;
+}
+
+/*---------------------------------------------- SECTION GESTION ADH ----------------------------------------------*/
+
+#adherent {
+    padding-bottom: 15px;
+}
+
+.casegestion {
+    position: relative;
+    border-radius: 8px;
+    padding-top: 70px;;
+    padding-bottom: 25px;
+    border-color: #dde4ed;
+    border: solid 1px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#contenuemprunt {
+    padding: 0 15px 0 15px;
+}
+
+#contenuretour>select {
+    width: 50%;
+}
+
+.positiontitre {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+
+    border-color: #dde4ed;
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: solid 1px;
+
+    background-color: rgb(185, 172, 141);
+}
+
+.titre {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.btngestion {
+    max-width: 100px;
+    min-width: 100px;
+
+    margin: 2% 2% 2% 2%;
+    white-space: nowrap;
+}
+
+#labeladh {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.icon {
+    width: 50px;
+}
+
+.list {
+    font-weight: bold;
+}
+
+/*---------------------------------------------- SECTION EXEMPLAIRE ----------------------------------------------------*/
+
+#rechercheExemplaire {
+    text-align: center;
+}
+
+#rechercheExemplaire p {
+    display:inline;
+}
+
+#container-bd>div>div {
+    padding: 10px;
+}
+
+#container-bd p {
+    display:inline;
+}
+
+#th2 {
+    text-align: center;
+}
+
+#imgBD {
+    background-color: rgba(150, 133, 102, 0.445);
+    width: 250px;
+    height: 350px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#imageBD {
+    width: 100%;
+}
+
+#codeBD, #comments {
+    width: 100%;
+}
+
+#msgExemplaire{
+    color: brown;
+}
+
+#titreBD {
+    width: 100%;
+}
+
+
+/* --------------------------------------------- SECTION PAGE ACCUEIL ----------------------------------------*/
+/* SearchDiv */
+#searchDiv{
+    background-image: url('../image/banner_mob.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #c8bcac;
+    color: #202424;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    /* height: 200px; */
+
+    /* padding-top: 60px; */
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#search {
+    height: 30px;
+    width: 300px;
+    border-radius: 8px;
+    margin: 10px;
+    background-color: #c8bcac;;
+}
+
+/* NewItems */
+#newItems h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+#newItems img{
+    height: 180px;
+    width: 134px;
+    margin-bottom: 10px;
+}
+
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    background-color: #282424;
+    color : #8fb8bd;
+}
+#newItems button{
+    margin: 10px;
+}
+
+/*---------------------------------------------- SECTION PAGE CONNEXION ---------------------------------------*/
+/* SECTION */
+#connexion-section{
+    padding: 15px;
+    justify-content: center;
+}
+#connexion-content div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+#connexion-content input{
+    height: 20px;
+    background-color: rgba(153, 144, 129, 0.904);
+}
+#connexion-content label {
+    color: #c4bbab;
+}
+#btnConnexion{
+    display: flex;
+    align-items: center;
+}
+
+.mdp_oublie {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: thistle;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    box-shadow: unset;
+    text-shadow: unset;
+}
+
+.mdp_oublie:hover {
+    color: brown;
+    background: unset;
+	background-color: unset;
+}
+
+/* TITLE PAGE CONNEXION*/
+#connexion-title {
+    margin-top: 100px;
+    position: relative;
+    height: 250px;
+}
+#bubble-connexion-title {
+    position: absolute;
+    z-index: 1;
+    left: 50px;
+}
+#txt-connexion-title{
+    position: absolute;
+    z-index: 2;
+    top: 65px;
+    left: 120px;
+}
+#connexion-title img{
+    width: 300px;
+}
+@media screen and (width:320px){
+
+    /* TITLE PAGE CONNEXION*/
+    #bubble-connexion-title {
+        left: unset;
+    }
+    #txt-connexion-title{
+        left: 60px;
+    }
+    #connexion-title img{
+        width: 100%;
+    }
+
+}
+
+@media screen and (width:375px){
+    #txt-connexion-title {
+        top: 70px;
+        left: 95px;
+    }
+    #bubble-connexion-title {
+        left: 30px;
+    }
+}
+
+/*---------------------------------------------- SECTION PAGE MDP OUBLIE ---------------------------------------*/
+
+#mdp_oublie {
+    margin-top: 50px;
+}
