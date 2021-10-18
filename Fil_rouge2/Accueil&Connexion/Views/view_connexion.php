@@ -23,7 +23,7 @@
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
                         <div>
                             <label for="user-name">Nom d'utilisateur</label>
-                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant" value="9724349540">
+                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant" value="9724349539">
                         </div>
                         <div>
                             <label for="password">Mot de passe</label>
@@ -36,7 +36,6 @@
                             <button type="submit">Se connecter</button>
                         </div>
                     </form>
-
                 </div>
                 <div id="comment-connexion">
                     <p>Vous n'avez pas de compte chez nous ? Rendez-vous dans une de nos BDthèque pour ouvrir un compte et rejoignez l'aventure. Des centaines de BD vous attendent !</p>

@@ -1,6 +1,54 @@
 <?php 
-require_once('../Header&Footer/Models/connexionBDD.class.php');
+// require_once('../Header&Footer/Models/connexionBDD.class.php');
+require_once('BDMgrException.class.php');
+
 class BDMgr {
+
+    /**
+     * Get list of ISBN from table album in database bdtk
+     * @param void
+     * @return array
+     */
+    public static function getListISBN() : array {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT ISBN FROM album';
+        
+        $resPDOstt = $connexionPDO->query($sql);
+
+        $ISBN = $resPDOstt->fetchAll(PDO::FETCH_COLUMN); 
+
+        $resPDOstt->closeCursor();
+        connexionBDD::disconnect();
+
+        return $ISBN;
+    }
+
+    /**
+     * Search BD by ISBN in table album from database bdtk
+     * @param int $id
+     * @return object
+     */
+
+    public static function searchBDByISBN($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM album WHERE ISBN=:idVoulu';
+        $res = $connexionPDO->prepare($sql);
+        $res->execute(array(':idVoulu'=>$id));
+
+        // Lit le résultat
+        $album = $res->fetch(PDO::FETCH_ASSOC);
+
+        $album = new BD (...(array_values($album)));
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $album;
+    }
 
     /**
      * Ajoute une BD dans la liste des albums

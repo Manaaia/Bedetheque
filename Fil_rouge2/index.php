@@ -8,6 +8,8 @@ require_once 'Header&Footer/Models/connexionBDD.class.php';
 require_once 'CRUD_Adherent/Models/user.class.php';
 require_once 'CRUD_Adherent/Models/userMgr.class.php';
 require_once 'CRUD_Employe/Models/roleMgr.class.php';
+require_once 'CRUD_BD/Models/BD.class.php';
+require_once 'CRUD_BD/Models/BDMgr.class.php';
 require_once 'Accueil&Connexion/Models/model_connexion.inc.php';
 
 print_r($_POST);

@@ -14,7 +14,7 @@ class connexionBDD {
     * @return object
     */
     private static function connect() {
-        $file = '../Contenu/Parameters/parameters.ini';
+        $file = 'Contenu/Parameters/parameters.ini';
         if(file_exists($file)) {
             $aParam = parse_ini_file($file, true);
             extract($aParam['connexion bdd']);
