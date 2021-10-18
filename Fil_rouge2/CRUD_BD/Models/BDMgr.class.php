@@ -25,12 +25,14 @@ class BDMgr {
 
             $res->closeCursor();
             connexionBDD::disconnect();
+            return $nombre;
+
         } catch (PDOException $e) {
             if ($e->getCode() == 23000 || $e->getCode() == 45000) {
                 throw new BDMgrException("Erreur : Il semble que la BD correspondant à cet ISBN existe déjà");
             }
         }
-        return $nombre;
+        
     }
 
 
@@ -127,25 +129,38 @@ class BDMgr {
      * @return bool
      */
 
-    public static function updateBD($newTitle, $newAuthorID, $newSerieID, $newPrice, $newNumber, 
-                        $newImage, $newMiniImage, $newResume, $searchResultISBN) {
+    public static function updateBD($newTitle, $newNumber, $newPrice, $newResume, $newSerieID, $newAuthorID,  
+                        $newImage, $newMiniImage, $searchResultISBN) {
+        try {
+            $connexionPDO = connexionBDD::getConnexion();
+            $sql = "CALL prcUpdateBd(:titre, 
+                                    :numero, :prix, 
+                                :resum, :serie, :auteur, :imag, 
+                                :miniImage,
+                                :idVoulue)";
+            $res = $connexionPDO->prepare($sql);
+            $res->execute(array(':idVoulue'=>$searchResultISBN, ':titre'=>$newTitle, ':numero'=>$newNumber, 
+                                ':prix'=>$newPrice, ':resum'=>$newResume, ':serie'=>$newSerieID, ':auteur'=>$newAuthorID, 
+                                ':imag'=>$newImage, ':miniImage'=>$newMiniImage));
 
-        $connexionPDO = connexionBDD::getConnexion();
-        $sql = "UPDATE `album` SET `Titre_album` = :titre, 
-                            `Numero_album` = :numero, `Prix` = :prix, 
-                            `Resume` = :resum, `idSerie` = :serie, `idAuteur` = :auteur, `ID_image` = :imag, 
-                            `Id_mini_image` = :miniImage
-                            WHERE `ISBN` = :idVoulue";
-        $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':idVoulue'=>$searchResultISBN, ':titre'=>$newTitle, ':numero'=>$newNumber, 
-                            ':prix'=>$newPrice, ':resum'=>$newResume, ':serie'=>$newSerieID, ':auteur'=>$newAuthorID, 
-                            ':imag'=>$newImage, ':miniImage'=>$newMiniImage));
-         
-        // Ferme le curseur et la connexion
-        $res->closeCursor(); // ferme le curseur
-        connexionBDD::disconnect();     // ferme la connexion
+            $nombre = $res->rowCount();
+
+            // Ferme le curseur et la connexion
+            $res->closeCursor(); // ferme le curseur
+            connexionBDD::disconnect();     // ferme la connexion
+            
+            return $nombre;
+
+        } catch (PDOException $e) {
+            if ($e->getCode() == 45000) {
+                if(stristr($e->getMessage(), 'auteur') !== false) {
+                    throw new BDMgrException("Erreur : Il semble que l'auteur sélectionné ne soit pas dans la liste");
+                } elseif(stristr($e->getMessage(), 'série') !== false) {
+                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée ne soit pas dans la liste");
+                }
+            }
+        }
         
-        return true;
 
     }
 
