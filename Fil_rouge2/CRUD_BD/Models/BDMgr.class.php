@@ -47,9 +47,7 @@ class BDMgr {
 
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-            JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-            JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE :titreVoulu";
+        $sql = "CALL prcSearchTitle(:titreVoulu)";
         $res = $connexionPDO->prepare($sql);
         $res->execute(array(':titreVoulu'=>'%'.$titleSearch.'%'));
             $res->setFetchMode($choix);
