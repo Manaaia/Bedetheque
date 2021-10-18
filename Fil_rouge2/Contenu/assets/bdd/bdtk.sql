@@ -20,9 +20,54 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bdtk`
 --
-
+CREATE DATABASE IF NOT EXISTS `bdtk` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bdtk`;
 -- --------------------------------------------------------
+DELIMITER $$
+--
+-- Procédures
+--
+DROP PROCEDURE IF EXISTS `prcAddBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
+	INSERT INTO album VALUES (newisbn, title, num, price, newresume, image, miniImage, newserie, newauthor);
+END$$
 
+DROP PROCEDURE IF EXISTS `prcDeleteBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcDeleteBd` (IN `id` BIGINT(13))  BEGIN
+DELETE FROM album WHERE isbn = id;
+END$$
+
+DROP PROCEDURE IF EXISTS `prcSearchAuthor`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchAuthor` (IN `author` VARCHAR(50))  BEGIN
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE CONCAT('%', author, '%');
+END$$
+
+DROP PROCEDURE IF EXISTS `prcSearchSerie`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchSerie` (IN `serie` VARCHAR(100))  BEGIN
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE CONCAT('%', serie, '%');
+END$$
+
+DROP PROCEDURE IF EXISTS `prcSearchTitle`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchTitle` (IN `title` VARCHAR(100))  BEGIN 
+SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
+            JOIN `auteur` au ON al.idAuteur = au.idAuteur 
+            JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE CONCAT("%", title, "%");
+END$$
+
+DROP PROCEDURE IF EXISTS `prcUpdateBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcUpdateBd` (IN `title` VARCHAR(50), `num` CHAR(3), `price` DECIMAL(4,2), `newresume` VARCHAR(1500), `newserie` INT, `newauthor` INT, `image` VARCHAR(100), `miniImage` VARCHAR(100), `id` BIGINT(13))  BEGIN
+UPDATE `album` SET `Titre_album` = title, 
+                            `Numero_album` = num, `Prix` = price, 
+                            `Resume` = newresume, `idSerie` = newserie, `idAuteur` = newauthor, `ID_image` = image, 
+                            `Id_mini_image` = miniImage
+                            WHERE `ISBN` = id;
+END$$
+
+DELIMITER ;
 --
 -- Structure de la table `album`
 --
@@ -79,6 +124,62 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 (9791034709182, 'Vito la déveine', '43', '10.42', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Spirou et Fantasio-43-Vito la déveine.jpg', 'Spirou et Fantasio-43-Vito la déveine.jpg', 2, 6),
 (9791034709212, 'Machine qui rêve', '46', '23.50', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 2, 6);
 
+--
+-- Déclencheurs `album`
+--
+DROP TRIGGER IF EXISTS `avant_delete_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_delete_BD` BEFORE DELETE ON `album` FOR EACH ROW BEGIN
+ DECLARE finished INT DEFAULT 0;
+ DECLARE exp VARCHAR(17);
+ DECLARE exemplaires CURSOR FOR
+ 	SELECT id_exemplaire
+    FROM exemplaire 
+    where isbn = old.isbn;
+ DECLARE CONTINUE HANDLER 
+ FOR NOT FOUND SET finished = 1;
+ IF (OLD.isbn IN (SELECT isbn FROM exemplaire)) THEN
+	OPEN exemplaires;
+getExemplaire:LOOP
+    FETCH exemplaires into exp;
+    IF finished = 1 THEN 
+		LEAVE getExemplaire;
+	END IF;
+	IF (exp IN(SELECT id_exemplaire FROM emprunt) AND (SELECT date_retour from emprunt WHERE id_exemplaire = exp) IS NULL) THEN
+    	SIGNAL SQLSTATE '45000'
+    	SET MESSAGE_TEXT = "emprunt en cours",
+    	MYSQL_ERRNO = 2008;
+    END IF;
+END LOOP;
+CLOSE exemplaires;
+END IF;
+END$$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS `avant_insert_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_insert_BD` BEFORE INSERT ON `album` FOR EACH ROW BEGIN
+IF (NEW.isbn IN (SELECT isbn FROM album)) THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'ISBN déjà existant',
+    MYSQL_ERRNO = 2004;
+END IF;
+END$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `avant_update_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_update_BD` BEFORE UPDATE ON `album` FOR EACH ROW BEGIN
+IF (NEW.idAuteur NOT IN(SELECT idAuteur FROM auteur)) THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Auteur inexistant',
+    MYSQL_ERRNO = 2005;
+ELSEIF (NEW.idSerie NOT IN(SELECT idSerie FROM serie)) THEN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Série inexistante',
+    MYSQL_ERRNO = 2006;
+END IF;
+END$$
+DELIMITER ;
 -- --------------------------------------------------------
 
 --
@@ -516,6 +617,20 @@ INSERT INTO `exemplaire` (`ID_exemplaire`, `Date_entree_exemplaire`, `Commentair
 ('9791034709182_4', '2019-10-15', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 25, 0, 1, 9791034709182),
 ('9791034709212_1', '2007-05-28', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 11, 0, 0, 9791034709212);
 
+--
+-- Déclencheurs `exemplaire`
+--
+DROP TRIGGER IF EXISTS `avant_delete_exemplaire`;
+DELIMITER $$
+CREATE TRIGGER `avant_delete_exemplaire` BEFORE DELETE ON `exemplaire` FOR EACH ROW BEGIN
+	IF (OLD.id_exemplaire IN(SELECT id_exemplaire FROM emprunt) AND (SELECT date_retour from emprunt WHERE id_exemplaire = OLD.id_exemplaire) IS NULL) THEN
+    	SIGNAL SQLSTATE '45000'
+    	SET MESSAGE_TEXT = "emprunt en cours",
+    	MYSQL_ERRNO = 2008;
+    END IF;
+END$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -776,7 +891,7 @@ ALTER TABLE `emprunt`
 -- Contraintes pour la table `exemplaire`
 --
 ALTER TABLE `exemplaire`
-  ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`),
+  ADD CONSTRAINT `Exemplaire__Album3_FK` FOREIGN KEY (`ISBN`) REFERENCES `album` (`ISBN`) ON DELETE CASCADE,
   ADD CONSTRAINT `Exemplaire__Emplacement0_FK` FOREIGN KEY (`idEmplacement`) REFERENCES `emplacement` (`idEmplacement`),
   ADD CONSTRAINT `Exemplaire__Etat2_FK` FOREIGN KEY (`idEtat`) REFERENCES `etat` (`idEtat`);
 
