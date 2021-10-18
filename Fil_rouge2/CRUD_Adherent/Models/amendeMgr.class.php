@@ -1,9 +1,16 @@
 <?php 
 
+require_once('amendeMgrException.class.php');
+
 class AmendeMgr {
 
     // Getters
-    function getTarif($typeAmende) {
+    /**
+     * Get tarif by type of fine from table amendes in database bdtk
+     * @param int $typeAmende
+     * @return decimal
+     */
+    public static function getTarif($typeAmende) {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT Tarif_base FROM amendes WHERE ID_Amende=:typeVoulu';
@@ -12,7 +19,7 @@ class AmendeMgr {
 
         $result->execute(array(':typeVoulu'=>$typeAmende));
 
-        $tarif = $result->fetchAll();
+        $tarif = $result->fetch();
 
         $result->closeCursor();
         connexionBDD::disconnect();

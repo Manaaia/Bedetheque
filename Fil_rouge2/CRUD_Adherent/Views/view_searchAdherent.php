@@ -1,5 +1,5 @@
 
-<div class="container">
+    <div class="container">
         <fieldset class="form"><legend for="form">Rechercher un adhérent</legend>
             <?php if(isset($delMessage)) { ?>
             <p class="success">L'adhérent a bien été supprimé</p>
@@ -34,10 +34,6 @@
                 <?php } else { ?>
                 <p>Aucun résultat</p>
                 <?php } ?>
-            </div>
-            <div id="btns">
-                <button id="abandon">Abandonner</button>
-                <button id="submit" class="invisible">Valider</button>
             </div>
         </fieldset>
     </div>

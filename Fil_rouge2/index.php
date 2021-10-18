@@ -7,6 +7,7 @@
 require_once 'Header&Footer/Models/connexionBDD.class.php';
 require_once 'CRUD_Adherent/Models/user.class.php';
 require_once 'CRUD_Adherent/Models/userMgr.class.php';
+require_once 'CRUD_Employe/Models/roleMgr.class.php';
 require_once 'Accueil&Connexion/Models/model_connexion.inc.php';
 
 print_r($_POST);
@@ -60,6 +61,14 @@ switch ($type) {
         require 'Header&Footer/Views/view_head.php';
         require 'Header&Footer/index_header.php';
         require 'CRUD_Adherent/index_adherent.php';
+        require 'Header&Footer/Views/view_footer.php';
+
+        break;
+
+    case 'Employe' :
+        require 'Header&Footer/Views/view_head.php';
+        require 'Header&Footer/index_header.php';
+        require 'CRUD_Employe/index_employe.php';
         require 'Header&Footer/Views/view_footer.php';
 
         break;

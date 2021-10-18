@@ -63,7 +63,7 @@ class UserMgr {
      * @return object or
      * @return array of objects
      */
-    public static function getAdherentByName($name) {
+    public static function getAdherentsByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu AND id_role = 5 OR
@@ -91,11 +91,11 @@ class UserMgr {
      * @return object or
      * @return array of objects
      */
-    public static function getEmployeByName($name) {
+    public static function getEmployesByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu OR Prenom_user LIKE :nomVoulu AND
-         id_role <> 5';
+        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu AND id_role <> 5 
+        OR Prenom_user LIKE :nomVoulu AND id_role <> 5';
 
         $result = $connexionPDO->prepare($sql);
 

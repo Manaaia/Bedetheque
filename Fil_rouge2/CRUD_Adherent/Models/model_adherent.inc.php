@@ -100,7 +100,7 @@ function checkDateCo($dateStartCo) {
 */
 function getListAdherent($nom) {
     try {
-        $aUsers = UserMgr::getAdherentByName($nom);
+        $aUsers = UserMgr::getAdherentsByName($nom);
         return $aUsers;
     } catch (UserMgrException $e) {
         "Erreur :".$e->getMessage();

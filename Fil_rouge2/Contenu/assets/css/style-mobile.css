@@ -181,7 +181,7 @@ header div {
 
 #header-div button {
     max-width: 600px;
-    min-width: 160px;
+    /* min-width: 160px; */
     border-radius:2px;
     margin-right: 2px;
     background:linear-gradient(to bottom, #ebe7e1 5%, #c4bbab 100%);
@@ -202,8 +202,9 @@ header div {
 }
 
 #deconnexion {
-    max-width: 150px;
-    margin-right: 15px;
+    max-width: 88px;
+    /* margin-right: 15px; */
+    float: right;
 }
 
 #retour {
@@ -225,6 +226,7 @@ header img {
     display: flex;
     flex-direction: row;
     background: unset;
+    flex-wrap: wrap;
 }
 
 /* COMPTE */
@@ -238,8 +240,8 @@ header img {
     background: unset;
 }
 
-#compte>p {
-    font-size: 1.5em;
+#identifiant {
+    font-size: 1.3em;
     margin-bottom: 5px;
     text-align: center;
     color: #c4bbab;

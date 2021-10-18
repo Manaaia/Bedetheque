@@ -70,6 +70,7 @@
                 <div id="compte">
                     <p id="identification"></p>  
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+                        <p id="identifiant">Bonjour <?php echo $prenom." ".$nom?> !</p>
                         <input type="hidden" name="type" value="Accueil">
                         <button type="submit" id="deconnexion" name="action" value="deconnexion">Se déconnecter</button>
                     </form>
