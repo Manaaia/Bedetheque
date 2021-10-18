@@ -126,7 +126,7 @@ class BDMgr {
      * @param float $newPrice
      * @param string $newTitle, $newImage, $newMiniImage, $newResume
      * @param int $searchResultISBN
-     * @return bool
+     * @return int $nombre
      */
 
     public static function updateBD($newTitle, $newNumber, $newPrice, $newResume, $newSerieID, $newAuthorID,  
@@ -165,15 +165,34 @@ class BDMgr {
     }
 
 
-    // /**
-    //  * Supprime une BD de la liste des albums
-    //  * @param int $searchResultISBN
-    //  * @return bool
-    //  */
-    // function deleteBD($searchResultISBN) {
-    //     $sql = mysqli_query("DELETE * FROM `album` WHERE `ISBN` = $searchResultISBN");
-    //     return true;
-    // }
+    /**
+     * Supprime une BD de la liste des albums
+     * @param int $searchResultISBN
+     * @return int $nombre
+     */
+    public static function deleteBD($searchResultISBN) {
+        try {
+            $connexionPDO = connexionBDD::getConnexion();
+            $sql = "CALL prcDeleteBd(:idVoulue)";
+            $res = $connexionPDO->prepare($sql);
+            $res->execute(array(':idVoulue'=>$searchResultISBN));
+
+            $nombre = $res->rowCount();
+
+            // Ferme le curseur et la connexion
+            $res->closeCursor(); // ferme le curseur
+            connexionBDD::disconnect();     // ferme la connexion
+            
+            return $nombre;
+
+        } catch (PDOException $e) {
+            if ($e->getCode() == 45000) {
+                
+                throw new BDMgrException("Erreur : La BD selectionnée fait l'objet d'un emprunt en cours.");
+        
+            }
+        }
+    }
 }
 
 ?>

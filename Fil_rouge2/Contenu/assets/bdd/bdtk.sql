@@ -32,6 +32,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13),
 	INSERT INTO album VALUES (newisbn, title, num, price, newresume, image, miniImage, newserie, newauthor);
 END$$
 
+DROP PROCEDURE IF EXISTS `prcDeleteBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcDeleteBd` (IN `id` BIGINT(13))  BEGIN
+DELETE FROM album WHERE isbn = id;
+END$$
+
 DROP PROCEDURE IF EXISTS `prcSearchAuthor`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchAuthor` (IN `author` VARCHAR(50))  BEGIN
 SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
@@ -122,6 +127,35 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 --
 -- Déclencheurs `album`
 --
+DROP TRIGGER IF EXISTS `avant_delete_BD`;
+DELIMITER $$
+CREATE TRIGGER `avant_delete_BD` BEFORE DELETE ON `album` FOR EACH ROW BEGIN
+ DECLARE finished INT DEFAULT 0;
+ DECLARE exp VARCHAR(17);
+ DECLARE exemplaires CURSOR FOR
+ 	SELECT id_exemplaire
+    FROM exemplaire 
+    where isbn = old.isbn;
+ DECLARE CONTINUE HANDLER 
+ FOR NOT FOUND SET finished = 1;
+ IF (OLD.isbn IN (SELECT isbn FROM exemplaire)) THEN
+	OPEN exemplaires;
+getExemplaire:LOOP
+    FETCH exemplaires into exp;
+    IF finished = 1 THEN 
+		LEAVE getExemplaire;
+	END IF;
+	IF (exp IN(SELECT id_exemplaire FROM emprunt) AND (SELECT date_retour from emprunt WHERE id_exemplaire = exp) IS NULL) THEN
+    	SIGNAL SQLSTATE '45000'
+    	SET MESSAGE_TEXT = "emprunt en cours",
+    	MYSQL_ERRNO = 2008;
+    END IF;
+END LOOP;
+CLOSE exemplaires;
+END IF;
+END$$
+DELIMITER ;
+
 DROP TRIGGER IF EXISTS `avant_insert_BD`;
 DELIMITER $$
 CREATE TRIGGER `avant_insert_BD` BEFORE INSERT ON `album` FOR EACH ROW BEGIN
@@ -582,6 +616,20 @@ INSERT INTO `exemplaire` (`ID_exemplaire`, `Date_entree_exemplaire`, `Commentair
 ('9791034709182_3', '2017-07-04', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 22, 0, 1, 9791034709182),
 ('9791034709182_4', '2019-10-15', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 25, 0, 1, 9791034709182),
 ('9791034709212_1', '2007-05-28', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 11, 0, 0, 9791034709212);
+
+--
+-- Déclencheurs `exemplaire`
+--
+DROP TRIGGER IF EXISTS `avant_delete_exemplaire`;
+DELIMITER $$
+CREATE TRIGGER `avant_delete_exemplaire` BEFORE DELETE ON `exemplaire` FOR EACH ROW BEGIN
+	IF (OLD.id_exemplaire IN(SELECT id_exemplaire FROM emprunt) AND (SELECT date_retour from emprunt WHERE id_exemplaire = OLD.id_exemplaire) IS NULL) THEN
+    	SIGNAL SQLSTATE '45000'
+    	SET MESSAGE_TEXT = "emprunt en cours",
+    	MYSQL_ERRNO = 2008;
+    END IF;
+END$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

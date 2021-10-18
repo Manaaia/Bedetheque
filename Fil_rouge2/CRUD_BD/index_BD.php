@@ -15,11 +15,17 @@ try {
     "Blablabla, ils trouvent toujours la solution parce que c'est les zéros.", 1, 1, 3, 11);
     echo $bd1;
     echo "<br />";
-    // echo BDMgr::addNewBD($bd1);
+    echo BDMgr::addNewBD($bd1);
     echo "<br />"; 
     echo BDMgr::updateBD('Mort à Venise', '58', '4.02', 'My bad I dunno', 2, 62,  
     3, 3, 9780269887519);
     echo "<br />";
+    echo BDMgr::deleteBD(9780269887519);
+    echo "<br />";
+
+    echo BDMgr::deleteBD(9780312429621);
+
+
     
 } catch (BDException $e) {
     echo $e->getMessage();
