@@ -327,9 +327,14 @@ hr {
     max-height: 200px;
     max-width: 800px;
     overflow-y: scroll;
+    overflow-x: scroll;
     text-align: center;
     border: 1px solid black;
     margin: auto;
+}
+
+#resultats {
+    overflow-y: scroll;
 }
 
 .adherentselect {
@@ -513,7 +518,7 @@ hr {
 
 .card {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
     justify-content: center;

@@ -92,5 +92,6 @@ switch ($type) {
         require 'Header&Footer/Views/view_footer.php';
 
         break;
-    
+
 }
+    

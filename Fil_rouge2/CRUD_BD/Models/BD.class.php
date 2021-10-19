@@ -177,7 +177,7 @@ class BD {
      * @return void
      */
     private function setImage($idImage) {
-        if(preg_match("/^\S+(?:\s*\S)*\.jpg$/u", $idImage)) {
+        if(preg_match("/^\S+(?:\s*\S)*(?:\s)*\.jpg$/", $idImage)) {
             $this->idImage = $idImage;
         } else {
             throw new BDException ("Attention : l'id de l'image doit être un nom de fichier .jpg");
@@ -190,7 +190,7 @@ class BD {
      * @return void
      */
     private function setMiniImage($idMiniImage) {
-        if(preg_match("/^\S+(?:\s*\S)*\.jpg$/u", $idMiniImage)) {
+        if(preg_match("/^\S+(?:\s*\S)*(?:\s)*\.jpg$/u", $idMiniImage)) {
             $this->idMiniImage = $idMiniImage;
         } else {
             throw new BDException ("Attention : l'id de l'image doit être un nom de fichier .jpg");

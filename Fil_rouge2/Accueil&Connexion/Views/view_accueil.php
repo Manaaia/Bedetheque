@@ -2,28 +2,31 @@
         <container id="main">
             <div id="searchDiv">
                 <h1>Bienvenue au Centre Culturel des Marmusots</h1>
-                <form action="index.php" method="POST"></form>
+                <form action="index.php" method="POST">
                 <div>
-                    <input type="search" name="searchTitle" id="searchTitle"> <button id="searchBtn">Rechercher</button>
+                    <input type="search" name="searchTitle" id="searchTitle">
+                    <input type="hidden" name="type" value="BD">
+                    <input type="hidden" name="action" value="searchBD">
+                    <button type="submit" id="searchBtn">Rechercher</button>
                     
                 </div>
                 
                 <div>
-                    <input type="search" name="searchSerie" id="searchSerie"> <button id="searchBtn">Rechercher</button>
+                    <input type="search" name="searchSerie" id="searchSerie"> <button type="submit" id="searchBtn">Rechercher</button>
                     
                 </div>
                 
                 <div>
-                    <input type="search" name="searchAuthor" id="searchAuthor"> <button id="searchBtn">Rechercher</button>
+                    <input type="search" name="searchAuthor" id="searchAuthor"> <button type="submit" id="searchBtn">Rechercher</button>
                     
                 </div>
-                
+            </form>    
                 
             </div>
             <div id="newItems">
                 <h2 id="discover">Découvrir</h2>
                 <div id="cards">
-                    <?php foreach($aReco as $reco) { 
+                    <?php foreach($aReco as $reco) {
                     $album = BDMgr::searchBDByISBN($reco); ?>
                     <figure class="card">
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
@@ -38,3 +41,4 @@
                 </div>
             </div>
         </container>
+        <!-- <script src="Contenu/assets/script/searchBD.js"></script> -->
