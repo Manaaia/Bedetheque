@@ -9,4 +9,6 @@ if(isset($_POST["idAdherent"])) {
     $nom = $user->getNomUser();
 }
 
+$aBibli = bibliothequeMgr::getListBibli();
+
 require 'Views/view_emprunt&retour.php';
