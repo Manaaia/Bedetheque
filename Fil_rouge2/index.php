@@ -85,5 +85,12 @@ switch ($type) {
 
         break;
 
+    case 'BD' :
+        require 'Header&Footer/Views/view_head.php';
+        require 'Header&Footer/index_header.php';
+        require 'CRUD_BD/index_BD.php';
+        require 'Header&Footer/Views/view_footer.php';
+
+        break;
     
 }

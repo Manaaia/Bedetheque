@@ -2,11 +2,23 @@
         <container id="main">
             <div id="searchDiv">
                 <h1>Bienvenue au Centre Culturel des Marmusots</h1>
+                <form action="index.php" method="POST"></form>
                 <div>
-                    <input type="search" name="search" id="search">
+                    <input type="search" name="searchTitle" id="searchTitle"> <button id="searchBtn">Rechercher</button>
+                    
                 </div>
-
-                <button id="searchBtn">Rechercher</button>
+                
+                <div>
+                    <input type="search" name="searchSerie" id="searchSerie"> <button id="searchBtn">Rechercher</button>
+                    
+                </div>
+                
+                <div>
+                    <input type="search" name="searchAuthor" id="searchAuthor"> <button id="searchBtn">Rechercher</button>
+                    
+                </div>
+                
+                
             </div>
             <div id="newItems">
                 <h2 id="discover">Découvrir</h2>
