@@ -4,8 +4,25 @@ require_once 'Models/model_adherent.inc.php';
 
 switch ($action) {
     case 'addAdherent' :
-        if (isset( $_POST["nom"])) {
+        if (isset($_POST["nomAdherent"])) {
+            $nomAdherent = $_POST["nomAdherent"];
+            $prenomAdherent = $_POST["prenomAdherent"];
+            $mdp = $_POST["mdp"];
+            $adresse1 = $_POST["adresse1"];
+            $adresse2 = $_POST["adresse2"];
+            $cp = $_POST["cp"];
+            $ville = $_POST["ville"];
+            $dateCo = $_POST["dateCo"];
             $addMessage = addAdherent($_POST);
+        } else {
+            $nomAdherent = "";
+            $prenomAdherent = "";
+            $mdp = "";
+            $adresse1 = "";
+            $adresse2 = "";
+            $cp = "";
+            $ville = "";
+            $dateCo = "";
         }
         require 'Views/view_addAdherent.php';
         break;
@@ -13,6 +30,7 @@ switch ($action) {
     case 'searchAdherent' :
         if (isset($_POST["do"])) {
             $delMessage = deleteAdherent($_POST["idAdherent"]);
+            echo $delMessage;
         }
         if (isset($_POST["nomCherche"])) {
             $nomCherche = $_POST["nomCherche"];

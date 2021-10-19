@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 18 oct. 2021 à 18:24
+-- Généré le : mar. 19 oct. 2021 à 14:21
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -454,7 +454,7 @@ INSERT INTO `emplacement` (`idEmplacement`, `Code_emplacement`, `idBibli`) VALUE
 
 DROP TABLE IF EXISTS `emprunt`;
 CREATE TABLE IF NOT EXISTS `emprunt` (
-  `id_emprunt` int(6) NOT NULL,
+  `id_emprunt` int(6) NOT NULL AUTO_INCREMENT,
   `Date_emprunt` date NOT NULL,
   `Date_retour` date DEFAULT NULL,
   `id_user` bigint(10) UNSIGNED NOT NULL,
@@ -462,7 +462,7 @@ CREATE TABLE IF NOT EXISTS `emprunt` (
   PRIMARY KEY (`id_emprunt`),
   KEY `_Emprunt__User_FK` (`id_user`),
   KEY `Emprunt_Exemplaire_FK` (`ID_exemplaire`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `emprunt`
@@ -817,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `MDP` (`MDP`),
   KEY `_User__Role_FK` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=9724349540 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9724349548 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -825,16 +825,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user`, `Adresse_2_user`, `CP_user`, `Ville_user`, `Date_cotisation`, `id_role`) VALUES
 (0218924837, 'Drax', 'Guillaume', 'sYfT!3$9', '29, avenue de Cohen', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', '2020-09-29', 5),
-(0297380565, 'Goncalves', 'Vincent', '8A?mJv0!', 'Résidence Jean Moulin', 'rue Nicole Poulain', '76000', 'Rouen', NULL, 2),
 (0436342955, 'Ecu', 'Sandrine', '5$4Nr$Bx', '93, avenue Astrid Jacques', NULL, '14000', 'Caen', '2021-08-24', 5),
-(0624960766, 'Hebert', 'Jean', '$4?QcX2p', '6, chemin Marechal', NULL, '45816', 'Coulon', '2021-10-04', 5),
-(1336977764, 'Lupine', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', '', '14123', 'Fleury-sur-Orne', '2021-10-17', 5),
+(1336977764, 'Lupine', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', '', '14123', 'ifs', '2021-10-19', 5),
 (1526943621, 'Merlot', 'Isabelle', '0?N7Ch$e', 'Résidence Les Hauts-bois 2B', 'chemin Fernandez', '14200', 'Hérouville-Saint-Clair', '2021-07-10', 5),
 (1598771384, 'Villard', 'Augustin', 'Y5?j_0Cj', '44, rue du Vent', NULL, '14000', 'Caen', '2020-03-23', 5),
 (1781032377, 'Gouvier', 'Lucie', '1r!w$U1Q', '62, rue Pelletier', NULL, '14000', 'Caen', '2020-12-21', 5),
 (2529228893, 'Langlois', 'Mélodie', '5u4!OlF!', '41 boulevard Richemond', NULL, '14000', 'Caen', '2020-08-31', 5),
 (2926855475, 'Le Potier', 'Céline', 'K2v?$1Yc', '77, rue Grondin', NULL, '14123', 'Fleury-sur-Orne', NULL, 3),
-(3022260757, 'Papier', 'Amandine', '_1w8?nIR', '83, boulevard de Bertrand', NULL, '45816', 'Coulon', '2021-10-18', 5),
 (3060048688, 'Lebanc', 'Arnaud', 'Ae4z!0?D', '27, rue de Morin', NULL, '81856', 'Dupuis', NULL, 3),
 (3234631127, 'Malandrain', 'Justine', 'i6UIe1$!', '1 rue du Bengal', NULL, '14000', 'Caen', NULL, 3),
 (3378180016, 'Weiss', 'Henriette', 'Ze!?8uU7', 'Résidence des hirondelles, appartement 42', '21 rue Pierre Cassin', '14000', 'Caen', '2021-01-27', 5),
@@ -867,7 +864,12 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (9583161311, 'Yvetot', 'Pierre', 'Z_S!ms91', '40, rue Marchal', NULL, '45816', 'Coulon', NULL, 3),
 (9724349537, 'Libellule', 'Pauline', 'Q$27$bcV', '40, rue Fournier', NULL, '14000', 'Caen', '2021-02-13', 5),
 (9724349538, 'Menestrelle', 'Aurélie', '@J35u15dr0l3', '6 impasse de la cambrousse', '', '16852', 'Cambrousse', '2021-01-04', 5),
-(9724349539, 'Lepecheur', 'Clément', 'Gp3t3d3s0l3.', '4 rue des poissons', 'Résidence des Cannes', '14500', 'Vire', NULL, 3);
+(9724349539, 'Lepecheur', 'Clément', 'Gp3t3d3s0l3.', '4 rue des poissons', 'Résidence des Cannes', '14500', 'Vire', NULL, 3),
+(9724349540, 'Lagrimpe', 'Manon', '@Cand52kjdbzjke', '42 rue des champs', '', '14000', 'Caen', '2021-10-19', 5),
+(9724349541, 'Mimine', 'Amanda', '$peR5236d', '2 rue de Poik', NULL, '14500', 'Vire', '2021-05-22', 5),
+(9724349542, 'King', 'Fred', '$peR52rah', '7 avenue du Soleil', NULL, '14300', 'Gerrots', NULL, 1),
+(9724349543, 'Manon', 'ssgd', '$regex2Mille', 'vsdvqs', '', '15000', 'sdvsd', '2021-10-19', 5),
+(9724349547, 'Lagrimpe', 'Manon', '*CandyL1k3', '5 impasse de l\'herbe verte', '', '13250', 'Saint-Chamas', '2021-10-19', 5);
 
 --
 -- Contraintes pour les tables déchargées
@@ -905,7 +907,7 @@ ALTER TABLE `exemplaire`
 -- Contraintes pour la table `lettres`
 --
 ALTER TABLE `lettres`
-  ADD CONSTRAINT `Lettres__Emprunt_FK` FOREIGN KEY (`id_emprunt`) REFERENCES `emprunt` (`id_emprunt`);
+  ADD CONSTRAINT `FK_LETTRES_EMPRUNT` FOREIGN KEY (`id_emprunt`) REFERENCES `emprunt` (`id_emprunt`);
 
 --
 -- Contraintes pour la table `user`

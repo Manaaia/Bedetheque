@@ -1,9 +1,12 @@
 
     <div class="container">
         <fieldset class="form"><legend for="form">Rechercher un adhérent</legend>
-            <?php if(isset($delMessage)) { ?>
+            <?php if(isset($delMessage)) {
+                if($delMessage) { ?>
             <p class="success">L'adhérent a bien été supprimé</p>
-            <?php } ?>
+            <?php } else { ?>
+            <p class="alerte">Impossible de supprimer un adhérent avec emprunt</p>
+            <?php }} ?>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">    
                 <div class="recherche">
                     <div>

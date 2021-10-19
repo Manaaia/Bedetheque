@@ -173,7 +173,7 @@ class UserMgr {
                 $message = "Confirmation : l'utilisateur a bien été supprimé de la BDD.";
             }
         } catch(PDOException $e) {
-            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.");
+            throw new UserMgrException("Impossible de supprimer un utilisateur avec un emprunt.");
         } finally {
             $result->closeCursor();
             connexionBDD::disconnect();
