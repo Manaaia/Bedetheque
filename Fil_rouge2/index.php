@@ -10,8 +10,12 @@ require_once 'CRUD_Adherent/Models/userMgr.class.php';
 require_once 'CRUD_Employe/Models/roleMgr.class.php';
 require_once 'CRUD_BD/Models/BD.class.php';
 require_once 'CRUD_BD/Models/BDMgr.class.php';
+require_once 'CRUD_Exemplaire/Models/exemplaire.class.php';
+require_once 'CRUD_Exemplaire/Models/exemplaireMgr.class.php';
 require_once 'Emprunt&Retour/Models/bibliotheque.class.php';
 require_once 'Emprunt&Retour/Models/bibliothequeMgr.class.php';
+require_once 'Emprunt&Retour/Models/emprunt.class.php';
+require_once 'Emprunt&Retour/Models/empruntMgr.class.php';
 require_once 'Accueil&Connexion/Models/model_connexion.inc.php';
 
 print_r($_POST);

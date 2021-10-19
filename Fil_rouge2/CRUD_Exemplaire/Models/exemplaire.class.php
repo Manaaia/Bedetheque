@@ -56,7 +56,7 @@ class Exemplaire {
         if (preg_match("/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/",$dateEntree)) {
             $this->dateEntree = $dateEntree;
         } else {
-            throw new ExemplaireException ("La date d'entrée doit être au format date.");
+            throw new ExemplaireException ("La date doit êrte au format date 'yyyy-mm-dd'.");
         }
     }
 
@@ -93,27 +93,31 @@ class Exemplaire {
      * @return void
      */
     private function setIdEmplacement($idEmplacement) {
-        $connexionPDO = connexionBDD::getConnexion();
+        if($idEmplacement != null) {
+            $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT idEmplacement FROM emplacement';
+            $sql = 'SELECT idEmplacement FROM emplacement';
 
-        $result = $connexionPDO->prepare($sql);
+            $result = $connexionPDO->prepare($sql);
 
-        $result->execute();
+            $result->execute();
 
-        $idList = $result->fetchAll();
+            $idList = $result->fetchAll();
 
-        $result->closeCursor();
-        connexionBDD::disconnect();
+            $result->closeCursor();
+            connexionBDD::disconnect();
 
-        for ($i=0;$i<count($idList);$i++) {
-            if (in_array($idEmplacement,$idList[$i])) {
-                $this->idEmplacement = $idEmplacement;
+            for ($i=0;$i<count($idList);$i++) {
+                if (in_array($idEmplacement,$idList[$i])) {
+                    $this->idEmplacement = $idEmplacement;
+                }
             }
-        }
 
-        if (!$this->idEmplacement == $idEmplacement) {
-            throw new ExemplaireException ("Cet emplacement n'existe pas.");
+            if (!$this->idEmplacement == $idEmplacement) {
+                throw new ExemplaireException ("Cet emplacement n'existe pas.");
+            }
+        } else {
+            $this->idEmplacement = $idEmplacement;
         }
     }
 

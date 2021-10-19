@@ -4,8 +4,25 @@ require_once 'Models/model_employe.inc.php';
 
 switch ($action) {
     case 'addEmploye' :
-        if (isset( $_POST["nom"])) {
+        if (isset( $_POST["nomEmploye"])) {
+            $nomEmploye = $_POST["nomEmploye"];
+            $prenomEmploye = $_POST["prenomEmploye"];
+            $mdp = $_POST["mdp"];
+            $adresse1 = $_POST["adresse1"];
+            $adresse2 = $_POST["adresse2"];
+            $cp = $_POST["cp"];
+            $ville = $_POST["ville"];
+            $roleEmploye = $_POST["roleEmploye"];
             $addMessage = addEmploye($_POST);
+        } else {
+            $nomEmploye = "";
+            $prenomEmploye = "";
+            $mdp = "";
+            $adresse1 = "";
+            $adresse2 = "";
+            $cp = "";
+            $ville = "";
+            $roleEmploye = "";
         }
         require 'Views/view_addEmploye.php';
         break;
