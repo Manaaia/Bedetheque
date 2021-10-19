@@ -1,77 +1,59 @@
 <div class="container">
         <fieldset class="form"><legend for="form">Fiche BD</legend>
             <div id="rechercheExemplaire">
-                <p class="label">ISNB : </p>
+                <p class="label">ISNB : <?php echo $isbn; ?></p>
                 <p id="isbn"></p>
             </div>
             <hr>
             <div class="visible" id="container-bd" >
                 <div id="ajoutBD" class="visible" >
                     <div id="alertesaisie" class="alerte invisible"></div>
-                    <div>
-                        <p class="label">Code exemplaire :</p>
-                        <p id="codeBD"></p>
-                    </div>
-
-                    <br>
 
                     <div>
-                        <p class="label">Titre :</p>
+                        <p class="label">Titre : <?php echo $titreBD; ?></p>
                         <p id="titreBD">
                     </div>
 
                     <br/>
 
                     <div>
-                        <p class="label">Auteur :</p>
+                        <p class="label">Numéro d'album : <?php echo $numeroBD; ?></p>
+                        <p id="selectAuteur"></p>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <p class="label">Auteur : <?php echo $auteurBD; ?></p>
                         <p id="selectAuteur"></p>
                     </div>
 
                     <br/>
                                 
                     <div>
-                        <p class="label">Série :</p>
+                        <p class="label">Série : <?php echo $serieBD; ?></p>
                         <p id="selectSerie">
                         </p>
                     </div>
 
                     <br>
                     <div>
-                        <p class="label">État :</p>
+                        <p class="label">Résumé : <?php echo $resumeBD; ?></p>
                         <p id="etatBD">
                         </p>
                     </div>
 
                     <br>
                     <div>
-                        <p class="label">Bibliothèque :</p>
+                        <p class="label">Prix : <?php echo $prixBD; ?></p>
                         <p id="biblioExemplaire"></p>
                     </div>
                     <br>
-                    <div>
-                        <p class="label">Emplacement :</p>
-                        <p id="emplacementBD"></p>
-                    </div>
-                    <br>
-                    <div>
-                        <p class="label">Commentaires :</p>
-                        <p id="commentaireBD">Neque porro quisquam est qui dolorem ipsum quia dolor 
-                            sit amet, consectetur, adipisci velit...</p>
-                    </div>
-                    <br>
-                    <div>
-                        <p class="label">Résumé :</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
 
                     <br>
                 </div>
                 <div id="th2">
-                    <img id="imgBD">
+                    <img id="imgBD" src="Contenu/assets/image/albumsMini/<?php echo $couvBD; ?>">
                 </div>
             </div>
                 
