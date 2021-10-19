@@ -13,6 +13,10 @@
             </div>
             <hr>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
+            <?php if(isset($check)) {
+                if (!$check) { ?>
+                <p class="alerte">Emprunt impossible</p> 
+            <?php }} ?>
                 <div>
                     <p>Choisissez une bibliothèque</p>
                     <select name="bibli" required>
@@ -28,17 +32,17 @@
                             <h2 class="titre">Renseigner un emprunt</h2>
                         </div>
                         <div id="contenuemprunt">
-                        <?php if(!$checkEmprunt) { ?>
-                            <p id="alertemprunt"></p>
-                                <label>Code article 1</label><br/>
+                        <?php if(!$checkEmprunt) { 
+                            ?>
+                                <label>ISBN 1</label><br/>
                                 <input id="code1" name="code1" type="text" class="article list"/><br/>
                                 <!-- <button id="btn1" class="btngestion">Valider</button> -->
                                 <!-- <img id="icon1" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
-                                <label>Code article 2</label><br/>
+                                <label>ISBN 2</label><br/>
                                 <input id="code2" name="code2" type="text" class="article list"/><br/>
                                 <!-- <button id="btn2" class="btngestion">Valider</button> -->
                                 <!-- <img id="icon2" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
-                                <label>Code article 3</label><br/>
+                                <label>ISBN 3</label><br/>
                                 <input id="code3" name="code3" type="text" class="article list"/><br/>
                                 <!-- <button id="btn3" class="btngestion">Valider</button> -->
                                 <!-- <img id="icon3" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->

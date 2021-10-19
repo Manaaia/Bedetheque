@@ -121,7 +121,7 @@ class EmpruntMgr {
     public static function getCurrentEmpruntsByIdExemplaire($idExemplaire) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT * FROM emprunt WHERE ID_exemplaire = :idVoulu AND Date_retour = null';
+        $sql = 'SELECT * FROM emprunt WHERE ID_exemplaire = :idVoulu AND Date_retour IS NULL';
 
         $result = $connexionPDO->prepare($sql);
 
@@ -137,5 +137,38 @@ class EmpruntMgr {
         } else {
             throw new EmpruntMgrException("Aucun emprunt en cours pour cet exemplaire");
         }
+    }
+
+    /**
+     * Add emprunt from table emprunt in database bdtk
+     * @param object $emprunt
+     * @return string
+     */
+    public static function addEmprunt($emprunt) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $dateEmprunt = $emprunt->getDateEmprunt();
+        $idUser = $emprunt->getIdUser();
+        $idExemplaire = $emprunt->getIdExemplaire();
+
+        $sql = 'INSERT INTO emprunt (Date_emprunt, id_user, ID_exemplaire)
+        VALUES (:dateEVoulu,:idUVoulu,:idEVoulu)';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':dateEVoulu'=>$dateEmprunt,
+        ':idUVoulu'=>$idUser,':idEVoulu'=>$idExemplaire));
+
+        $count = $result->rowCount();
+        if ($count == 0) {
+            $message = "Lignes affectées : ".$count;
+        } else {
+            $message = "Confirmation : emprunt bien ajouté à la BDD.";
+        }
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        return $message;
     }
 }

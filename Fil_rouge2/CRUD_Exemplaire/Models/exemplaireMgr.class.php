@@ -165,4 +165,40 @@ class ExemplaireMgr {
             throw new ExemplaireMgrException("Aucun exemplaire avec cet état");
         }
     }
+
+    /**
+     * Get exemplaire(s) by etat from table exemplaire in database bdtk
+     * @param int $etat
+     * @return object or
+     * @return array of objects
+     */
+    public static function getExemplairesByISBNandBibli($isbn,$idBibli) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM exemplaire ex
+        JOIN emplacement em ON ex.idEmplacement = em.idEmplacement 
+        WHERE ex.ISBN = :isbnVoulu 
+        AND em.idBibli = :idVoulu';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':isbnVoulu'=>$isbn,':idVoulu'=>$idBibli));
+
+        $records = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        $exemplaires = array ();
+        foreach($records as $record) {
+            $exemplaire = new Exemplaire (...(array_values($record)));
+            $exemplaires[] = $exemplaire;
+        }      
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        if($exemplaires) {
+            return $exemplaires;
+        } else {
+            throw new ExemplaireMgrException("Aucun exemplaire avec cet isbn dans cette bibliothèque");
+        }
+    }
 }
