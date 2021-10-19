@@ -12,26 +12,36 @@
                 </form>
             </div>
             <hr>
-            <div id="gestionEmpruntRetour">
-                <div id="divemprunt" class="casegestion">
-                    <div id="divtitreemprunt" class="positiontitre">
-                        <h2 class="titre">Renseigner un emprunt</h2>
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
+                <div>
+                    <p>Choisissez une bibliothèque</p>
+                    <select name="bibli">
+                        <?php foreach($aBibli as $bibli) { ?>
+                            <option value="<?php echo $bibli->getIdBibli()?>"><?php echo $bibli->getNomBibli()?></option>
+                        <?php } ?>
+                    </select>
+                </div><br/><br/>
+                <div id="gestionEmpruntRetour">
+                    <div id="divemprunt" class="casegestion">
+                        <div id="divtitreemprunt" class="positiontitre">
+                            <h2 class="titre">Renseigner un emprunt</h2>
+                        </div>
+                        <div id="contenuemprunt">
+                            <!--Placeholder div emprunt-->
+                        </div>
                     </div>
-                    <div id="contenuemprunt">
-                        <!--Placeholder div emprunt-->
+                    <div id="divretour" class="casegestion">
+                        <div id = "divtitreretour" class="positiontitre">
+                            <h2 class="titre">Renseigner un retour</h2>
+                        </div>
+                        <div id="contenuretour">
+                            <!--Placeholder div retour-->
+                        </div>
                     </div>
                 </div>
-                <div id="divretour" class="casegestion">
-                    <div id = "divtitreretour" class="positiontitre">
-                        <h2 class="titre">Renseigner un retour</h2>
-                    </div>
-                    <div id="contenuretour">
-                        <!--Placeholder div retour-->
-                    </div>
-                </div>
-            </div>
-            <div id="btns">
-            <button id="submit">Enregistrer</button>
+                <div id="btns">
+                <button id="submit">Enregistrer</button>
+            </form>
             <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                 <input type="hidden" name="action" value="searchAdherent">
                 <input type="hidden" name="type" value="Adherent">
