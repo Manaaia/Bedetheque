@@ -107,9 +107,16 @@ function updateEmploye() {
 function deleteEmploye($id) {
     try {
         $check = UserMgr::delUser($id);
-        return $check;
+        if($check) {
+            $flag = true;
+        } else {
+            $flag = false;
+        }
     } catch (UserMgrException $e) {
         echo "Erreur :".$e->getMessage();
+        $flag = false;
+    } finally {
+        return $flag;
     }
 }
 
@@ -125,9 +132,9 @@ function addEmploye() {
         } else {
             $adresse2 = null;
         }
-        $user = new User (null, $_POST["nom"], $_POST["prenom"], $_POST["mdp"],
+        $user = new User (null, $_POST["nomEmploye"], $_POST["prenomEmploye"], $_POST["mdp"],
         $_POST["adresse1"], $adresse2, $_POST["cp"], $_POST["ville"], 
-        null,$_POST["role"]);
+        null,$_POST["roleEmploye"]);
     } catch (UserException $e) {
         echo "Erreur : ".$e->getMessage();
     }

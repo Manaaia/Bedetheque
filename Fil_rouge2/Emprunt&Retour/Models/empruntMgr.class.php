@@ -94,13 +94,13 @@ class EmpruntMgr {
     public static function getCurrentEmpruntsByUser($idUser) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT * FROM emprunt WHERE id_user = :idVoulu AND Date_retour = null';
+        $sql = 'SELECT * FROM emprunt WHERE id_user = :idVoulu AND Date_retour IS NULL';
 
         $result = $connexionPDO->prepare($sql);
 
         $result->execute(array(':idVoulu'=>$idUser));
 
-        $records = $result->fetchAll();
+        $records = $result->fetchAll(PDO::FETCH_ASSOC);
 
         $result->closeCursor();
         connexionBDD::disconnect();
