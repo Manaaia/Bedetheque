@@ -21,7 +21,7 @@ class Bibliotheque {
      * @return void
      */
     private function setIdBibli($idBibli) {
-        if (preg_match("/[0-9]{1,2}/",$idBibli)) {
+        if (preg_match("/[0-9]{1,2}/",$idBibli) || $idBibli == null) {
             $this->idBibli = $idBibli;
         } else {
             throw new BibliothequeException ("L'id de bibliotheque ne doit être composé que d'un ou deux chiffres.");
