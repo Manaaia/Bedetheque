@@ -28,7 +28,6 @@ switch ($action) {
             $isbn = $_POST["id"];
             $nomAuteur = $_POST["auteur"];
             $nomSerie = $_POST["serie"];
-            var_dump($isbn);
             $album = BDMgr::searchBDByISBN($isbn);
             $titreBD = $album->getTitreAlbum();
             $numeroBD = $album->getNumeroAlbum();
@@ -37,7 +36,34 @@ switch ($action) {
             $resumeBD = $album->getResume();
             $prixBD = $album->getPrix();
             $couvBD = $album->getImage();
-            
+            $exemplaires = ExemplaireMgr::getExemplairesByISBN($isbn);
+            $nbEmprunts = 0;
+            $dispos = [];
+            $lieux = [];
+            foreach ($exemplaires as $line_num => $exp) {
+                try {
+                   $nbEmprunts += count(EmpruntMgr::getCurrentEmpruntsByIdExemplaire($exp['ID_exemplaire']));
+                } catch (EmpruntMgrException $e) {
+                    $nbEmprunts--;
+                    $dispos[] = $exp['ID_exemplaire'];
+                }
+                
+            }
+            if($nbEmprunts < 0) {
+                $nbDispo = count($exemplaires);
+            } else {
+                $nbDispo = count($exemplaires) - ($nbEmprunts+1);
+            }
+            foreach ($dispos as $line_num => $expD) {
+                $idEmp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['idEmplacement'];
+                $emp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['code_emplacement'];
+                // var_dump($idEmp);
+                // var_dump($emp);
+                $bib = BibliothequeMgr::getBibliByEmplacement($idEmp)[0];
+                $lieux[] = $emp." : ".$bib;
+
+            }
+            // var_dump($lieux);
             require 'Views/view_displayBD.php';
         }
         else {

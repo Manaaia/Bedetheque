@@ -60,7 +60,8 @@
 
                     <br>
                     <div>
-                        <p class="label">Emplacements : <?php echo $emplacement." : ".$bibli; ?></p>
+                        <p class="label">Emplacements : <ul><?php foreach($lieux as $line_num => $line) {
+                            echo "<li>".$line."</li>"; } ?></ul></p>
                         <p id="expDispo"></p>
                     </div>
                     <br>

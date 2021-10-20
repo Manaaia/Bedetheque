@@ -56,4 +56,27 @@ class BibliothequeMgr {
 
         return $aBibli;
     }
+
+    public static function getBibliByEmplacement($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT DISTINCT Nom_bibli FROM bibliotheque b
+        JOIN emplacement em ON em.idBibli = b.idBibli
+        WHERE em.idEmplacement =:idVoulu';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':idVoulu'=>$id));
+
+        $labelBibli = $result->fetch();
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        if($labelBibli) {
+            return $labelBibli;
+        } else {
+            throw new BibliothequeMgrException("Bibliotheque inexistante.");
+        }
+    }
 }

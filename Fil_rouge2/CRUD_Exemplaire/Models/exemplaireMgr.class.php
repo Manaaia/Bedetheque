@@ -201,4 +201,41 @@ class ExemplaireMgr {
             throw new ExemplaireMgrException("Aucun exemplaire avec cet isbn dans cette bibliothèque");
         }
     }
+
+    public static function getExemplairesByISBN($isbn) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM exemplaire ex
+        WHERE ex.ISBN = :isbnVoulu AND Statut = 0';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':isbnVoulu'=>$isbn));
+
+        $records = $result->fetchAll(PDO::FETCH_ASSOC);      
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        return $records;
+    }
+
+    public static function getExemplaireEmplacement($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT DISTINCT ex.idEmplacement, code_emplacement FROM exemplaire ex
+        JOIN emplacement em ON ex.idEmplacement = em.idEmplacement
+        WHERE ex.id_exemplaire = :idVoulu';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':idVoulu'=>$id));
+
+        $records = $result->fetchAll(PDO::FETCH_ASSOC);      
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        return $records;
+    }
 }
