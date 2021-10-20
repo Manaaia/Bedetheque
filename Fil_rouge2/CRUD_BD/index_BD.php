@@ -31,9 +31,9 @@ switch ($action) {
             $numeroBD = $album->getNumeroAlbum();
             $serieBD = $album->getSerie();
             $auteurBD = $album->getAuteur();
-            $resume = $album->getResume();
-            $prix = $album->getPrix();
-            $couv = $album->getImage();
+            $resumeBD = $album->getResume();
+            $prixBD = $album->getPrix();
+            $couvBD = $album->getImage();
             require 'Views/view_displayBD.php';
         }
         else {

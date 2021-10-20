@@ -12,12 +12,18 @@
                 </div>
                 
                 <div>
-                    <input type="search" name="searchSerie" id="searchSerie"> <button type="submit" id="searchBtn">Rechercher</button>
+                    <input type="search" name="searchSerie" id="searchSerie"> 
+                    <input type="hidden" name="type" value="BD">
+                    <input type="hidden" name="action" value="searchBD">
+                    <button type="submit" id="searchBtn">Rechercher</button>
                     
                 </div>
                 
                 <div>
-                    <input type="search" name="searchAuthor" id="searchAuthor"> <button type="submit" id="searchBtn">Rechercher</button>
+                    <input type="search" name="searchAuthor" id="searchAuthor">
+                    <input type="hidden" name="type" value="BD">
+                    <input type="hidden" name="action" value="searchBD"> 
+                    <button type="submit" id="searchBtn">Rechercher</button>
                     
                 </div>
             </form>    
