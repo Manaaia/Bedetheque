@@ -59,15 +59,25 @@
                         <?php if(!$checkEmprunt) { ?>
                             <p>Aucun emprunt en cours</p>
                         <?php } else if ($checkEmprunt) { 
-                            foreach($aBD as $uneBD) {?>
-                            <p><?php echo $uneBD->getTitreAlbum()?></p><br/>
+                            for($i = 0; $i< count($aBD); $i++) {?>
+                            <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
                             <select name="etatBD">
-                                <option value="selectEtat">Modifier état</option>
-                                <option value="neuf">Neuf</option>
-                                <option value="abime">Abîmé</option>
+                                <?php if($aExemplaires[$i]->getIdEtat() == 0) { ?>
+                                <option value="0" selected><?php echo EtatMgr::getLabelEtat(0)?></option>
+                                <option value="1"><?php echo EtatMgr::getLabelEtat(1)?></option>
+                                <option value="2"><?php echo EtatMgr::getLabelEtat(2)?></option>
+                                <?php } else if ($aExemplaires[$i]->getIdEtat() == 1) { ?>
+                                <option value="0"><?php echo EtatMgr::getLabelEtat(0)?></option>
+                                <option value="1" selected><?php echo EtatMgr::getLabelEtat(1)?></option>
+                                <option value="2"><?php echo EtatMgr::getLabelEtat(2)?></option>
+                                <?php } else if ($aExemplaires[$i]->getIdEtat() == 2) { ?>
+                                <option value="0"><?php echo EtatMgr::getLabelEtat(0)?></option>
+                                <option value="1"><?php echo EtatMgr::getLabelEtat(1)?></option>
+                                <option value="2" selected><?php echo EtatMgr::getLabelEtat(2)?></option>
+                                <?php } ?>
                             </select><br/>
-                            <div><input type="radio" id="perdu" name="status"><label for="perdu">Perdu</label></div>
-                            <div><input type="radio" id="OK" name="status"checked><label for="ok">OK</label></div><br/><br/>
+                            <div><input type="radio" id="perdu" name="status" required><label for="perdu">Perdu</label></div>
+                            <div><input type="radio" id="OK" name="status"><label for="ok">OK</label></div><br/><br/>
                         <?php }} ?>
                         </div>
                     </div>

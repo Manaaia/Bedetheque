@@ -12,6 +12,7 @@ require_once 'CRUD_BD/Models/BD.class.php';
 require_once 'CRUD_BD/Models/BDMgr.class.php';
 require_once 'CRUD_Exemplaire/Models/exemplaire.class.php';
 require_once 'CRUD_Exemplaire/Models/exemplaireMgr.class.php';
+require_once 'CRUD_Exemplaire/Models/etatMgr.class.php';
 require_once 'Emprunt&Retour/Models/bibliotheque.class.php';
 require_once 'Emprunt&Retour/Models/bibliothequeMgr.class.php';
 require_once 'Emprunt&Retour/Models/emprunt.class.php';
