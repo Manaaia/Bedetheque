@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 19 oct. 2021 à 14:21
+-- Généré le : mer. 20 oct. 2021 à 08:37
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -457,19 +457,24 @@ CREATE TABLE IF NOT EXISTS `emprunt` (
   `id_emprunt` int(6) NOT NULL AUTO_INCREMENT,
   `Date_emprunt` date NOT NULL,
   `Date_retour` date DEFAULT NULL,
-  `id_user` bigint(10) UNSIGNED NOT NULL,
+  `id_user` bigint(10) UNSIGNED ZEROFILL NOT NULL,
   `ID_exemplaire` varchar(17) NOT NULL,
   PRIMARY KEY (`id_emprunt`),
   KEY `_Emprunt__User_FK` (`id_user`),
   KEY `Emprunt_Exemplaire_FK` (`ID_exemplaire`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `emprunt`
 --
 
 INSERT INTO `emprunt` (`id_emprunt`, `Date_emprunt`, `Date_retour`, `id_user`, `ID_exemplaire`) VALUES
-(1, '2021-09-17', NULL, 1336977764, '9780312429621_1');
+(1, '2021-09-17', NULL, 1336977764, '9780312429621_1'),
+(2, '2021-10-20', NULL, 4126127561, '9780312429621_2'),
+(3, '2021-10-20', NULL, 0436342955, '9791034709212_1'),
+(4, '2021-10-20', NULL, 0436342955, '9791034709182_1'),
+(5, '2021-10-20', NULL, 0436342955, '9791034709168_1'),
+(6, '2021-10-20', NULL, 0218924837, '9782354260354_5');
 
 -- --------------------------------------------------------
 
@@ -817,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `MDP` (`MDP`),
   KEY `_User__Role_FK` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=9724349548 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9724349549 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -829,9 +834,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (1336977764, 'Lupine', 'Amélie', '89$QIgt?', '22, impasse Gilles Bernard', '', '14123', 'ifs', '2021-10-19', 5),
 (1526943621, 'Merlot', 'Isabelle', '0?N7Ch$e', 'Résidence Les Hauts-bois 2B', 'chemin Fernandez', '14200', 'Hérouville-Saint-Clair', '2021-07-10', 5),
 (1598771384, 'Villard', 'Augustin', 'Y5?j_0Cj', '44, rue du Vent', NULL, '14000', 'Caen', '2020-03-23', 5),
-(1781032377, 'Gouvier', 'Lucie', '1r!w$U1Q', '62, rue Pelletier', NULL, '14000', 'Caen', '2020-12-21', 5),
 (2529228893, 'Langlois', 'Mélodie', '5u4!OlF!', '41 boulevard Richemond', NULL, '14000', 'Caen', '2020-08-31', 5),
-(2926855475, 'Le Potier', 'Céline', 'K2v?$1Yc', '77, rue Grondin', NULL, '14123', 'Fleury-sur-Orne', NULL, 3),
 (3060048688, 'Lebanc', 'Arnaud', 'Ae4z!0?D', '27, rue de Morin', NULL, '81856', 'Dupuis', NULL, 3),
 (3234631127, 'Malandrain', 'Justine', 'i6UIe1$!', '1 rue du Bengal', NULL, '14000', 'Caen', NULL, 3),
 (3378180016, 'Weiss', 'Henriette', 'Ze!?8uU7', 'Résidence des hirondelles, appartement 42', '21 rue Pierre Cassin', '14000', 'Caen', '2021-01-27', 5),
@@ -843,7 +846,7 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (4450752613, 'Djouadi', 'Ibrahim', '5Jk!?Ly4', '6 avenue Foch', NULL, '14280', 'Saint-Germain-la-Blanche-Herbe', NULL, 2),
 (5772151915, 'Le Gall', 'Arthur', 'i_E_Z2m7', '97, boulevard Gros', NULL, '73901', 'Legendreboeuf', '2021-10-03', 5),
 (5936989908, 'Lebrec', 'Thimothée', 'tS9v5!C_', '70, rue Devaux', NULL, '14000', 'Caen', '2021-03-28', 5),
-(5981680957, 'Kabec', 'Théo', 'C?y8xG3!', '16, rue Cujas', NULL, '45816', 'Coulon', NULL, 3),
+(5981680957, 'Kabeczerze', 'Théocrf', 'C?y8xG3!', '16, rue Cujasse', 'Résidence du style', '45000', 'CoulonNe', NULL, 1),
 (6213494418, 'Montembault', 'Louis', 'u8aAW?4?', '77, place Théophile Hamel', NULL, '14530', 'Luc-sur-Mer', '2021-08-23', 5),
 (6321447697, 'Querny', 'Maëlle', '60pw!?QK', '65, avenue Marie', NULL, '14280', 'Saint-Contest', '2021-01-29', 5),
 (6621960167, 'Leguerrec', 'Soizic', 'Y$Il7?7v', '18 rue Josselin', NULL, '56000', 'Vannes', NULL, 1),
@@ -869,7 +872,8 @@ INSERT INTO `user` (`id_user`, `Nom_user`, `Prenom_user`, `MDP`, `Adresse_1_user
 (9724349541, 'Mimine', 'Amanda', '$peR5236d', '2 rue de Poik', NULL, '14500', 'Vire', '2021-05-22', 5),
 (9724349542, 'King', 'Fred', '$peR52rah', '7 avenue du Soleil', NULL, '14300', 'Gerrots', NULL, 1),
 (9724349543, 'Manon', 'ssgd', '$regex2Mille', 'vsdvqs', '', '15000', 'sdvsd', '2021-10-19', 5),
-(9724349547, 'Lagrimpe', 'Manon', '*CandyL1k3', '5 impasse de l\'herbe verte', '', '13250', 'Saint-Chamas', '2021-10-19', 5);
+(9724349547, 'Lagrimpe', 'Manon', '*CandyL1k3', '5 impasse de l\'herbe verte', '', '13250', 'Saint-Chamas', '2021-10-19', 5),
+(9724349548, 'Vieux', 'Matthieu', '*Bonjour54', 'ejbzc,ndc', 'fbfg', '12452', 'ncnh', NULL, 1);
 
 --
 -- Contraintes pour les tables déchargées

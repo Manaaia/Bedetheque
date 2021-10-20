@@ -47,6 +47,23 @@ switch ($action) {
         $dateEndCo = afficheDateEndCo($dateCo);
         $interval = getInterval($dateEndCo);
         $checkDateCo = checkDateCo($dateCo);
+        $idUser = $user->getIdUser();
+        $checkEmprunt = checkEmpruntEnCours($idUser);
+        echo $checkEmprunt;
+
+        if ($checkEmprunt) {
+            $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idUser);
+            $aAlbums = array();
+            foreach($aEmprunt as $emprunt) {
+                $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
+                $aAlbums[] = $exemplaire->getISBN();
+            }
+            $aBD = array();
+            foreach($aAlbums as $album) {
+                $bd = BDMgr::searchBDByISBN($album);
+                $aBD[] = $bd;
+            }
+        }
         require 'Views/view_displayAdherent.php';
         break;
 
