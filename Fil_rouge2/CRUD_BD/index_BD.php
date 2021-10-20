@@ -109,6 +109,35 @@ switch ($action) {
             }
         }
         break;
+
+    case "modifyBD" :
+        if(isset($_POST["id"]) && !empty($_POST["id"])) {
+            try {
+
+                $isbn = $_POST["id"];
+                $nomAuteur = $_POST["auteur"];
+                $nomSerie = $_POST["serie"];
+                $album = BDMgr::searchBDByISBN($isbn);
+                $titreBD = $album->getTitreAlbum();
+                $numeroBD = $album->getNumeroAlbum();
+                $serieBD = $album->getSerie();
+                $auteurBD = $album->getAuteur();
+                $resumeBD = $album->getResume();
+                $prixBD = $album->getPrix();
+                $couvBD = $album->getImage();
+                $listAuthors = BDMgr::getListAuteurs();
+                require 'Views/view_modifyBD.php';
+            } catch (BDMgrException $e) {
+                $msg = $e->getMessage();
+                require 'Views/view_errorBD.php';
+            
+            }    
+     
+        }
+        else {
+            $action = "searchBD";
+        }
+        break;
 }
 // try {
 //     spl_autoload_register(function($classe) {

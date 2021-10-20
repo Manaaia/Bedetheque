@@ -246,6 +246,27 @@ class BDMgr {
             }
         }
     }
+
+    /**
+     * Recherche la liste des auteurs de toutes les BD
+     * @return array $tAuteurs
+     */
+    public static function getListAuteurs() {
+        $connexionPDO = connexionBDD::getConnexion();
+        $sql = "SELECT * FROM auteur";
+        $res = $connexionPDO->query($sql);
+        // Lit le résultat
+        $tAuteurs = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tAuteurs;
+    }
 }
+
+
 
 ?>
