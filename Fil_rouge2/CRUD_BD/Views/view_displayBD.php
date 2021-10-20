@@ -18,7 +18,7 @@
 
                     <div>
                         <p class="label">Numéro d'album : <?php echo $numeroBD; ?></p>
-                        <p id="selectAuteur"></p>
+                        <p id="numBD"></p>
                     </div>
 
                     <br/>
@@ -39,14 +39,14 @@
                     <br>
                     <div>
                         <p class="label">Résumé : <?php echo $resumeBD; ?></p>
-                        <p id="etatBD">
-                        </p>
+                        <p id="resumeBD"></p>
+                        
                     </div>
 
                     <br>
                     <div>
                         <p class="label">Prix : <?php echo $prixBD; ?></p>
-                        <p id="biblioExemplaire"></p>
+                        <p id="prixBD"></p>
                     </div>
                     <br>
 
@@ -59,7 +59,9 @@
                 
                 <div id="btns">
                     <button id="modifierBD">Modifier</button>
+                    <button id="supprimerBD">Supprimer</button>
                     <button id="ajouterExemplaire">Ajouter Exemplaire</button>
+
                 </div>
             </div> 
         </fieldset>        
