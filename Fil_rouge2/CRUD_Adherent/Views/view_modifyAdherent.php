@@ -47,6 +47,15 @@
                      <?php } ?>
                     </div>
                     <div>
+                        <h3 class="label">Emprunts en cours</h3>
+                        <?php if(!$checkEmprunt) { ?>
+                        <p>Aucun emprunt en cours</p>
+                        <?php } else if ($checkEmprunt) { 
+                        for($i = 0; $i< count($aBD); $i++) {?>
+                        <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
+                        <?php }} ?>
+                    </div>
+                    <div>
                         <h3 class="label invisible">Amendes</h3>
                         <p id="amende" class="invisible">Aucune amende en attente</p>
                     </div>

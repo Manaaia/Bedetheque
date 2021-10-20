@@ -49,7 +49,6 @@ switch ($action) {
         $checkDateCo = checkDateCo($dateCo);
         $idUser = $user->getIdUser();
         $checkEmprunt = checkEmpruntEnCours($idUser);
-        echo $checkEmprunt;
 
         if ($checkEmprunt) {
             $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idUser);
@@ -92,6 +91,21 @@ switch ($action) {
         $dateEndCo = afficheDateEndCo($dateCo);
         $interval = getInterval($dateEndCo);
         $checkDateCo = checkDateCo($dateCo);
+        $checkEmprunt = checkEmpruntEnCours($idAdherent);
+
+        if ($checkEmprunt) {
+            $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idAdherent);
+            $aAlbums = array();
+            foreach($aEmprunt as $emprunt) {
+                $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
+                $aAlbums[] = $exemplaire->getISBN();
+            }
+            $aBD = array();
+            foreach($aAlbums as $album) {
+                $bd = BDMgr::searchBDByISBN($album);
+                $aBD[] = $bd;
+            }
+        }
         require 'Views/view_modifyAdherent.php';
         break;
         
