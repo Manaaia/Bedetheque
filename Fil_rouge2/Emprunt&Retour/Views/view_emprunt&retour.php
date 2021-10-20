@@ -15,7 +15,8 @@
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
                 <div>
                 <?php if(!$checkDateCo) { ?>
-                <p class="alerte">Emprunt impossible : cotisation expirée</p> 
+                <p class="alerte">Emprunt impossible : cotisation expirée</p>
+                <!-- Test -->
                 <?php } else { ?>
                     <p>Choisissez une bibliothèque</p>
                     <select name="bibli" required>
