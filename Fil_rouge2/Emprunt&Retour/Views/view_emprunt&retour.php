@@ -21,9 +21,16 @@
                     <p>Choisissez une bibliothèque</p>
                     <select name="bibli" required>
                         <option value="">--Choisissez une bibliothèque--</option>
-                        <?php foreach($aBibli as $bibli) { ?>
+                        <?php foreach($aBibli as $bibli) {
+                            if(isset($idBibli)) {
+                                if($idBibli == $bibli->getIdBibli()) { ?>
+                        <option value="<?php echo $bibli->getIdBibli()?>" selected><?php echo $bibli->getNomBibli()?></option> 
+                            <?php } else { ?>
+                        <option value="<?php echo $bibli->getIdBibli()?>"><?php echo $bibli->getNomBibli()?></option> 
+                            <?php }
+                            } else { ?>   
                         <option value="<?php echo $bibli->getIdBibli()?>"><?php echo $bibli->getNomBibli()?></option>
-                        <?php } ?>
+                        <?php }} ?>
                     </select>
                 </div><br/><br/>
                 <div id="gestionEmpruntRetour">
@@ -32,20 +39,34 @@
                             <h2 class="titre">Renseigner un emprunt</h2>
                         </div>
                         <div id="contenuemprunt">
-                        <?php if(!$checkEmprunt) { 
-                            ?>
-                                <label>ISBN 1</label><br/>
-                                <input id="code1" name="code1" type="text" class="article list"/><br/>
-                                <!-- <button id="btn1" class="btngestion">Valider</button> -->
-                                <!-- <img id="icon1" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
-                                <label>ISBN 2</label><br/>
-                                <input id="code2" name="code2" type="text" class="article list"/><br/>
-                                <!-- <button id="btn2" class="btngestion">Valider</button> -->
-                                <!-- <img id="icon2" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
-                                <label>ISBN 3</label><br/>
-                                <input id="code3" name="code3" type="text" class="article list"/><br/>
-                                <!-- <button id="btn3" class="btngestion">Valider</button> -->
-                                <!-- <img id="icon3" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
+                        <?php if(!$checkEmprunt) { ?>
+                            <?php if(isset($message1)) { ?>
+                            <p class="alerte"><?php echo $message1 ?></p>
+                            <?php } else if(isset($messageSuccess1)) { ?>
+                            <p class="success"><?php echo $messageSuccess1 ?></p>
+                            <?php } ?>
+                            <label>ISBN 1</label><br/>
+                            <input id="code1" name="code1" type="text" class="article list" value="<?php echo $code1 ?>"/><br/>
+                            <!-- <button id="btn1" class="btngestion">Valider</button> -->
+                            <!-- <img id="icon1" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
+                            <?php if(isset($message2)) { ?>
+                            <p class="alerte"><?php echo $message2 ?></p>
+                            <?php } else if(isset($messageSuccess2)) { ?>
+                            <p class="success"><?php echo $messageSuccess2 ?></p>
+                            <?php } ?>
+                            <label>ISBN 2</label><br/>
+                            <input id="code2" name="code2" type="text" class="article list" value="<?php echo $code2 ?>"/><br/>
+                            <!-- <button id="btn2" class="btngestion">Valider</button> -->
+                            <!-- <img id="icon2" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
+                            <?php if(isset($message3)) { ?>
+                            <p class="alerte"><?php echo $message3 ?></p>
+                            <?php } else if(isset($messageSuccess3)) { ?>
+                            <p class="success"><?php echo $messageSuccess3 ?></p>
+                            <?php } ?>
+                            <label>ISBN 3</label><br/>
+                            <input id="code3" name="code3" type="text" class="article list" value="<?php echo $code3 ?>"/><br/>
+                            <!-- <button id="btn3" class="btngestion">Valider</button> -->
+                            <!-- <img id="icon3" class ="invisible icon" src="assets/image/icon_valider.png" alt="icon_valider"><br/><br/> -->
                             <?php } else if($checkEmprunt) {?>
                             <p>Impossible d'emprunter tant que l'emprunt en cours n'a pas été rendu</p>
                             <?php } ?>

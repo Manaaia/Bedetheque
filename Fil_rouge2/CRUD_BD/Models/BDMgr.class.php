@@ -40,7 +40,12 @@ class BDMgr {
         // Lit le résultat
         $album = $res->fetch(PDO::FETCH_ASSOC);
 
-        $album = new BD (...(array_values($album)));
+        if($album) {
+
+            $album = new BD (...(array_values($album)));
+        } else {
+            throw new BDMgrException("Acun album trouvé avec cet ISBN");
+        }
 
         // Ferme le curseur et la connexion
         $res->closeCursor(); // ferme le curseur

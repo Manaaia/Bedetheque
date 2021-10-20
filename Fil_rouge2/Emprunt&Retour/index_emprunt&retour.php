@@ -28,57 +28,93 @@ if ($checkEmprunt) {
     }
 }
 
-if(isset($_POST["code1"])) {
+if(isset($_POST["bibli"])) {
+    $idBibli = $_POST["bibli"];
+}
+
+if(isset($_POST["code1"]) && $_POST["code1"] != "") {
     // for ($i = 1; $i < 4 ; $i++) {
         $code1 = $_POST["code1"];
-        $idBibli = $_POST["bibli"];
-        if($code1) {
-            $check1 = checkEmpruntPossible($code1,$idBibli);
-            if ($check1) {
-                $exemplaire = getExemplaire($code1,$idBibli);
-                
-                $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
-                echo $checkEmpruntOK;
+        $checkSyntaxe1 = checkSyntaxe($code1);
+        if(!$checkSyntaxe1) {
+            $message1 = "Syntaxe inccorecte : L'ISBN est un code à 13 chiffres";
+        } else {
+            $checkIfExists = checkIfExists($code1);
+            if(!$checkIfExists) {
+                $message1 = "Aucun album trouvé avec cet ISBN";
             } else {
-                $message = getMessage($code1,$idBibli);
-                echo $message;
+                $check1 = checkEmpruntPossible($code1,$idBibli);
+                if (!$check1) {
+                    $message1 = "Album n'appartenant pas à cette bibliothèque";
+                } else {
+                    $aExemplaires = ExemplaireMgr::getExemplairesByISBNandBibli($code1,$idBibli);
+                    $checkAvailability = false;
+                    for ($i = 0; $i < count($aExemplaires); $i++) {
+                        $checkAvailability = checkAvailability($aExemplaires[$i]);
+
+                        if($checkAvailability == true) {
+                            break;
+                        }
+                    }
+                    if(!$checkAvailability) {
+                        $message1 = "Aucun exemplaire de cet album actuellement disponible";
+                    } else {
+                        $exemplaire = getExemplaire($code1,$idBibli);
+                        $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
+                        if(!$checkEmpruntOK) {
+                            $message = "Erreur : l'emprunt n'a pas pu être enregistré.";
+                        } else {
+                            $messageSuccess1 = "Emprunt bien enregistré";
+                        }
+                    }
+                }
             }
         }
     // }
+} else {
+    $code1 = "";
 }
 
-if(isset($_POST["code2"])) {
+if(isset($_POST["code2"]) && $_POST["code2"] != "") {
     $code2 = $_POST["code2"];
-    $idBibli = $_POST["bibli"];
-    if($code2) {
-        $check2 = checkEmpruntPossible($code2,$idBibli);
-        if ($check2) {
-            $exemplaire = getExemplaire($code2,$idBibli);
-            
-            $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
-            echo $checkEmpruntOK;
-        } else {
-            $message = getMessage($code2,$idBibli);
-            echo $message;
+    $checkSyntaxe2 = checkSyntaxe($code2);
+    if(!$checkSyntaxe2) {
+        $message2 = "Syntaxe inccorecte : L'ISBN est un code à 13 chiffres";
+    } else {
+        if($code2) {
+            $check2 = checkEmpruntPossible($code2,$idBibli);
+            if ($check2) {
+                $exemplaire = getExemplaire($code2,$idBibli);
+                
+                $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
+            } else {
+                $message2 = getMessage($code2,$idBibli);
+            }
         }
     }
+} else {
+    $code2 = "";
 }
 
-if(isset($_POST["code3"])) {
+if(isset($_POST["code3"]) && $_POST["code3"] != "") {
     $code3 = $_POST["code3"];
-    $idBibli = $_POST["bibli"];
-    if($code3) {
-        $check3 = checkEmpruntPossible($code3,$idBibli);
-        if ($check3) {
-            $exemplaire = getExemplaire($code3,$idBibli);
-            
-            $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
-            echo $checkEmpruntOK;
-        } else {
-            $message = getMessage($code3,$idBibli);
-            echo $message;
+    $checkSyntaxe3 = checkSyntaxe($code3);
+    if(!$checkSyntaxe3) {
+        $message3 = "Syntaxe inccorecte : L'ISBN est un code à 13 chiffres";
+    } else {
+        if($code3) {
+            $check3 = checkEmpruntPossible($code3,$idBibli);
+            if ($check3) {
+                $exemplaire = getExemplaire($code3,$idBibli);
+                
+                $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
+            } else {
+                $message3 = getMessage($code3,$idBibli);
+            }
         }
     }
+} else {
+    $code3 = "";
 }
 
 require 'Views/view_emprunt&retour.php';

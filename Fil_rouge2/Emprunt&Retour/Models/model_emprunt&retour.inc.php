@@ -19,24 +19,47 @@ function checkEmpruntEnCours($idUser) {
 }
 
 /**
+ * Vérifie la syntaxe de l'input
+ * @param string $code
+ * @return bool
+ */
+function checkSyntaxe($code) {
+    if(preg_match("/^[0-9]{13}$/", $code)) {
+        $flag = true;
+    } else {
+        $flag = false;
+    }
+    return $flag;
+}
+
+/**
+ * Vérifie la syntaxe de l'input
+ * @param string $code
+ * @return bool
+ */
+function checkIfExists($code) {
+    try {
+        BDMgr::searchBDByISBN($code);
+        $flag = true;
+    } catch (BDMgrException $e) {
+        $flag = false;
+    } finally {
+        return $flag;
+    }
+}
+
+/**
  * Vérifie si des exemplaires de l'album demandé sont disponibles dans la bibliothèque demandée
  * @param int $ISBN
  * @param int $idBibli
  * @return bool
  */
 function checkEmpruntPossible($ISBN,$idBibli) {
-    $flag = false;
     try {
-        $aExemplaires = ExemplaireMgr::getExemplairesByISBNandBibli($ISBN,$idBibli);
-        for ($i = 0; $i < count($aExemplaires); $i++) {
-            $flag = checkAvailability($aExemplaires[$i]);
-
-            if($flag == true) {
-                break;
-            }
-        }
+        ExemplaireMgr::getExemplairesByISBNandBibli($ISBN,$idBibli);
+        $flag = true;
     } catch (ExemplaireMgrException $e) {
-        echo $e;
+        $flag = false;
     } finally {
         return $flag;
     }
@@ -118,9 +141,9 @@ function addEmprunt($exemplaire,$idAdherent) {
     $today = $today->format('Y-m-d');
 
     try {
-    $emprunt = new Emprunt (null, $today,null, $idAdherent, $idExemplaire);
+        $emprunt = new Emprunt (null, $today,null, $idAdherent, $idExemplaire);
     } catch (EmpruntException $e) {
-        echo $e;
+        $flag = false;
     }
 
     if(isset($emprunt)) {
@@ -131,6 +154,9 @@ function addEmprunt($exemplaire,$idAdherent) {
             }
         } catch (EmpruntMgrException $eMgr) {
             echo "Erreur : ".$eMgr->getMessage();
+            $flag = false;
+        } finally {
+            return $flag;
         }
     } else {
         return $flag = false;
