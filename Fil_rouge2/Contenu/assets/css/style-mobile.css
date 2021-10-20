@@ -48,6 +48,13 @@ h1 {
     text-align: center;
 }
 
+#confirmDel button {
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+}
+
 #discover,
 #comment-connexion {
     color: #c4bbab;

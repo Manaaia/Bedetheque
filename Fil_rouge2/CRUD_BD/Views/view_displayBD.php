@@ -2,6 +2,8 @@
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Fiche BD</legend>
             <div id="rechercheExemplaire">
+                <input type="hidden" name="type" value="BD">
+                <input type="hidden" name="id" value="<?php echo $isbn; ?>">
                 <p class="label">ISNB : <?php echo $isbn; ?></p>
                 <p id="isbn"></p>
             </div>
@@ -17,7 +19,7 @@
 
                     <br/>
 
-                    <div>
+                    <div>                    
                         <p class="label">Numéro d'album : <?php echo $numeroBD; ?></p>
                         <p id="numBD"></p>
                     </div>
@@ -25,6 +27,7 @@
                     <br/>
 
                     <div>
+                        <input type="hidden" name="auteur" value="<?php echo $nomAuteur; ?>">
                         <p class="label">Auteur : <?php echo $auteurBD." : ".$nomAuteur; ?></p>
                         <p id="selectAuteur"></p>
                     </div>
@@ -32,6 +35,7 @@
                     <br/>
                                 
                     <div>
+                        <input type="hidden" name="serie" value="<?php echo $nomSerie; ?>">
                         <p class="label">Série : <?php echo $serieBD." : ".$nomSerie; ?></p>
                         <p id="selectSerie">
                         </p>

@@ -44,7 +44,7 @@ class BDMgr {
 
             $album = new BD (...(array_values($album)));
         } else {
-            throw new BDMgrException("Acun album trouvé avec cet ISBN");
+            throw new BDMgrException("Aucun album trouvé avec cet ISBN");
         }
 
         // Ferme le curseur et la connexion

@@ -85,6 +85,13 @@
         white-space: nowrap;
         text-overflow: "[...]";
     }
+    #confirmDel {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
     #cards {
         display: flex;
         flex-wrap: wrap;

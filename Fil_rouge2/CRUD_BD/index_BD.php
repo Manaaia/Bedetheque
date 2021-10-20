@@ -25,51 +25,90 @@ switch ($action) {
 
     case "displayBD" :
         if(isset($_POST["id"]) && !empty($_POST["id"])) {
-            $isbn = $_POST["id"];
-            $nomAuteur = $_POST["auteur"];
-            $nomSerie = $_POST["serie"];
-            $album = BDMgr::searchBDByISBN($isbn);
-            $titreBD = $album->getTitreAlbum();
-            $numeroBD = $album->getNumeroAlbum();
-            $serieBD = $album->getSerie();
-            $auteurBD = $album->getAuteur();
-            $resumeBD = $album->getResume();
-            $prixBD = $album->getPrix();
-            $couvBD = $album->getImage();
-            $exemplaires = ExemplaireMgr::getExemplairesByISBN($isbn);
-            $nbEmprunts = 0;
-            $dispos = [];
-            $lieux = [];
-            foreach ($exemplaires as $line_num => $exp) {
-                try {
-                   $nbEmprunts += count(EmpruntMgr::getCurrentEmpruntsByIdExemplaire($exp['ID_exemplaire']));
-                } catch (EmpruntMgrException $e) {
-                    $nbEmprunts--;
-                    $dispos[] = $exp['ID_exemplaire'];
-                }
-                
-            }
-            if($nbEmprunts < 0) {
-                $nbDispo = count($exemplaires);
-            } else {
-                $nbDispo = count($exemplaires) - ($nbEmprunts+1);
-            }
-            foreach ($dispos as $line_num => $expD) {
-                $idEmp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['idEmplacement'];
-                $emp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['code_emplacement'];
-                // var_dump($idEmp);
-                // var_dump($emp);
-                $bib = BibliothequeMgr::getBibliByEmplacement($idEmp)[0];
-                $lieux[] = $emp." : ".$bib;
+            try {
 
+                $isbn = $_POST["id"];
+                $nomAuteur = $_POST["auteur"];
+                $nomSerie = $_POST["serie"];
+                $album = BDMgr::searchBDByISBN($isbn);
+                $titreBD = $album->getTitreAlbum();
+                $numeroBD = $album->getNumeroAlbum();
+                $serieBD = $album->getSerie();
+                $auteurBD = $album->getAuteur();
+                $resumeBD = $album->getResume();
+                $prixBD = $album->getPrix();
+                $couvBD = $album->getImage();
+                $exemplaires = ExemplaireMgr::getExemplairesByISBN($isbn);
+                $nbEmprunts = 0;
+                $dispos = [];
+                $lieux = [];
+                foreach ($exemplaires as $line_num => $exp) {
+                    try {
+                    $nbEmprunts += count(EmpruntMgr::getCurrentEmpruntsByIdExemplaire($exp['ID_exemplaire']));
+                    } catch (EmpruntMgrException $e) {
+                        $nbEmprunts--;
+                        $dispos[] = $exp['ID_exemplaire'];
+                    }
+                    
+                }
+                if($nbEmprunts < 0) {
+                    $nbDispo = count($exemplaires);
+                } else {
+                    $nbDispo = count($exemplaires) - ($nbEmprunts+1);
+                }
+                // var_dump($nbDispo);
+                // var_dump($dispos);
+                foreach ($dispos as $line_num => $expD) {
+                    if(!empty(ExemplaireMgr::getExemplaireEmplacement($expD))) {
+                        $idEmp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['idEmplacement'];
+                        $emp = ExemplaireMgr::getExemplaireEmplacement($expD)[0]['code_emplacement'];
+                        // var_dump($idEmp);
+                        // var_dump($emp);
+                        $bib = BibliothequeMgr::getBibliByEmplacement($idEmp)[0];
+                        $lieux[] = $emp." : ".$bib;
+                    } else {
+                        $lieux[] = "Non renseigné";
+                    } 
+                    
+
+                }
+                require 'Views/view_displayBD.php';
+            } catch (BDMgrException $e) {
+                $msg = $e->getMessage();
+                require 'Views/view_errorBD.php';
             }
             // var_dump($lieux);
-            require 'Views/view_displayBD.php';
+            
         }
         else {
             $action = "searchBD";
         }
-        break; 
+        break;
+
+    case "deleteBD" :
+        if(isset($_POST["id"]) && !empty($_POST["id"])) {
+            $isbn = $_POST["id"];
+            $nomAuteur = $_POST["auteur"];
+            $nomSerie = $_POST["serie"];
+            require 'Views/view_deleteBD.php';
+        }
+        else {
+            $action = "searchBD";
+        }
+        break;
+    case "confirmDeleteBD" :
+        if(isset($_POST["id"]) && !empty($_POST["id"])) {
+            $isbn = $_POST["id"];
+            try {
+                BDMgr::deleteBD($isbn);
+                $msg = "La BD ".$isbn." a bien été supprimée";
+                require 'Views/view_deleteBD.php';
+            } catch (BDMgrException $e) {
+                $msg = "Cette BD fait l'objet d'un emprunt en cours et ne peut être supprimée.";
+                require 'Views/view_deleteBD.php';
+            }
+        }
+        break;
 }
 // try {
 //     spl_autoload_register(function($classe) {
