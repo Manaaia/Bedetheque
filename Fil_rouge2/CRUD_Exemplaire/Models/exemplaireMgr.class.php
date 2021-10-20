@@ -177,7 +177,7 @@ class ExemplaireMgr {
 
         $sql = 'SELECT * FROM exemplaire ex
         JOIN emplacement em ON ex.idEmplacement = em.idEmplacement 
-        WHERE ex.ISBN = :isbnVoulu 
+        WHERE ex.ISBN = :isbnVoulu AND Statut = 0
         AND em.idBibli = :idVoulu';
 
         $result = $connexionPDO->prepare($sql);

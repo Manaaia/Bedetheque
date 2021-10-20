@@ -227,19 +227,20 @@ class UserMgr {
         $cp = $user->getCpUser();
         $ville = $user->getVilleUser();
         $dateCot = $user->getDateCot();
+        $role = $user->getIdRole();
 
         $sql = 'UPDATE user 
         SET Nom_user = :nomVoulu, Prenom_user = :prenomVoulu,
         Adresse_1_user = :adresse1Voulu, Adresse_2_user = :adresse2Voulu,
         CP_user = :cpVoulu, Ville_user = :villeVoulu,
-        Date_cotisation = :dateVoulu 
+        Date_cotisation = :dateVoulu, id_role = :roleVoulu
         WHERE id_user = :idVoulu';
         $result = $connexionPDO->prepare($sql);
 
         try {
             $result->execute(array(':idVoulu'=>$id_user,':nomVoulu'=>$nom,
             ':prenomVoulu'=>$prenom,':adresse1Voulu'=>$adresse1,':adresse2Voulu'=>$adresse2,
-            ':cpVoulu'=>$cp,':villeVoulu'=>$ville,'dateVoulu'=>$dateCot));
+            ':cpVoulu'=>$cp,':villeVoulu'=>$ville,'dateVoulu'=>$dateCot,':roleVoulu'=>$role));
             $count = $result->rowCount();
             if ($count == 0) {
                 $message = "Lignes affectées : ".$count;

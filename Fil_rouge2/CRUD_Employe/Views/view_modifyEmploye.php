@@ -37,9 +37,9 @@
                     </div>
                     <div>
                         <h3 class="label">Poste occupé</h3>
-                        <label for="role">Poste occupé (*)</label><br/>
+                        <label for="newRole">Poste occupé (*)</label><br/>
                         <p>
-                            <select name="role">
+                            <select name="newRole">
                                 <?php if($role == 1) { ?>
                                 <option value="1" selected><?php echo RoleMgr::getLabelRole(1) ?></option>
                                 <option value="2"><?php echo RoleMgr::getLabelRole(2) ?></option>

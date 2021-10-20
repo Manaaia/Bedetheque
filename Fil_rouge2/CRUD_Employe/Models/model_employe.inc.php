@@ -82,6 +82,7 @@ function updateEmploye() {
         }
         $user->setCpUser($_POST["newCp"]);
         $user->setVilleUser($_POST["newVille"]);
+        $user->setIdRole($_POST["newRole"]);
     } catch (UserException $e) {
         echo "Erreur : ".$e->getMessage();
         return $flag = false;

@@ -50,7 +50,7 @@ function checkEmpruntPossible($ISBN,$idBibli) {
 function checkAvailability($exemplaire) {
     $idExemplaire = $exemplaire->getIdExemplaire();
     try {
-        $check = EmpruntMgr::getCurrentEmpruntsByIdExemplaire($idExemplaire);
+        EmpruntMgr::getCurrentEmpruntsByIdExemplaire($idExemplaire);
         $flag = false;
     } catch (EmpruntMgrException $e) {
         $flag = true;
