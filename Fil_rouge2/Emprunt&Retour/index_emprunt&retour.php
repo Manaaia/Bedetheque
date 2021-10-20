@@ -1,12 +1,15 @@
 <?php
 
 require_once 'Models/model_emprunt&retour.inc.php';
+require_once 'CRUD_Adherent/Models/model_adherent.inc.php';
 
 if(isset($_POST["idAdherent"])) {
     $idAdherent = $_POST["idAdherent"];
     $adherent = UserMgr::getUserById($idAdherent);
     $prenomAdherent = $adherent->getPrenomUser();
     $nomAdherent = $adherent->getNomUser();
+    $dateCo = $adherent->getDateCot();
+    $checkDateCo = checkDateCo($dateCo);
 }
 
 $aBibli = bibliothequeMgr::getListBibli();
@@ -81,14 +84,34 @@ if(isset($_POST["code2"]) && $_POST["code2"] != "") {
     if(!$checkSyntaxe2) {
         $message2 = "Syntaxe inccorecte : L'ISBN est un code à 13 chiffres";
     } else {
-        if($code2) {
+        $checkIfExists2 = checkIfExists($code2);
+        if(!$checkIfExists2) {
+            $message2 = "Aucun album trouvé avec cet ISBN";
+        } else {
             $check2 = checkEmpruntPossible($code2,$idBibli);
-            if ($check2) {
-                $exemplaire = getExemplaire($code2,$idBibli);
-                
-                $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
+            if (!$check2) {
+                $message2 = "Album n'appartenant pas à cette bibliothèque";
             } else {
-                $message2 = getMessage($code2,$idBibli);
+                $aExemplaires2 = ExemplaireMgr::getExemplairesByISBNandBibli($code2,$idBibli);
+                $checkAvailability2 = false;
+                for ($i = 0; $i < count($aExemplaires2); $i++) {
+                    $checkAvailability2 = checkAvailability($aExemplaires2[$i]);
+
+                    if($checkAvailability2 == true) {
+                        break;
+                    }
+                }
+                if(!$checkAvailability2) {
+                    $message2 = "Aucun exemplaire de cet album actuellement disponible";
+                } else {
+                    $exemplaire2 = getExemplaire($code2,$idBibli);
+                    $checkEmpruntOK2 = addEmprunt($exemplaire2,$idAdherent);
+                    if(!$checkEmpruntOK2) {
+                        $message2 = "Erreur : l'emprunt n'a pas pu être enregistré.";
+                    } else {
+                        $messageSuccess2 = "Emprunt bien enregistré";
+                    }
+                }
             }
         }
     }
@@ -102,14 +125,34 @@ if(isset($_POST["code3"]) && $_POST["code3"] != "") {
     if(!$checkSyntaxe3) {
         $message3 = "Syntaxe inccorecte : L'ISBN est un code à 13 chiffres";
     } else {
-        if($code3) {
+        $checkIfExists3 = checkIfExists($code3);
+        if(!$checkIfExists3) {
+            $message3 = "Aucun album trouvé avec cet ISBN";
+        } else {
             $check3 = checkEmpruntPossible($code3,$idBibli);
-            if ($check3) {
-                $exemplaire = getExemplaire($code3,$idBibli);
-                
-                $checkEmpruntOK = addEmprunt($exemplaire,$idAdherent);
+            if (!$check3) {
+                $message3 = "Album n'appartenant pas à cette bibliothèque";
             } else {
-                $message3 = getMessage($code3,$idBibli);
+                $aExemplaires3 = ExemplaireMgr::getExemplairesByISBNandBibli($code3,$idBibli);
+                $checkAvailability3 = false;
+                for ($i = 0; $i < count($aExemplaires3); $i++) {
+                    $checkAvailability3 = checkAvailability($aExemplaires3[$i]);
+
+                    if($checkAvailability3 == true) {
+                        break;
+                    }
+                }
+                if(!$checkAvailability3) {
+                    $message3 = "Aucun exemplaire de cet album actuellement disponible";
+                } else {
+                    $exemplaire3 = getExemplaire($code3,$idBibli);
+                    $checkEmpruntOK3 = addEmprunt($exemplaire3,$idAdherent);
+                    if(!$checkEmpruntOK3) {
+                        $message3 = "Erreur : l'emprunt n'a pas pu être enregistré.";
+                    } else {
+                        $messageSuccess3 = "Emprunt bien enregistré";
+                    }
+                }
             }
         }
     }

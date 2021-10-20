@@ -13,11 +13,10 @@
             </div>
             <hr>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
-            <?php if(isset($check)) {
-                if (!$check) { ?>
-                <p class="alerte">Emprunt impossible</p> 
-            <?php }} ?>
                 <div>
+                <?php if(!$checkDateCo) { ?>
+                <p class="alerte">Emprunt impossible : cotisation expirée</p> 
+                <?php } else { ?>
                     <p>Choisissez une bibliothèque</p>
                     <select name="bibli" required>
                         <option value="">--Choisissez une bibliothèque--</option>
@@ -102,6 +101,7 @@
                         <?php }} ?>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <div id="btns">
                 <input type="hidden" name="action" value="emprunt&retour">

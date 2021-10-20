@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Models/model_adherent.inc.php';
+require_once 'Emprunt&Retour/Models/model_emprunt&retour.inc.php';
 
 switch ($action) {
     case 'addAdherent' :

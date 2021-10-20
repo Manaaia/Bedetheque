@@ -197,24 +197,6 @@ function addAdherent() {
     }
 }
 
-/**
- * Vérifie si l'utilisateur a des emprunts en cours
- * @param int $idUser
- * @return bool
- */
-function checkEmpruntEnCours($idUser) {
-    try {
-        $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idUser);
-        if($aEmprunt) {
-            $flag = true;
-        }
-    } catch (EmpruntMgrException $e) {
-        $flag = false;
-    } finally {
-        return $flag;
-    }
-}
-
 // function afficheAmendes($person) {
     
 // }
