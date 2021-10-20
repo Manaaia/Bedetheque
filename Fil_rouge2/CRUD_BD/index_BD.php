@@ -26,6 +26,9 @@ switch ($action) {
     case "displayBD" :
         if(isset($_POST["id"]) && !empty($_POST["id"])) {
             $isbn = $_POST["id"];
+            $nomAuteur = $_POST["auteur"];
+            $nomSerie = $_POST["serie"];
+            var_dump($isbn);
             $album = BDMgr::searchBDByISBN($isbn);
             $titreBD = $album->getTitreAlbum();
             $numeroBD = $album->getNumeroAlbum();
@@ -34,6 +37,7 @@ switch ($action) {
             $resumeBD = $album->getResume();
             $prixBD = $album->getPrix();
             $couvBD = $album->getImage();
+            
             require 'Views/view_displayBD.php';
         }
         else {

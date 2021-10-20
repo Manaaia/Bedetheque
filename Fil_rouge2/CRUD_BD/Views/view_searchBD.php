@@ -48,6 +48,8 @@
                             <figcaption><?php echo "<p>".$titreAlbum."</p>
                                 <p>Série : ".$serieAlbum."</p>
                                 <p>Auteur : ".$auteurAlbum."</p>"; ?></figcaption>
+                            <input type="hidden" name="auteur" value="<?php echo $auteurAlbum; ?>">
+                            <input type="hidden" name="serie" value="<?php echo $serieAlbum; ?>">
                             <input type="hidden" name="id" value="<?php echo $album['ISBN']; ?>">
                             <input type="hidden" name="action" value="displayBD">
                             <input type="hidden" name="type" value="BD">

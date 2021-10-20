@@ -33,11 +33,21 @@
                 <h2 id="discover">Découvrir</h2>
                 <div id="cards">
                     <?php foreach($aReco as $reco) {
-                    $album = BDMgr::searchBDByISBN($reco); ?>
+                    $album = BDMgr::searchBDByISBN($reco); 
+                    $albumInfo = BDMgr::searchBDByTitle($album->getTitreAlbum());
+                    ?>
+                    
                     <figure class="card">
-                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                        <img src="Contenu/assets/image/albumsMini/<?php echo $album->getMiniImage()?>">
-                        <figcaption><?php echo $album->getTitreAlbum()?></figcaption>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                        <img src="Contenu/assets/image/albumsMini/<?php echo $album->getMiniImage();?>">
+                        <figcaption>
+                            <?php echo "<p>".$album->getTitreAlbum()."</p>";?>
+                            <?php echo "<p> Série : ".$albumInfo[0]['Nom_serie']."</p>";?>
+                            <?php echo "<p>Auteur : ".$albumInfo[0]['Nom_auteur']."</p>";?>
+                        </figcaption>
+                        <input type="hidden" name="auteur" value="<?php echo $albumInfo[0]['Nom_auteur'];?>">
+                        <input type="hidden" name="serie" value="<?php echo $albumInfo[0]['Nom_serie'];?>">
+                        <input type="hidden" name="id" value="<?php echo $album->getISBN();?>">
                         <input type="hidden" name="action" value="displayBD">
                         <input type="hidden" name="type" value="BD">
                         <button type="submit"> + </button>
