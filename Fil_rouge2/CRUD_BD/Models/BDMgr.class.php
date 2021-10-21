@@ -210,6 +210,10 @@ class BDMgr {
                     throw new BDMgrException("Erreur : Il semble que l'auteur sélectionné ne soit pas dans la liste");
                 } elseif(stristr($e->getMessage(), 'série') !== false) {
                     throw new BDMgrException("Erreur : Il semble que la série sélectionnée ne soit pas dans la liste");
+                } elseif(stristr($e->getMessage(), 'tome')!== false) {
+                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée contienne déjà ce numero d'album");
+                } elseif(stristr($e->getMessage(), 'titre')!== false) {
+                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée contienne déjà un album avec ce titre");
                 }
             }
         }
