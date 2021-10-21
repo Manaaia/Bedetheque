@@ -79,8 +79,8 @@
                         <div id="contenuretour">
                         <?php if(!$checkEmprunt) { ?>
                             <p>Aucun emprunt en cours</p>
-                        <?php } else if ($checkEmprunt) { 
-                            for($i = 0; $i< count($aBD); $i++) {?>
+                        <?php } else if ($checkEmprunt) { ?>
+                            <?php for($i = 0; $i< count($aBD); $i++) {?>
                             <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
                             <select name="etatBD">
                                 <?php if($aExemplaires[$i]->getIdEtat() == 0) { ?>

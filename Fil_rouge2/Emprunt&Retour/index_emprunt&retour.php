@@ -50,10 +50,10 @@ if(isset($_POST["code1"]) && $_POST["code1"] != "") {
                 if (!$check1) {
                     $message1 = "Album n'appartenant pas à cette bibliothèque";
                 } else {
-                    $aExemplaires = ExemplaireMgr::getExemplairesByISBNandBibli($code1,$idBibli);
+                    $aExemplaires1 = ExemplaireMgr::getExemplairesByISBNandBibli($code1,$idBibli);
                     $checkAvailability = false;
-                    for ($i = 0; $i < count($aExemplaires); $i++) {
-                        $checkAvailability = checkAvailability($aExemplaires[$i]);
+                    for ($i = 0; $i < count($aExemplaires1); $i++) {
+                        $checkAvailability = checkAvailability($aExemplaires1[$i]);
 
                         if($checkAvailability == true) {
                             break;
