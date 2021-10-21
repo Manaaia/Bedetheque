@@ -43,18 +43,19 @@ switch ($action) {
                 $dispos = [];
                 $lieux = [];
                 foreach ($exemplaires as $line_num => $exp) {
+                    // var_dump($nbEmprunts);
                     try {
                     $nbEmprunts += count(EmpruntMgr::getCurrentEmpruntsByIdExemplaire($exp['ID_exemplaire']));
                     } catch (EmpruntMgrException $e) {
-                        $nbEmprunts--;
                         $dispos[] = $exp['ID_exemplaire'];
                     }
                     
                 }
+                // var_dump($nbEmprunts);
                 if($nbEmprunts < 0) {
                     $nbDispo = count($exemplaires);
                 } else {
-                    $nbDispo = count($exemplaires) - ($nbEmprunts+1);
+                    $nbDispo = count($exemplaires) - ($nbEmprunts);
                 }
                 // var_dump($nbDispo);
                 // var_dump($dispos);
@@ -126,11 +127,11 @@ switch ($action) {
                 $prixBD = $album->getPrix();
                 $couvBD = $album->getImage();
                 $listAuthors = BDMgr::getListAuteurs();
+                $listSeries = BDMgr::getListSeries();
                 require 'Views/view_modifyBD.php';
             } catch (BDMgrException $e) {
                 $msg = $e->getMessage();
                 require 'Views/view_errorBD.php';
-            
             }    
      
         }
@@ -138,6 +139,43 @@ switch ($action) {
             $action = "searchBD";
         }
         break;
+    case "confirmModifyBD" :
+        if(isset($_POST["id"]) && !empty($_POST["id"])) {
+            try {
+                $titre = $_POST['titre'];
+                $num = $_POST['num'];
+                $resume = $_POST['resume'];
+                $prix = $_POST['prix'];
+                $serie = explode(" : ",$_POST['selectserie']);
+                $idSerie = $serie[0];
+                $auteur = explode(" : ",$_POST['selectauteur']);
+                $idAuteur = $auteur[0];
+
+                if(isset($_POST['image']) && !empty($_POST['image'])) {
+                    $image = explode("/", $_POST['image']);
+                    $idImage = $image[count($image)-1];
+                    $idMiniImage = $idImage;
+                } else {
+                    $idImage = $_POST['idImage'];
+                    $idMiniImage = $idImage;
+                }
+
+                $isbn = $_POST["id"];
+                BDMgr::updateBD($titre, $num, $prix, $resume, $idSerie, $idAuteur,  
+                $idImage, $idMiniImage,$isbn);
+                $msg = "La BD ".$isbn." a bien été modifiée";
+                require 'Views/view_modifyBD.php';
+            } catch (BDMgrException $e) {
+                $msg = $e->getMessage();
+                require 'Views/view_modifiyBD.php';
+            }    
+        
+        }
+        else {
+            $action = "searchBD";
+        }
+        break;
+    
 }
 // try {
 //     spl_autoload_register(function($classe) {

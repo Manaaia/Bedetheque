@@ -55,6 +55,13 @@ h1 {
     justify-content: center;
 }
 
+#modifBD input,
+textarea,
+select {
+    width: 600px;
+    height: 20px;
+}
+
 #discover,
 #comment-connexion {
     color: #c4bbab;
@@ -131,7 +138,6 @@ textarea::placeholder {
 }
 
 select {
-    padding: 7px 30px 7px 12px;
     border: none;
     border-radius: 2px;
     box-shadow: 0 1px 3px -2px #968566;
@@ -459,6 +465,11 @@ hr {
 
 #titreBD {
     width: 100%;
+}
+
+#th2 div,
+input {
+    width: 300px;
 }
 
 

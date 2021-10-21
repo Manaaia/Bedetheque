@@ -265,6 +265,28 @@ class BDMgr {
         // Retourne la / les BDs ou FALSE
         return $tAuteurs;
     }
+
+    /**
+     * Recherche la liste des séries de toutes les BD
+     * @return array $tSeries
+     */
+    public static function getListSeries() {
+        $connexionPDO = connexionBDD::getConnexion();
+        $sql = "SELECT * FROM serie";
+        $res = $connexionPDO->query($sql);
+        // Lit le résultat
+        $tSeries = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tSeries;
+    }
+
+
+
 }
 
 

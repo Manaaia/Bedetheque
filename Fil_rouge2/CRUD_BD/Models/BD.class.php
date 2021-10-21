@@ -164,7 +164,7 @@ class BD {
      * @return void
      */
     private function setResume($resume) {
-        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $resume)) {
+        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $resume) || $resume === null) {
             $this->resume = $resume;
         } else {
             throw new BDException("Attention : Le résumé est une chaîne de caractères");

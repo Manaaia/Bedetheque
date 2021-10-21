@@ -1,3 +1,20 @@
+<?php if ($action == "confirmModifyBD") { ?>
+            
+            <div class="container">
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                    <fieldset class="form"><legend for="form">Modification d'une BD</legend>
+                    <div id="rechercheExemplaire">
+                        <div>
+                            <p><?php echo $msg; ?></p>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+            </div>
+
+       <?php } else {
+        ?>
+
 <div class="container">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Modification d'une BD</legend>
@@ -25,19 +42,20 @@
                     </div>
 
                     <br/>
-
+<input type="hidden" name="auteur" value="<?php echo $nomAuteur; ?>">
                     <div>
-                        <label class="label">Auteur : <select type="text">
+                        
+                        <label class="label" for="selectauteur">Auteur : </label><select type="text" name="selectauteur" > 
                             <optgroup>
-                            <?php foreach ($listAuthors as $line_num => $auteur) { 
+                            <?php foreach ($listAuthors as $line_num => $auteur) {
                                   ?>
-                                    <option name="auteur" value="<?php echo $auteur['idAuteur'].' : '.$auteur['Nom_auteur']; ?>" <?php if($auteur['idAuteur'] == $auteurBD) { ?> selected <?php } ?>>
-                                    <?php echo $auteur['idAuteur']." : ".$auteur['Nom_auteur'];  { ?></option>
+                                    
+                                    <option name="selectauteur" value="<?php echo $auteur['idAuteur'].' : '.$auteur['Nom_auteur']; ?>" <?php if($auteur['idAuteur'] == $auteurBD) { ?> selected <?php } ?>>
+                                    <?php echo $auteur['idAuteur']." : ".$auteur['Nom_auteur'];  ?></option>
                                 <?php }
-                            }
                             ?>
                             </optgroup>
-                        </select></label>
+                        </select>
                         
                         <p id="selectAuteur"></p>
                     </div>
@@ -46,53 +64,51 @@
                                 
                     <div>
                         <input type="hidden" name="serie" value="<?php echo $nomSerie; ?>">
-                        <p class="label">Série : <?php echo $serieBD." : ".$nomSerie; ?></p>
+                        <label class="label" for="selectserie">Série : <select type="text" name="selectserie">
+                            
+                            <?php foreach ($listSeries as $line_num => $serie) { 
+                                  ?>
+                                    <option name="selectserie" value="<?php echo $serie['idSerie'].' : '.$serie['Nom_serie']; ?>" <?php if($serie['idSerie'] == $serieBD) { ?> selected <?php } ?>>
+                                    <?php echo $serie['idSerie']." : ".$serie['Nom_serie'];  ?></option>
+                                <?php }
+                            
+                            ?>
+                            
+                        </select></label>
                         <p id="selectSerie">
                         </p>
                     </div>
 
                     <br>
                     <div>
-                        <p class="label">Résumé : <?php echo $resumeBD; ?></p>
+                    <label class="label" for="resume">Résumé : </label> <textarea type="text" rows="5" cols="33" class="input text" name="resume" id="resume" value="<?php echo $resumeBD; ?>"><?php echo $resumeBD; ?></textarea>
                         <p id="resumeBD"></p>
                         
                     </div>
 
                     <br>
                     <div>
-                        <p class="label">Prix : <?php echo $prixBD; ?></p>
+                        <label class="label" for="prix">Prix : <input type="text" name="prix" id="prix" value="<?php echo $prixBD; ?>"></label>
                         <p id="prixBD"></p>
                     </div>
                     <br>
 
-                    <br>
-                    <div>
-                        <p class="label">Exemplaires disponibles : <?php echo $nbDispo; ?></p>
-                        <p id="expDispo"></p>
-                    </div>
-                    <br>
-
-                    <br>
-                    <div>
-                        <p class="label">Emplacements : <ul><?php foreach($lieux as $line_num => $line) {
-                            echo "<li>".$line."</li>"; } ?></ul></p>
-                        <p id="expDispo"></p>
-                    </div>
-                    <br>
 
                     <br>
                 </div>
                 <div id="th2">
-                    <img id="imgBD" src="Contenu/assets/image/albumsMini/<?php echo $couvBD; ?>">
+                    <input type="hidden" name="idImage" value="<?php echo $couvBD; ?>">
+                    <div><label class="label" for="image">Choisir une image :</label><input type="file" id="image" name="image" accept="image/png, image/jpeg"></div>
+                    <img id="imgBD" src="Contenu/assets/image/albumsMini/<?php echo $couvBD; ?>">       
+                    
                 </div>
             </div>
                 
                 <div id="btns">
                 <?php if (isset($_SESSION["user"])) {
                         if ($role == 4) { ?>
-                            <button type="submit" name="action" id="modifierBD" value="modifyBD">Modifier</button>
-                            <button type="submit" name="action" id="supprimerBD" value="deleteBD">Supprimer</button>
-                            <button type="submit" name="action" id="ajouterExemplaire" value="add">Ajouter Exemplaire</button>
+                            <button type="submit" name="action" id="confirmMod" value="confirmModifyBD">Confirmer</button>
+                            <button type="submit" name="action" id="resetMod" value="displayBD">Annuler</button>
                         <?php } elseif ($role == 3) { ?>
                             <button type="submit" name="action" id="emprunterBD" value="borrowBD">Effectuer un emprunt</button>
 
@@ -104,3 +120,4 @@
         </fieldset>
     </form>        
 </div>
+                    <?php } ?>
