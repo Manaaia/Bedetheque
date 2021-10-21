@@ -13,11 +13,11 @@
             </div>
             <hr>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
-            <?php if(isset($check)) {
-                if (!$check) { ?>
-                <p class="alerte">Emprunt impossible</p> 
-            <?php }} ?>
                 <div>
+                <?php if(!$checkDateCo) { ?>
+                <p class="alerte">Emprunt impossible : cotisation expirée</p>
+                <!-- Test -->
+                <?php } else { ?>
                     <p>Choisissez une bibliothèque</p>
                     <select name="bibli" required>
                         <option value="">--Choisissez une bibliothèque--</option>
@@ -79,8 +79,8 @@
                         <div id="contenuretour">
                         <?php if(!$checkEmprunt) { ?>
                             <p>Aucun emprunt en cours</p>
-                        <?php } else if ($checkEmprunt) { 
-                            for($i = 0; $i< count($aBD); $i++) {?>
+                        <?php } else if ($checkEmprunt) { ?>
+                            <?php for($i = 0; $i< count($aBD); $i++) {?>
                             <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
                             <select name="etatBD">
                                 <?php if($aExemplaires[$i]->getIdEtat() == 0) { ?>
@@ -102,6 +102,7 @@
                         <?php }} ?>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <div id="btns">
                 <input type="hidden" name="action" value="emprunt&retour">
