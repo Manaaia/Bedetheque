@@ -202,6 +202,11 @@ class ExemplaireMgr {
         }
     }
 
+    /** FLAVIE
+     * Gets exemplaire by ISBN from table exemplaire in database bdtk
+     * @param int $isbn
+     * @return array $records
+     */
     public static function getExemplairesByISBN($isbn) {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -212,14 +217,20 @@ class ExemplaireMgr {
 
         $result->execute(array(':isbnVoulu'=>$isbn));
 
+        // Lit les résultats
         $records = $result->fetchAll(PDO::FETCH_ASSOC);      
 
-        $result->closeCursor();
-        connexionBDD::disconnect();
+        $result->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect(); // ferme la connexion
 
         return $records;
     }
 
+    /** FLAVIE
+     * Gets emplacement by id_exemplaire from tables exemplaire AND emplacement in database bdtk
+     * @param int $isbn
+     * @return array $records
+     */
     public static function getExemplaireEmplacement($id) {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -231,10 +242,11 @@ class ExemplaireMgr {
 
         $result->execute(array(':idVoulu'=>$id));
 
+        // Lit les résultats
         $records = $result->fetchAll(PDO::FETCH_ASSOC);      
 
-        $result->closeCursor();
-        connexionBDD::disconnect();
+        $result->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect(); // ferme la connexion
 
         return $records;
     }

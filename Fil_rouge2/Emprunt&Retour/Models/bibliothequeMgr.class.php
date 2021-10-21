@@ -1,3 +1,4 @@
+<!-- FLAVIE -->
 <?php 
 
 require_once('bibliothequeMgrException.class.php');
@@ -57,6 +58,11 @@ class BibliothequeMgr {
         return $aBibli;
     }
 
+    /** FLAVIE
+     * Gets bibliotheque's name by idEmplacement from table bibliotheque in database bdtk
+     * @param int $id
+     * @return array $labelBibli
+     */
     public static function getBibliByEmplacement($id) {
         $connexionPDO = connexionBDD::getConnexion();
 
@@ -67,11 +73,12 @@ class BibliothequeMgr {
         $result = $connexionPDO->prepare($sql);
 
         $result->execute(array(':idVoulu'=>$id));
-
+        
+        //Lit le résultat
         $labelBibli = $result->fetch();
 
-        $result->closeCursor();
-        connexionBDD::disconnect();
+        $result->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect(); // ferme la connexion
 
         if($labelBibli) {
             return $labelBibli;

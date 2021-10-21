@@ -1,3 +1,5 @@
+<!-- Page modification d'une BD -->
+
 <!-- AFFICHAGE CONFIRMATION OU ERREUR SI MODIFICATION VALIDÉE -->
 <?php if ($action == "confirmModifyBD") { ?>
             
@@ -40,6 +42,7 @@
                     </div>
 
                     <br/>
+
                     <!-- NUM ALBUM -->
                     <div>                    
                         <label class="label" for="num">Numéro d'album : <input type="text" name="num" id="num" value="<?php echo $numeroBD; ?>"></label>
@@ -47,9 +50,9 @@
                     </div>
 
                     <br/>
-<input type="hidden" name="auteur" value="<?php echo $nomAuteur; ?>">
+                    <!-- AUTEUR (select) -->
                     <div>
-                        
+                        <input type="hidden" name="auteur" value="<?php echo $nomAuteur; ?>">
                         <label class="label" for="selectauteur">Auteur : </label><select type="text" name="selectauteur" > 
                             <optgroup>
                             <?php foreach ($listAuthors as $line_num => $auteur) {
@@ -66,7 +69,7 @@
                     </div>
 
                     <br/>
-                                
+                    <!-- SERIE (select) -->
                     <div>
                         <input type="hidden" name="serie" value="<?php echo $nomSerie; ?>">
                         <label class="label" for="selectserie">Série : <select type="text" name="selectserie">
@@ -85,6 +88,7 @@
                     </div>
 
                     <br>
+                    <!-- RESUME -->
                     <div>
                     <label class="label" for="resume">Résumé : </label> <textarea type="text" rows="5" cols="33" class="input text" name="resume" id="resume" value="<?php echo $resumeBD; ?>"><?php echo $resumeBD; ?></textarea>
                         <p id="resumeBD"></p>
@@ -92,6 +96,7 @@
                     </div>
 
                     <br>
+                    <!-- PRIX -->
                     <div>
                         <label class="label" for="prix">Prix : <input type="text" name="prix" id="prix" value="<?php echo $prixBD; ?>"></label>
                         <p id="prixBD"></p>
@@ -101,6 +106,7 @@
 
                     <br>
                 </div>
+                <!-- IMAGE -->
                 <div id="th2">
                     <input type="hidden" name="idImage" value="<?php echo $couvBD; ?>">
                     <div><label class="label" for="image">Choisir une image :</label><input type="file" id="image" name="image" accept="image/png, image/jpeg"></div>

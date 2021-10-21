@@ -1,4 +1,6 @@
-<?php 
+<!-- FLAVIE -->
+<?php
+
 // require_once('../Header&Footer/Models/connexionBDD.class.php');
 require_once('BDMgrException.class.php');
 
@@ -55,7 +57,7 @@ class BDMgr {
         return $album;
     }
 
-    /**
+    /** FLAVIE
      * Ajoute une BD dans la liste des albums
      * @param object $bd
      * @return int 0 or $nombre
@@ -98,7 +100,7 @@ class BDMgr {
 
 
 
-    /**
+    /** FLAVIE
      * Recherche une BD par titre dans la liste des albums
      * @param string $titleSearch
      * @return array or
@@ -127,7 +129,7 @@ class BDMgr {
 
 
 
-    /**
+    /** FLAVIE
      * Recherche une BD par série dans la liste des albums
      * @param string $serieSearch
      * @return array or
@@ -155,7 +157,7 @@ class BDMgr {
 
 
 
-    /**
+    /** FLAVIE
      * Recherche une BD par auteur dans la liste des albums
      * @param string $titleSearch
      * @return array or
@@ -181,7 +183,7 @@ class BDMgr {
         return $tBDs;
     }
 
-    /**
+    /** FLAVIE
      * Modifie une BD dans la liste des albums
      * @param int $newAuthorID, $newSerieID, $newNumber
      * @param float $newPrice
@@ -230,7 +232,7 @@ class BDMgr {
     }
 
 
-    /**
+    /** FLAVIE
      * Supprime une BD de la liste des albums
      * @param int $searchResultISBN
      * @return int $nombre
@@ -259,7 +261,7 @@ class BDMgr {
         }
     }
 
-    /**
+    /** FLAVIE
      * Recherche la liste des auteurs de toutes les BD
      * @return array $tAuteurs
      */
@@ -278,7 +280,7 @@ class BDMgr {
         return $tAuteurs;
     }
 
-    /**
+    /** FLAVIE
      * Recherche la liste des séries de toutes les BD
      * @return array $tSeries
      */

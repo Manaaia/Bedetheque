@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 
 DELIMITER $$
 --
--- Procédures
+-- Procédures (FLAVIE)
 --
 DROP PROCEDURE IF EXISTS `prcAddBd`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
@@ -126,7 +126,7 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 (9791034709212, 'Machine qui rêve', '46', '23.50', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 'Spirou et Fantasio-46-Machine qui rêve.jpg', 2, 6);
 
 --
--- Déclencheurs `album`
+-- Déclencheurs `album` (FLAVIE)
 --
 DROP TRIGGER IF EXISTS `avant_delete_BD`;
 DELIMITER $$
@@ -195,7 +195,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `amendes`
+-- Structure de la table `amendes` 
 --
 
 DROP TABLE IF EXISTS `amendes`;
@@ -645,7 +645,7 @@ INSERT INTO `exemplaire` (`ID_exemplaire`, `Date_entree_exemplaire`, `Commentair
 ('9791034709212_1', '2007-05-28', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 11, 0, 0, 9791034709212);
 
 --
--- Déclencheurs `exemplaire`
+-- Déclencheurs `exemplaire` (FLAVIE)
 --
 DROP TRIGGER IF EXISTS `avant_delete_exemplaire`;
 DELIMITER $$

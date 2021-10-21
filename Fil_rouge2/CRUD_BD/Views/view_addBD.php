@@ -1,5 +1,7 @@
+<!-- Page d'ajout d'une BD -->
+
+<!-- AFFICHAGE CONFIRMATION OU ERREUR SI AJOUT VALIDÉ -->
 <?php if ($action == "confirmAddBD") { ?>
-            
             <div class="container">
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                     <fieldset class="form"><legend for="form">Modification d'une BD</legend>
@@ -14,13 +16,13 @@
 
        <?php } else {
         ?>
-
+<!-- AFFICHAGE FORMULAIRE AJOUT AVANT VALIDATION -->
 <div class="container">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Ajout d'une BD</legend>
             <div id="rechercheExemplaire">
                 <input type="hidden" name="type" value="BD">
-                
+                <!-- ISBN -->
                 <label class="label" for="id">ISBN : </label><input type="text" name="id">
                 <p id="isbn"></p>
             </div>
@@ -28,20 +30,21 @@
             <div class="visible" id="container-bd" >
                 <div id="modifBD" class="visible" >
                     <div id="alertesaisie" class="alerte invisible"></div>
-
+                    <!-- TITRE -->
                     <div>
                         <label class="label" for="titre">Titre : <input type="text" name="titre" id="titre"></label>
                         <p id="titreBD"></p>
                     </div>
 
                     <br/>
-
+                    <!-- NUMERO ALBUM -->
                     <div>                    
                         <label class="label" for="num">Numéro d'album : <input type="text" name="num" id="num"></label>
                         <p id="numBD"></p>
                     </div>
 
                     <br/>
+                    <!-- AUTEUR (select) -->
                     <div>
                         
                         <label class="label" for="selectauteur">Auteur : </label><select type="text" name="selectauteur" > 
@@ -58,7 +61,7 @@
                     </div>
 
                     <br/>
-                                
+                    <!-- SERIE (select) -->
                     <div>
                         <label class="label" for="selectserie">Série : <select type="text" name="selectserie">
                             
@@ -76,6 +79,7 @@
                     </div>
 
                     <br>
+                    <!-- RESUME (facultatif) -->
                     <div>
                     <label class="label" for="resume">Résumé : </label> <textarea type="text" rows="5" cols="33" class="input text" name="resume" id="resume" ></textarea>
                         <p id="resumeBD"></p>
@@ -83,6 +87,7 @@
                     </div>
 
                     <br>
+                    <!-- PRIX -->
                     <div>
                         <label class="label" for="prix">Prix : <input type="text" name="prix" id="prix"></label>
                         <p id="prixBD"></p>
@@ -92,11 +97,12 @@
 
                     <br>
                 </div>
+                <!-- IMAGE -->
                 <div id="th2">
                     <div><label class="label" for="image">Choisir une image :</label><input type="file" id="image" name="image" accept="image/png, image/jpeg"></div>       
                 </div>
             </div>
-                
+                <!-- BOUTONS CONFIRMER OU ANNULER (pour gestionnaire) -->
                 <div id="btns">
                 <?php if (isset($_SESSION["user"])) {
                         if ($role == 4) { ?>

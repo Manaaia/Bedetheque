@@ -3,7 +3,7 @@
             <div id="searchDiv">
                 <h1>Bienvenue au Centre Culturel des Marmusots</h1>
 
-                <!-- FORMULAIRE RECHERCHE DANS LE CATALOGUE -->
+                <!-- FORMULAIRE RECHERCHE DANS LE CATALOGUE (FLAVIE) -->
                 <form action="index.php" method="POST">
                 <!-- TITRE -->
                 <div>
@@ -38,7 +38,7 @@
                 
             </div>
 
-            <!-- SUGGESTIONS ALEATOIRES DE BDs À DÉCOUVRIR -->
+            <!-- SUGGESTIONS ALEATOIRES DE BDs À DÉCOUVRIR (MANON)--> 
             <div id="newItems">
                 <h2 id="discover">Découvrir</h2>
                 <div id="cards">

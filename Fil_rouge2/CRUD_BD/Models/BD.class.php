@@ -1,9 +1,10 @@
+<!-- FLAVIE -->
 <?php
 
 require_once('BDException.class.php');
 
 class BD {
-    //Propriétes
+    //Propriétes (FLAVIE)
     private $ISBN;
     private $titreAlbum;
     private $numeroAlbum;
@@ -14,7 +15,7 @@ class BD {
     private $idSerie;
     private $idAuteur;
 
-    // Constructeur
+    // Constructeur (FLAVIE)
     public function __construct ($ISBN,$titreAlbum,$numeroAlbum,$prix,
     $resume,$idImage,$idMiniImage,$idSerie,$idAuteur) {
         $this->setISBN($ISBN);
@@ -31,7 +32,7 @@ class BD {
     //Accesseurs
 
     //getters
-    /**
+    /** FLAVIE
      * récupère l'ISBN d'une BD
      * @return int
      */
@@ -39,7 +40,7 @@ class BD {
         return $this->ISBN;
     }
 
-    /**
+    /** FLAVIE
      * récupère le titre d'une BD
      * @return string
      */
@@ -47,15 +48,15 @@ class BD {
         return $this->titreAlbum;
     }
 
-    /**
+    /** FLAVIE
      * récupère le numéro d'album d'une BD
-     * @return int
+     * @return string
      */
     public function getNumeroAlbum() {
         return $this->numeroAlbum;
     }
 
-    /**
+    /** FLAVIE
      * récupère le prix d'une BD
      * @return float
      */
@@ -63,7 +64,7 @@ class BD {
         return $this->prix;
     }
 
-    /**
+    /** FLAVIE
      * récupère le résumé d'une BD
      * @return string
      */
@@ -71,23 +72,23 @@ class BD {
         return $this->resume;
     }
 
-    /**
+    /** FLAVIE
      * récupère l'image d'une BD
-     * @return int
+     * @return string
      */
     public function getImage() {
         return $this->idImage;
     }
 
-    /**
+    /** FLAVIE
      * récupère la mini image d'une BD
-     * @return int
+     * @return string
      */
     public function getMiniImage() {
         return $this->idMiniImage;
     }
 
-    /**
+    /** FLAVIE
      * récupère l'id de Série d'une BD
      * @return int 
      */
@@ -96,7 +97,7 @@ class BD {
     }
 
 
-    /**
+    /** FLAVIE
      * récupère l'id d'Auteur d'une BD
      * @return int
      */
@@ -106,7 +107,7 @@ class BD {
 
 
     //setters
-    /**
+    /** FLAVIE
      * initialise l'ISBN d'une BD
      * @param int $ISBN
      * @return void
@@ -119,7 +120,7 @@ class BD {
         }
     }
 
-    /**
+    /** FLAVIE
      * initialise le titre d'une BD
      * @param string $tireAlbum
      * @return void
@@ -132,9 +133,9 @@ class BD {
         }
     }
     
-    /**
+    /** FLAVIE
      * initialise le numéro d'album d'une BD
-     * @param int $numeroAlbum
+     * @param string $numeroAlbum
      * @return void
      */
     private function setNumeroAlbum($numeroAlbum) {
@@ -145,7 +146,7 @@ class BD {
         }
     }
 
-    /**
+    /** FLAVIE
      * initialise le prix d'une BD
      * @param float $prix
      * @return void
@@ -158,7 +159,7 @@ class BD {
         }    
     }
 
-    /**
+    /** FLAVIE
      * initialise le résumé d'une BD
      * @param string $resume
      * @return void
@@ -171,9 +172,9 @@ class BD {
         }    
     }
 
-    /**
+    /** FLAVIE
      * initialise l'image d'une BD
-     * @param int $idImage
+     * @param string $idImage
      * @return void
      */
     private function setImage($idImage) {
@@ -184,9 +185,9 @@ class BD {
         }
     }
 
-    /**
+    /** FLAVIE
      * initialise l'image miniature d'une BD
-     * @param int $idMiniImage
+     * @param string $idMiniImage
      * @return void
      */
     private function setMiniImage($idMiniImage) {
@@ -197,7 +198,7 @@ class BD {
         }
     }
 
-    /**
+    /** FLAVIE
      * initialise l'id Série d'une BD
      * @param int $idSerie
      * @return void
@@ -211,7 +212,7 @@ class BD {
         
     }
 
-    /**
+    /** FLAVIE
      * initialise l'id Auteur d'une BD
      * @param int $idAuteur
      * @return void
@@ -225,7 +226,7 @@ class BD {
         
     }
 
-    /**
+    /** FLAVIE
      * Affiche les informations relative à une BD
      * @return string $message
      */

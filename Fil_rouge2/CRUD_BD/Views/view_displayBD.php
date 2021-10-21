@@ -1,3 +1,4 @@
+<!-- Page de détail d'une BD -->
 <div class="container">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Fiche BD</legend>
@@ -7,6 +8,7 @@
 
                 <!-- AFFICHAGE DETAIL BD -->
 
+                <!-- ISBN -->
                 <p class="label">ISBN : <?php echo $isbn; ?></p>
                 <p id="isbn"></p>
             </div>
@@ -14,21 +16,21 @@
             <div class="visible" id="container-bd" >
                 <div id="ajoutBD" class="visible" >
                     <div id="alertesaisie" class="alerte invisible"></div>
-
+                    <!-- TITRE -->
                     <div>
                         <p class="label">Titre : <?php echo $titreBD; ?></p>
                         <p id="titreBD">
                     </div>
 
                     <br/>
-
+                    <!-- NUM ALBUM -->
                     <div>                    
                         <p class="label">Numéro d'album : <?php echo $numeroBD; ?></p>
                         <p id="numBD"></p>
                     </div>
 
                     <br/>
-
+                    <!-- AUTEUR -->
                     <div>
                         <input type="hidden" name="auteur" value="<?php echo $nomAuteur; ?>">
                         <p class="label">Auteur : <?php echo $auteurBD." : ".$nomAuteur; ?></p>
@@ -36,7 +38,7 @@
                     </div>
 
                     <br/>
-                                
+                    <!-- SERIE -->
                     <div>
                         <input type="hidden" name="serie" value="<?php echo $nomSerie; ?>">
                         <p class="label">Série : <?php echo $serieBD." : ".$nomSerie; ?></p>
@@ -45,6 +47,7 @@
                     </div>
 
                     <br>
+                    <!-- RESUME -->
                     <div>
                         <p class="label">Résumé : <?php echo $resumeBD; ?></p>
                         <p id="resumeBD"></p>
@@ -52,6 +55,7 @@
                     </div>
 
                     <br>
+                    <!-- PRIX -->
                     <div>
                         <p class="label">Prix : <?php echo $prixBD; ?></p>
                         <p id="prixBD"></p>
@@ -59,6 +63,7 @@
                     <br>
 
                     <br>
+                    <!-- NB EXEMPLAIRES DISPOS -->
                     <div>
                         <p class="label">Exemplaires disponibles : <?php echo $nbDispo; ?></p>
                         <p id="expDispo"></p>
@@ -66,6 +71,7 @@
                     <br>
 
                     <br>
+                    <!-- EMPLACEMENT EXEMPLAIRES DISPOS -->
                     <div>
                         <p class="label">Emplacements : <ul><?php foreach($lieux as $line_num => $line) {
                             echo "<li>".$line."</li>"; } ?></ul></p>
@@ -75,6 +81,7 @@
 
                     <br>
                 </div>
+                <!-- IMAGE -->
                 <div id="th2">
                     <img id="imgBD" src="Contenu/assets/image/albumsMini/<?php echo $couvBD; ?>">
                 </div>
@@ -98,7 +105,7 @@
     </form>
 
     <!-- Bouton : NE S'AFFICHE QUE SI l'UTILISATEUR EST GESTIONNAIRE -->
-    
+
     <?php if (isset($_SESSION["user"])) {
                         if ($role == 4) { ?>
                             <button type="text" style="color: red;" id="ajouterExemplaire">Ajouter Exemplaire : EN CONSTRUCTION</button>
