@@ -1,3 +1,4 @@
+<!-- AFFICHAGE CONFIRMATION OU ERREUR SI MODIFICATION VALIDÉE -->
 <?php if ($action == "confirmModifyBD") { ?>
             
             <div class="container">
@@ -15,13 +16,16 @@
        <?php } else {
         ?>
 
+<!-- AFFICHAGE FORMULAIRE MODIFICATION AVANT VALIDATION -->
 <div class="container">
+    <!-- FORMULAIRE AVEC VALEURS PREREMPLIES SELON ISBN -->
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Modification d'une BD</legend>
             <div id="rechercheExemplaire">
                 <input type="hidden" name="type" value="BD">
+                <!-- ISBN -->
                 <input type="hidden" name="id" value="<?php echo $isbn; ?>">
-                <p class="label">ISNB : <?php echo $isbn; ?></p>
+                <p class="label">ISBN : <?php echo $isbn; ?></p>
                 <p id="isbn"></p>
             </div>
             <hr>
@@ -29,13 +33,14 @@
                 <div id="modifBD" class="visible" >
                     <div id="alertesaisie" class="alerte invisible"></div>
 
+                    <!-- TITRE -->
                     <div>
                         <label class="label" for="titre">Titre : <input type="text" name="titre" id="titre" value="<?php echo $titreBD; ?>"></label>
                         <p id="titreBD"></p>
                     </div>
 
                     <br/>
-
+                    <!-- NUM ALBUM -->
                     <div>                    
                         <label class="label" for="num">Numéro d'album : <input type="text" name="num" id="num" value="<?php echo $numeroBD; ?>"></label>
                         <p id="numBD"></p>
@@ -104,15 +109,15 @@
                 </div>
             </div>
                 
+                <!-- BOUTONS CONFIRMER OU ANNULER (pour gestionnaire) -->
                 <div id="btns">
                 <?php if (isset($_SESSION["user"])) {
                         if ($role == 4) { ?>
                             <button type="submit" name="action" id="confirmMod" value="confirmModifyBD">Confirmer</button>
                             <button type="submit" name="action" id="resetMod" value="displayBD">Annuler</button>
-                        <?php } elseif ($role == 3) { ?>
-                            <button type="submit" name="action" id="emprunterBD" value="borrowBD">Effectuer un emprunt</button>
-
                         <?php }
+
+                         
                         } ?>
 
                 </div>

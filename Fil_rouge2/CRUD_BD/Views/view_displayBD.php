@@ -4,7 +4,10 @@
             <div id="rechercheExemplaire">
                 <input type="hidden" name="type" value="BD">
                 <input type="hidden" name="id" value="<?php echo $isbn; ?>">
-                <p class="label">ISNB : <?php echo $isbn; ?></p>
+
+                <!-- AFFICHAGE DETAIL BD -->
+
+                <p class="label">ISBN : <?php echo $isbn; ?></p>
                 <p id="isbn"></p>
             </div>
             <hr>
@@ -76,21 +79,31 @@
                     <img id="imgBD" src="Contenu/assets/image/albumsMini/<?php echo $couvBD; ?>">
                 </div>
             </div>
-                
+
+                <!-- Boutons : NE S'AFFICHENT QUE SI l'UTILISATEUR EST GESTIONNAIRE -->
+
                 <div id="btns">
                 <?php if (isset($_SESSION["user"])) {
                         if ($role == 4) { ?>
                             <button type="submit" name="action" id="modifierBD" value="modifyBD">Modifier</button>
                             <button type="submit" name="action" id="supprimerBD" value="deleteBD">Supprimer</button>
-                            <button type="submit" name="action" id="ajouterExemplaire" value="add">Ajouter Exemplaire</button>
-                        <?php } elseif ($role == 3) { ?>
-                            <button type="submit" name="action" id="emprunterBD" value="borrowBD">Effectuer un emprunt</button>
-
-                        <?php }
-                        } ?>
+                            
+                        <?php 
+                        }
+                    } ?>
 
                 </div>
             </div> 
         </fieldset>
-    </form>        
+    </form>
+
+    <!-- Bouton : NE S'AFFICHE QUE SI l'UTILISATEUR EST GESTIONNAIRE -->
+    
+    <?php if (isset($_SESSION["user"])) {
+                        if ($role == 4) { ?>
+                            <button type="text" style="color: red;" id="ajouterExemplaire">Ajouter Exemplaire : EN CONSTRUCTION</button>
+                        <?php 
+                        }
+                    } ?>
+            
 </div>

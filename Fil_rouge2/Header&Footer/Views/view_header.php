@@ -51,8 +51,8 @@
                             <button type="submit" id="fond" name="action" value="accueil" class ="btn-nav">Catalogue</button>
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                            <input type="hidden" name="type" value="Exemplaire">
-                            <button type="submit" id="nav-gestionnaire" name="action" value="searchExemplaire">Gestion du fond</button>
+                            <input type="hidden" name="type" value="BD">
+                            <button type="submit" id="nav-gestionnaire" name="action" value="searchBD">Gestion du fond</button>
                         </form>
                     </div>
                     <?php } else if ($role == 5) { ?>

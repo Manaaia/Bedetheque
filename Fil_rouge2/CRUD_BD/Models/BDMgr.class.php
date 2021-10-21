@@ -81,8 +81,16 @@ class BDMgr {
             return $nombre;
 
         } catch (PDOException $e) {
-            if ($e->getCode() == 23000 || $e->getCode() == 45000) {
-                throw new BDMgrException("Erreur : Il semble que la BD correspondant à cet ISBN existe déjà");
+            if ($e->getCode() == 23000) {
+                throw new BDMgrException("Erreur : La BD correspondant à cet ISBN existe déjà");
+            } elseif($e->getCode() == 45000) {
+                if(stristr($e->getMessage(), 'isbn') !== false) {
+                    throw new BDMgrException("Erreur : La BD correspondant à cet ISBN existe déjà");
+                } elseif(stristr($e->getMessage(), 'tome') !== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà ce numero d'album");
+                } elseif(stristr($e->getMessage(), 'titre') !== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà un album avec ce titre");
+                }
             }
         }
         
@@ -207,13 +215,13 @@ class BDMgr {
         } catch (PDOException $e) {
             if ($e->getCode() == 45000) {
                 if(stristr($e->getMessage(), 'auteur') !== false) {
-                    throw new BDMgrException("Erreur : Il semble que l'auteur sélectionné ne soit pas dans la liste");
+                    throw new BDMgrException("Erreur : L'auteur sélectionné n'est' pas dans la liste");
                 } elseif(stristr($e->getMessage(), 'série') !== false) {
-                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée ne soit pas dans la liste");
+                    throw new BDMgrException("Erreur : La série sélectionnée n'est' pas dans la liste");
                 } elseif(stristr($e->getMessage(), 'tome')!== false) {
-                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée contienne déjà ce numero d'album");
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà ce numero d'album");
                 } elseif(stristr($e->getMessage(), 'titre')!== false) {
-                    throw new BDMgrException("Erreur : Il semble que la série sélectionnée contienne déjà un album avec ce titre");
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà un album avec ce titre");
                 }
             }
         }

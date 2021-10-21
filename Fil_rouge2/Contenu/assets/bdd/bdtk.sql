@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 21 oct. 2021 à 09:20
+-- Généré le : jeu. 21 oct. 2021 à 09:38
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -179,6 +179,14 @@ ELSEIF (NEW.idSerie NOT IN(SELECT idSerie FROM serie)) THEN
 	SIGNAL SQLSTATE '45000'
     SET MESSAGE_TEXT = 'Série inexistante',
     MYSQL_ERRNO = 2006;
+ELSEIF (NEW.Numero_album IN(SELECT Numero_album FROM album WHERE idSerie = NEW.idSerie AND isbn <> NEW.isbn)) THEN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Doublon tome',
+    MYSQL_ERRNO = 2009;
+ELSEIF (NEW.Titre_album IN(SELECT Titre_album FROM album WHERE idSerie = NEW.idSerie AND isbn <> NEW.isbn)) THEN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Doublon titre',
+    MYSQL_ERRNO = 2010;
 END IF;
 END
 $$
