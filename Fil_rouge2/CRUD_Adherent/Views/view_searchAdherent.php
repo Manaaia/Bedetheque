@@ -7,6 +7,7 @@
             <?php } else { ?>
             <p class="alerte">Impossible de supprimer un adhérent avec emprunt</p>
             <?php }} ?>
+            <p class="alerte invisible" id="alerte"></p>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">    
                 <div class="recherche">
                     <div>

@@ -2,73 +2,23 @@
 // Initialisation des variables
 var rechercherBtn = document.getElementById("rechercher");
 var divResult = document.getElementById("results");
+var inputRecherche = document.getElementById("nomcherche");
+var alerte = document.getElementById("alerte");
 const REGEXPA = /^[a-zA-ZÀ-ÿ-]*$/;
 
-rechercherBtn.addEventListener("click", clickRecherche);
 
+inputRecherche.addEventListener("keyup", function controleSaisieLettre() {
+    let bool = false;
 
-// Fonctions
-// Contrôle de saisie
-function controleSaisie(bool, unnom) {
-    
     do {
-        if (unnom == "") {
-            alert("Veuillez remplir le champ de recherche");
-            break;
-        } else if (!REGEXPA.test(unnom)) {
-            alert("Saisie incorrecte : merci de ne saisir que des lettres ou des tirets.");
-            document.getElementById("nomcherche").value = "";
+        if (!REGEXPA.test(inputRecherche.value)) {
+            inputRecherche.value = inputRecherche.value.slice(0, -1);
+            alerte.innerHTML = "Saisie incorrecte : merci de ne saisir que des lettres ou des tirets.";
+            alerte.className = "alerte visible";
             break;
         } else {
+            alerte.className = "alerte invisible";
             bool = true;
         }
     } while (bool == false);
-    return bool;
-}
-
-// Clique sur bouton recherche lance la contrôle de saisie et la recherche dans map users
-function clickRecherche() {
-    var nom = document.getElementById("nomcherche").value;
-    var flag = false;
-
-    nom = nom.toLowerCase();
-
-    flag = controleSaisie(flag, nom);
-
-    if (flag == true) {
-        divResult.innerHTML = "";
-        rechercheMapUsers(nom)
-    }
-}
-
-// Recherche dans map users de la saisie
-function rechercheMapUsers(lenom) {
-var compt = 0;
-
-    for (var [role, user] of users.entries()) {
-        if (user.role == 3) {
-            var appel = user.idA.replace("."," ");
-            if(appel.includes(lenom)) {
-                afficheResult(appel, role);
-                compt ++;
-            }
-        }
-    }
-    if (compt == 0) {
-        divResult.innerHTML = "Aucun résultat";
-    }
-}
-
-// Affiche les résultat de la recherche
-function afficheResult(nomutilisateur, key) {
-    var newElement = document.createElement("ul");
-    newElement.innerHTML =
-    "<li>" + nomutilisateur + "</li>";
-    newElement.addEventListener("click", function() {clickResult(key)});
-    divResult.appendChild(newElement);
-}
-
-// Clique résultat pour redirection avec clé valeur dans url
-function clickResult(cle) {
-    window.location = "gestion_adherent.html?var=" + cle;
-}
+});

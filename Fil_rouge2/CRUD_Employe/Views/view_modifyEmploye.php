@@ -22,7 +22,7 @@
                         <h3 class="label">Adresse</h3>
                         <p id="adresseadherent">
                             <label for="NetRue">N° et rue</label><br/>
-                            <input type="text" class="lettre" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
+                            <input type="text" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
                             <label for="rue">Complément d'adresse</label><br/>
                             <?php if (isset($adresse2)) { ?>
                             <input type="text" class="lettre" id="complement" name="newAdresse2" value="<?php echo $adresse2 ?>"><br/>
@@ -79,12 +79,13 @@
             </div>
             <br/><hr><br/>
             <div>
-                <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+            <script src='Contenu\assets\script\modifier_adherent.js'></script>
+                <form onSubmit="return confirm('Voulez-vous vraiment supprimer cet adhérent ?')" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                     <input type="hidden" name="action" value="searchEmploye">
                     <input type="hidden" name="type" value="Employe">
                     <input type="hidden" name="do" value="delete">
                     <input type="hidden" name="idEmploye" value="<?php echo $idEmploye ?>">
-                    <button class="delete">Supprimer cet employé ?</button>
+                    <button type="submit" class="delete">Supprimer cet employé ?</button>
                 </form>
             </div>
         </fieldset>
