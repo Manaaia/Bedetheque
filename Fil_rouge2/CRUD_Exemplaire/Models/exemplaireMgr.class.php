@@ -238,4 +238,54 @@ class ExemplaireMgr {
 
         return $records;
     }
+
+    /**
+     * Récupère le code emplacement d'un exemplaire avec une jointure entre la table emplacement et exemplaire
+     * @param string $id
+     * @return string
+     */
+    public static function getExemplaireCodeEmplacement($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT code_emplacement FROM emplacement em
+        JOIN exemplaire ex ON ex.idEmplacement = em.idEmplacement
+        WHERE ex.ID_exemplaire = :idVoulu';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':idVoulu'=>$id));
+
+        $record = $result->fetchColumn();      
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        return $record;
+    }
+
+    /**
+     * Récupère la bibliothèque d'un exemplaire avec une jointure entre la table emplacement, exemplaire et bibliothèque
+     * @param string $id
+     * @return string
+     */
+    public static function getExemplaireBibliotheque($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT Nom_bibli FROM bibliotheque bi
+        JOIN emplacement em ON em.idBibli = bi.idBibli
+        JOIN exemplaire ex ON ex.idEmplacement = em.idEmplacement
+        WHERE ex.ID_exemplaire = :idVoulu';
+
+        $result = $connexionPDO->prepare($sql);
+
+        $result->execute(array(':idVoulu'=>$id));
+
+        $record = $result->fetchColumn();      
+
+        $result->closeCursor();
+        connexionBDD::disconnect();
+
+        return $record;
+    }
+    
 }
