@@ -23,11 +23,11 @@
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
                         <div>
                             <label for="user-name">Nom d'utilisateur</label>
-                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant" value="9724349539">
+                            <input type="text" name="user_name" id="user_name" placeholder="Renseignez votre identifiant">
                         </div>
                         <div>
                             <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" placeholder="Renseignez votre mot de passe" value="Gp3t3d3s0l3."> 
+                            <input type="password" name="password" id="password" placeholder="Renseignez votre mot de passe"> 
                             <input type="hidden" name="action" value="accueil">
                             <input type="hidden" name="type" value="Accueil">    
                         </div>

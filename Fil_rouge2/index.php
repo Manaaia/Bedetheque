@@ -98,5 +98,13 @@ switch ($type) {
 
         break;
 
+    case 'Statistiques' :
+        require 'Header&Footer/Views/view_head.php';
+        require 'Header&Footer/index_header.php';
+        require 'Statistiques/index_statistiques.php';
+        require 'Header&Footer/Views/view_footer.php';
+
+        break;
+
 }
     

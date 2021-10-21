@@ -30,6 +30,32 @@ class UserMgr {
     }
 
     /**
+     * Get full list of users from table users in database bdtk
+     * @param void
+     * @return array of objects
+     */
+    public static function getListAdherent() : array {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM user WHERE id_role = 5';
+        
+        $resPDOstt = $connexionPDO->query($sql);
+
+        $records = $resPDOstt->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = array ();
+        foreach($records as $record) {
+            $user = new User (...(array_values($record)));
+            $users[] = $user;
+        }        
+
+        $resPDOstt->closeCursor();
+        connexionBDD::disconnect();
+
+        return $users;
+    }
+
+    /**
      * Get one user by ID from table user in database bdtk
      * @param int $id
      * @return object

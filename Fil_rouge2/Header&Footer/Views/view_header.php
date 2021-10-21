@@ -26,7 +26,11 @@
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
                             <input type="hidden" name="type" value="Statistiques">
-                            <button type="submit" id="stats" name="action" value="stats">Statistiques</button>
+                            <button type="submit" id="statsAdherents" name="action" value="statsAdherents">Statistiques adhérents</button>
+                        </form>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+                            <input type="hidden" name="type" value="Statistiques">
+                            <button type="submit" id="statsExemplaires" name="action" value="statsExemplaires">Statistiques exemplaires</button>
                         </form>
                     </div>
                     <?php } else if ($role == 3) { ?>
