@@ -139,15 +139,13 @@
         margin-right: unset;
         width: 100%;
     }
-
     #modifBD input,
     #modifBD textarea,
     #modifBD select {
         width: 600px;
         height: 20px;
     }
-
-    /* COLONNE 2 DU FORMULAIRE POSITION DE L'IMGA DE COUVERTURE DE LA BD */
+    /* COLONNE 2 DU FORMULAIRE POSITION DE L'IMAGE DE COUVERTURE DE LA BD */
     #th2 {
         /* border: 1px solid black;  */
         width: 300px;

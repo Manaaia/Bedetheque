@@ -1,3 +1,4 @@
+<!-- FLAVIE -->
 <!-- Page modification d'une BD -->
 
 <!-- AFFICHAGE CONFIRMATION OU ERREUR SI MODIFICATION VALIDÉE -->

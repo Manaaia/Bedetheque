@@ -1,3 +1,7 @@
+<!-- FLAVIE -->
+<!-- Page de suppression d'une BD -->
+
+<!-- AFFICHAGE CONFIRMATION OU ERREUR SI Suppression VALIDÉE -->
 <?php if ($action == "confirmDeleteBD") { ?>
             
             <div class="container">
@@ -14,7 +18,7 @@
 
        <?php } else {
         ?>
-
+<!-- DEMANDE DE CONFIRMATION AVANT SUPPRESSION -->
 <div class="container">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <fieldset class="form"><legend for="form">Suppression d'une BD</legend>

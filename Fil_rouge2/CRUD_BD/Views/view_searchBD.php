@@ -1,5 +1,8 @@
+<!-- FLAVIE --> 
+
+<!-- Page de recherche (+ ajout si gestionnaire) BDs -->
 <container id="main">
-            <!-- Page de recherche (+ ajout si gestionnaire) BDs -->
+           
             <div id="searchDiv">
                 <h1>Albums BDs</h1>
 

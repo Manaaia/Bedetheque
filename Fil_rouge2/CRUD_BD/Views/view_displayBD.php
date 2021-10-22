@@ -1,3 +1,4 @@
+<!-- FLAVIE -->
 <!-- Page de détail d'une BD -->
 <div class="container">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">

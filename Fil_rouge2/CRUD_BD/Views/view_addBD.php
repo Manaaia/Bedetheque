@@ -1,10 +1,11 @@
+<!-- FLAVIE -->
 <!-- Page d'ajout d'une BD -->
 
 <!-- AFFICHAGE CONFIRMATION OU ERREUR SI AJOUT VALIDÉ -->
 <?php if ($action == "confirmAddBD") { ?>
             <div class="container">
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                    <fieldset class="form"><legend for="form">Modification d'une BD</legend>
+                    <fieldset class="form"><legend for="form">Ajout d'une BD</legend>
                     <div id="rechercheExemplaire">
                         <div>
                             <p><?php echo $msg; ?></p>
