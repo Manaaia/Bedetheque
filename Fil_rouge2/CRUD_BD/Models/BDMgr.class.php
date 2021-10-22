@@ -60,7 +60,7 @@ class BDMgr {
     /** FLAVIE
      * Ajoute une BD dans la liste des albums
      * @param object $bd
-     * @return int 0 or $nombre
+     * @return int $nombre
      */
 
     public static function addNewBD($bd) {
@@ -78,8 +78,8 @@ class BDMgr {
 
             $nombre = $res->rowCount();
 
-            $res->closeCursor();
-            connexionBDD::disconnect();
+            $res->closeCursor(); // Ferme le curseur
+            connexionBDD::disconnect();  // ferme la connexion
             return $nombre;
 
         } catch (PDOException $e) {
@@ -159,7 +159,7 @@ class BDMgr {
 
     /** FLAVIE
      * Recherche une BD par auteur dans la liste des albums
-     * @param string $titleSearch
+     * @param string $authorSearch
      * @return array or
      * @return bool
      */
