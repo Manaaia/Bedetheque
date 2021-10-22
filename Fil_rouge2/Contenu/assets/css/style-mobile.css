@@ -55,13 +55,6 @@ h1 {
     justify-content: center;
 }
 
-#modifBD input,
-textarea,
-select {
-    width: 600px;
-    height: 20px;
-}
-
 #discover,
 #comment-connexion {
     color: #c4bbab;
@@ -468,7 +461,7 @@ hr {
 }
 
 #th2 div,
-input {
+#th2 input {
     width: 300px;
 }
 
