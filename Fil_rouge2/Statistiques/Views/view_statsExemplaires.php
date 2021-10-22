@@ -17,11 +17,29 @@
                     <tbody>
                         <?php foreach($aListExemplaires as $exemplaire) { 
                             $ISBN = $exemplaire->getISBN();
+                            $code = ExemplaireMgr::getExemplaireCodeEmplacement($exemplaire->getIdExemplaire());
+                            $idStatut = $exemplaire->getStatut();
+                            if($idStatut == 0) {
+                                $statut = "Présent";
+                            } else {
+                                $statut = "Perdu";
+                            }
+                            $disponible = checkAvailability($exemplaire);
+                            if($disponible) {
+                                $disponibilite = "Disponible";
+                            } else {
+                                $disponibilite = "Emprunté";
+                            }
                             $album = BDMgr::searchBDByISBN($ISBN);?>
                         <tr>
-                            <td><?php echo $exemplaire->getISBN()?></td>
+                            <td><?php echo $exemplaire->getIdExemplaire()?></td>
                             <td><?php echo $album->getTitreAlbum() ?></td>
                             <td><?php echo $exemplaire->getDateEntree() ?></td>
+                            <td><?php echo $code ?></td>
+                            <td><?php echo ExemplaireMgr::getExemplaireBibliotheque($exemplaire->getIdExemplaire()) ?></td>
+                            <td><?php echo $statut ?></td>
+                            <td><?php echo EtatMgr::getLabelEtat($exemplaire->getIdEtat()) ?></td>
+                            <td><?php echo $disponibilite ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>

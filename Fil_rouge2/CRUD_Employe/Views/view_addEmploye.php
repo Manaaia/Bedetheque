@@ -24,7 +24,7 @@
                         <h3 class="label">Adresse</h3>
                         <p id="adresseadherent">
                             <label for="numero">N° et nom de rue (*)</label><br/>
-                            <input type="text" class="lettre" id="netrue" name="adresse1" placeholder="Veuillez renseigner un numéro et nom de rue" value="<?php echo $adresse1 ?>" required><br/>
+                            <input type="text" id="netrue" name="adresse1" placeholder="Veuillez renseigner un numéro et nom de rue" value="<?php echo $adresse1 ?>" required><br/>
                             <label for="rue">Complément d'adresse</label><br/>
                             <input type="text" class="lettre" id="complement" name="adresse2" placeholder="--" value="<?php echo $adresse2 ?>"><br/>
                             <label for="code">Code postal (*)</label><br/>

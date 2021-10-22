@@ -23,7 +23,7 @@
                         <h3 class="label">Adresse</h3>
                         <p id="adresseadherent">
                             <label for="NetRue">N° et rue</label><br/>
-                            <input type="text" class="lettre" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
+                            <input type="text" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
                             <label for="rue">Complément d'adresse</label><br/>
                             <?php if (isset($adresse2)) { ?>
                             <input type="text" class="lettre" id="complement" name="newAdresse2" value="<?php echo $adresse2 ?>"><br/>

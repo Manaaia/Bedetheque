@@ -19,15 +19,14 @@ require_once 'Emprunt&Retour/Models/emprunt.class.php';
 require_once 'Emprunt&Retour/Models/empruntMgr.class.php';
 require_once 'Accueil&Connexion/Models/model_connexion.inc.php';
 
-print_r($_POST);
 session_start();
 
 $type = 'Accueil';
 $action = 'accueil';
 
-if (isset($_SESSION["user"])) {             // A commenter pour le déployement
-    print_r($_SESSION["user"]);
-}
+// if (isset($_SESSION["user"])) {             // A commenter pour le déployement
+//     print_r($_SESSION["user"]);
+// }
 
 if(isset($_POST["type"])) {
     $type = $_POST["type"];

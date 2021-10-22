@@ -2,8 +2,6 @@
 // Initialisation des variables
 var inputslettre = document.getElementsByClassName("lettre");
 var inputschiffre = document.getElementsByClassName("chiffre");
-var btnabandon = document.getElementById("abandon");
-var btnvalid = document.getElementById("submit");
 var inputs = document.getElementsByTagName("input");
 var alerte = document.getElementById("alertesaisie");
 const REGEXPA = /^[a-zA-ZÀ-ÿ- ]*$/;
@@ -45,45 +43,3 @@ for (let i = 0; i < inputschiffre.length; i++) {
         } while (bool1 == false);
     });
 };
-
-// Gestion boutons
-btnabandon.addEventListener("click", cleanChamps);
-btnvalid.addEventListener("click", checkForm);
-
-
-// Fonctions
-function cleanChamps() {
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = "";
-    }
-}
-
-function checkForm() {
-
-    var compt = 0;
-    var flag = false;
-
-    for (let i = 0; i < inputs.length; i++) {
-        console.log(inputs[i].value);
-        if(inputs[i].value == "") {
-            alerte.innerHTML = "Veuillez remplir tous les champs";
-            alerte.className ="alerte visible";
-            compt ++;
-        }
-    }
-
-    var casenom = document.getElementById("nomadherent");
-    var caseprenom = document.getElementById("prenomadherent");
-    var checkprenom = caseprenom.value[0].toLowerCase()+caseprenom.value.slice(1);
-    var checknom = casenom.value[0].toLowerCase()+casenom.value.slice(1);
-    var checkId = checkprenom + "." + checknom;
-
-    flag = verifDoublon(flag, checkId);
-
-    if (flag == true) {
-        alert("Cet identifiant est déjà pris.");
-    } else if (compt == 0) {
-        alert("Nouvel adhérent créé");
-        cleanChamps();
-    }
-}
