@@ -167,7 +167,7 @@ class ExemplaireMgr {
     }
 
     /**
-     * Get exemplaire(s) by etat from table exemplaire in database bdtk
+     * Get exemplaire(s) by isbn + bibliotheque id from table exemplaire in database bdtk
      * @param int $etat
      * @return object or
      * @return array of objects

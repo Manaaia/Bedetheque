@@ -25,6 +25,12 @@ DELIMITER $$
 --
 -- Procédures (FLAVIE)
 --
+DROP PROCEDURE IF EXISTS `prcDeleteBd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcDeleteBd` (IN `id` BIGINT(13))
+BEGIN
+DELETE FROM album WHERE isbn = id;
+END$$
+
 DROP PROCEDURE IF EXISTS `prcAddBd`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
 	INSERT INTO album VALUES (newisbn, title, num, price, newresume, image, miniImage, newserie, newauthor);
