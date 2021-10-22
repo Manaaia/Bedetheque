@@ -172,8 +172,6 @@ INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, `Prix`, `Resume`, `I
 --
 -- Déclencheurs `album`
 --
-<<<<<<< HEAD
-=======
 DROP TRIGGER IF EXISTS `avant_delete_BD`;
 DELIMITER $$
 CREATE TRIGGER `avant_delete_BD` BEFORE DELETE ON `album` FOR EACH ROW BEGIN
@@ -203,7 +201,6 @@ END IF;
 END
 $$
 DELIMITER ;
->>>>>>> 6902c987a4263af5712c658daf92e15dbdcffd81
 DROP TRIGGER IF EXISTS `avant_insert_BD`;
 DELIMITER $$
 CREATE TRIGGER `avant_insert_BD` BEFORE INSERT ON `album` FOR EACH ROW BEGIN
@@ -212,12 +209,8 @@ IF (NEW.isbn IN (SELECT isbn FROM album)) THEN
     SET MESSAGE_TEXT = 'ISBN déjà existant',
     MYSQL_ERRNO = 2004;
 END IF;
-<<<<<<< HEAD
-END$$
-=======
 END
 $$
->>>>>>> 6902c987a4263af5712c658daf92e15dbdcffd81
 DELIMITER ;
 DROP TRIGGER IF EXISTS `avant_update_BD`;
 DELIMITER $$
@@ -230,11 +223,6 @@ ELSEIF (NEW.idSerie NOT IN(SELECT idSerie FROM serie)) THEN
 	SIGNAL SQLSTATE '45000'
     SET MESSAGE_TEXT = 'Série inexistante',
     MYSQL_ERRNO = 2006;
-<<<<<<< HEAD
-END IF;
-END$$
-DELIMITER ;
-=======
 ELSEIF (NEW.Numero_album IN(SELECT Numero_album FROM album WHERE idSerie = NEW.idSerie AND isbn <> NEW.isbn)) THEN
 	SIGNAL SQLSTATE '45000'
     SET MESSAGE_TEXT = 'Doublon tome',
@@ -248,7 +236,6 @@ END
 $$
 DELIMITER ;
 
->>>>>>> 6902c987a4263af5712c658daf92e15dbdcffd81
 -- --------------------------------------------------------
 
 --
