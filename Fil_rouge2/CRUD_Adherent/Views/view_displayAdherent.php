@@ -25,8 +25,13 @@
                 <?php } ?>
             </div>
             <div>
-                <p class="label invisible">Emprunts en cours</p>
-                <p id="emprunt" class="invisible"></p>
+                <p class="label">Emprunts en cours</p>
+                <?php if(!$checkEmprunt) { ?>
+                <p>Aucun emprunt en cours</p>
+                <?php } else if ($checkEmprunt) { 
+                for($i = 0; $i< count($aBD); $i++) {?>
+                <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
+                <?php }} ?>
             </div>
             <div>
                 <p class="label invisible">Amendes</p>

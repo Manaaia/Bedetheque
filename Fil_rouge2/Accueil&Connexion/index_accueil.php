@@ -1,7 +1,10 @@
 <?php
 
+require_once 'Models/model_accueil.inc.php';
+
 switch ($action) {
     case 'accueil' :
+        $aReco = randomReco();
         require 'Views/view_accueil.php';
         break;
 

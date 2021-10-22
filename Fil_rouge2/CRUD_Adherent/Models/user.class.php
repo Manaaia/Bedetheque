@@ -1,5 +1,7 @@
 <?php 
 
+require_once('userException.class.php');
+
 class User {
 
     // Proprieties
@@ -102,7 +104,7 @@ class User {
      * @return void
      */
     public function setMdp($mdp) {
-        if (preg_match("/^(?=\P{Ll}*\p{Ll})(?=\P{Lu}*\p{Lu})(?=\P{N}*\p{N})(?=[\p{L}\p{N}]*[^\p{L}\p{N}])[\s\S]{8,}$/",$mdp)) {
+        if (preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\W])(?=\S*[\d])\S*$/",$mdp)) {
             $this->mdp = $mdp;
         } else {
             throw new UserException ("Le mot de passe utilisateur doit contenir au moins une miniscule, une majuscule, un chiffre, un symbole et avoir au minimum 8 caractères.");

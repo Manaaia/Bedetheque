@@ -3,9 +3,12 @@
         <fieldset class="form"><legend for="form">Modifier adhérent</legend>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                 <div>
-                    <?php if(isset($modMessage)) { ?>
+                    <?php if(isset($modMessage)) { 
+                        if($modMessage) {?>
                     <p class="success">Adhérent mis à jour avec succès.</p>
-                    <?php } ?>
+                    <?php } else { ?>
+                    <p class="alerte">Erreur : champs renseignés incorrects.</p>
+                    <?php }} ?>
                     <p id="alertesaisie" class="alerte invisible"></p>
                     <div>
                         <h3 class="label">Identité</h3>
@@ -20,7 +23,7 @@
                         <h3 class="label">Adresse</h3>
                         <p id="adresseadherent">
                             <label for="NetRue">N° et rue</label><br/>
-                            <input type="text" class="lettre" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
+                            <input type="text" id="NetRue" name="newAdresse1" value="<?php echo $nEtRue ?>"><br/>
                             <label for="rue">Complément d'adresse</label><br/>
                             <?php if (isset($adresse2)) { ?>
                             <input type="text" class="lettre" id="complement" name="newAdresse2" value="<?php echo $adresse2 ?>"><br/>
@@ -44,6 +47,15 @@
                      <?php } ?>
                     </div>
                     <div>
+                        <h3 class="label">Emprunts en cours</h3>
+                        <?php if(!$checkEmprunt) { ?>
+                        <p>Aucun emprunt en cours</p>
+                        <?php } else if ($checkEmprunt) { 
+                        for($i = 0; $i< count($aBD); $i++) {?>
+                        <p><?php echo $aBD[$i]->getTitreAlbum()?></p><br/>
+                        <?php }} ?>
+                    </div>
+                    <div>
                         <h3 class="label invisible">Amendes</h3>
                         <p id="amende" class="invisible">Aucune amende en attente</p>
                     </div>
@@ -55,9 +67,9 @@
                     <button type="submit" id="submit">Valider</button>
             </form>
             <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-                <input type="hidden" name="action" value="searchAdherent">
-                <input type="hidden" name="type" value="Adherent">
-                <!-- <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>"> -->
+                <input type="hidden" name="action" value="emprunt&retour">
+                <input type="hidden" name="type" value="Emprunt">
+                <input type="hidden" name="idAdherent" value="<?php echo $idAdherent ?>">
                 <button id="abandon">Retour</button>
             </form>
             </div>

@@ -1,9 +1,13 @@
 
-<div class="container">
+    <div class="container">
         <fieldset class="form"><legend for="form">Rechercher un adhérent</legend>
-            <?php if(isset($delMessage)) { ?>
+            <?php if(isset($delMessage)) {
+                if($delMessage) { ?>
             <p class="success">L'adhérent a bien été supprimé</p>
-            <?php } ?>
+            <?php } else { ?>
+            <p class="alerte">Impossible de supprimer un adhérent avec emprunt</p>
+            <?php }} ?>
+            <p class="alerte invisible" id="alerte"></p>
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">    
                 <div class="recherche">
                     <div>
@@ -22,8 +26,8 @@
             <div id="results">
                 <?php if (isset($aNomCherche)) { ?>
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
-                    <input type="hidden" name="action" value="modifyAdherent">
-                    <input type="hidden" name="type" value="Adherent">
+                    <input type="hidden" name="action" value="emprunt&retour">
+                    <input type="hidden" name="type" value="Emprunt">
                     <ul>
                     <?php for ($i=0;$i<count($aNomCherche);$i++) {?>
                         <li><button type="submit" class="btn-link" name="idAdherent" value="<?php echo $aNomCherche[$i]["id_user"]?>">
@@ -34,10 +38,6 @@
                 <?php } else { ?>
                 <p>Aucun résultat</p>
                 <?php } ?>
-            </div>
-            <div id="btns">
-                <button id="abandon">Abandonner</button>
-                <button id="submit" class="invisible">Valider</button>
             </div>
         </fieldset>
     </div>

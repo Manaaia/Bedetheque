@@ -1,4 +1,7 @@
 <?php
+
+require_once('BDException.class.php');
+
 class BD {
     //Propriétes
     private $ISBN;
@@ -135,10 +138,10 @@ class BD {
      * @return void
      */
     private function setNumeroAlbum($numeroAlbum) {
-        if(preg_match("/^[0-9]{1,3}$/", $numeroAlbum)) {
+        if(preg_match("/^[0-9A-Z]{1,3}$/", $numeroAlbum)) {
             $this->numeroAlbum = $numeroAlbum;
         } else {
-            throw new BDException("Attention : L'ISBN est un code à 13 chiffres");
+            throw new BDException("Attention : Le numéro d'album ne peut contenir que des chiffres ou des lettres");
         }
     }
 
@@ -161,7 +164,7 @@ class BD {
      * @return void
      */
     private function setResume($resume) {
-        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $resume)) {
+        if(preg_match("/^[\S]{1,}(?:[-\s][\S]{1,})*$/u", $resume) || $resume === null) {
             $this->resume = $resume;
         } else {
             throw new BDException("Attention : Le résumé est une chaîne de caractères");
@@ -174,10 +177,10 @@ class BD {
      * @return void
      */
     private function setImage($idImage) {
-        if(preg_match("/^[0-9]{1,3}$/", $idImage)) {
+        if(preg_match("/^\S+(?:\s*\S)*(?:\s)*\.jpg$/", $idImage)) {
             $this->idImage = $idImage;
         } else {
-            throw new BDException ("Attention : l'id de l'image doit être un nombre entier inférieur à 1000");
+            throw new BDException ("Attention : l'id de l'image doit être un nom de fichier .jpg");
         }
     }
 
@@ -187,10 +190,10 @@ class BD {
      * @return void
      */
     private function setMiniImage($idMiniImage) {
-        if(preg_match("/^[0-9]{1,3}$/", $idMiniImage)) {
+        if(preg_match("/^\S+(?:\s*\S)*(?:\s)*\.jpg$/u", $idMiniImage)) {
             $this->idMiniImage = $idMiniImage;
         } else {
-            throw new BDException ("Attention : l'id de l'image doit être un nombre entier inférieur à 1000");
+            throw new BDException ("Attention : l'id de l'image doit être un nom de fichier .jpg");
         }
     }
 

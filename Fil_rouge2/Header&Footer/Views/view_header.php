@@ -26,7 +26,11 @@
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
                             <input type="hidden" name="type" value="Statistiques">
-                            <button type="submit" id="stats" name="action" value="stats">Statistiques</button>
+                            <button type="submit" id="statsAdherents" name="action" value="statsAdherents">Statistiques adhérents</button>
+                        </form>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+                            <input type="hidden" name="type" value="Statistiques">
+                            <button type="submit" id="statsExemplaires" name="action" value="statsExemplaires">Statistiques exemplaires</button>
                         </form>
                     </div>
                     <?php } else if ($role == 3) { ?>
@@ -51,8 +55,8 @@
                             <button type="submit" id="fond" name="action" value="accueil" class ="btn-nav">Catalogue</button>
                         </form>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-                            <input type="hidden" name="type" value="Exemplaire">
-                            <button type="submit" id="nav-gestionnaire" name="action" value="searchExemplaire">Gestion du fond</button>
+                            <input type="hidden" name="type" value="BD">
+                            <button type="submit" id="nav-gestionnaire" name="action" value="searchBD">Gestion du fond</button>
                         </form>
                     </div>
                     <?php } else if ($role == 5) { ?>
@@ -70,6 +74,7 @@
                 <div id="compte">
                     <p id="identification"></p>  
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+                        <p id="identifiant">Bonjour <?php echo $prenom." ".$nom?> !</p>
                         <input type="hidden" name="type" value="Accueil">
                         <button type="submit" id="deconnexion" name="action" value="deconnexion">Se déconnecter</button>
                     </form>

@@ -30,6 +30,32 @@ class UserMgr {
     }
 
     /**
+     * Get full list of users from table users in database bdtk
+     * @param void
+     * @return array of objects
+     */
+    public static function getListAdherent() : array {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM user WHERE id_role = 5';
+        
+        $resPDOstt = $connexionPDO->query($sql);
+
+        $records = $resPDOstt->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = array ();
+        foreach($records as $record) {
+            $user = new User (...(array_values($record)));
+            $users[] = $user;
+        }        
+
+        $resPDOstt->closeCursor();
+        connexionBDD::disconnect();
+
+        return $users;
+    }
+
+    /**
      * Get one user by ID from table user in database bdtk
      * @param int $id
      * @return object
@@ -63,7 +89,7 @@ class UserMgr {
      * @return object or
      * @return array of objects
      */
-    public static function getAdherentByName($name) {
+    public static function getAdherentsByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu AND id_role = 5 OR
@@ -91,11 +117,11 @@ class UserMgr {
      * @return object or
      * @return array of objects
      */
-    public static function getEmployeByName($name) {
+    public static function getEmployesByName($name) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu OR Prenom_user LIKE :nomVoulu AND
-         id_role <> 5';
+        $sql = 'SELECT * FROM user WHERE Nom_user LIKE :nomVoulu AND id_role <> 5 
+        OR Prenom_user LIKE :nomVoulu AND id_role <> 5';
 
         $result = $connexionPDO->prepare($sql);
 
@@ -173,7 +199,7 @@ class UserMgr {
                 $message = "Confirmation : l'utilisateur a bien été supprimé de la BDD.";
             }
         } catch(PDOException $e) {
-            throw new UserMgrException("Cet utilisateur n'existe pas dans la BDD.");
+            throw new UserMgrException("Impossible de supprimer un utilisateur avec un emprunt.");
         } finally {
             $result->closeCursor();
             connexionBDD::disconnect();
@@ -227,19 +253,20 @@ class UserMgr {
         $cp = $user->getCpUser();
         $ville = $user->getVilleUser();
         $dateCot = $user->getDateCot();
+        $role = $user->getIdRole();
 
         $sql = 'UPDATE user 
         SET Nom_user = :nomVoulu, Prenom_user = :prenomVoulu,
         Adresse_1_user = :adresse1Voulu, Adresse_2_user = :adresse2Voulu,
         CP_user = :cpVoulu, Ville_user = :villeVoulu,
-        Date_cotisation = :dateVoulu 
+        Date_cotisation = :dateVoulu, id_role = :roleVoulu
         WHERE id_user = :idVoulu';
         $result = $connexionPDO->prepare($sql);
 
         try {
             $result->execute(array(':idVoulu'=>$id_user,':nomVoulu'=>$nom,
             ':prenomVoulu'=>$prenom,':adresse1Voulu'=>$adresse1,':adresse2Voulu'=>$adresse2,
-            ':cpVoulu'=>$cp,':villeVoulu'=>$ville,'dateVoulu'=>$dateCot));
+            ':cpVoulu'=>$cp,':villeVoulu'=>$ville,'dateVoulu'=>$dateCot,':roleVoulu'=>$role));
             $count = $result->rowCount();
             if ($count == 0) {
                 $message = "Lignes affectées : ".$count;

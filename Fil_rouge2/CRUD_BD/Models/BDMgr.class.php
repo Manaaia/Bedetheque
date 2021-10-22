@@ -1,6 +1,59 @@
 <?php 
-require_once('../Models/connexionBDD.class.php');
+// require_once('../Header&Footer/Models/connexionBDD.class.php');
+require_once('BDMgrException.class.php');
+
 class BDMgr {
+
+    /**
+     * Get list of ISBN from table album in database bdtk
+     * @param void
+     * @return array
+     */
+    public static function getListISBN() : array {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT ISBN FROM album';
+        
+        $resPDOstt = $connexionPDO->query($sql);
+
+        $ISBN = $resPDOstt->fetchAll(PDO::FETCH_COLUMN); 
+
+        $resPDOstt->closeCursor();
+        connexionBDD::disconnect();
+
+        return $ISBN;
+    }
+
+    /**
+     * Search BD by ISBN in table album from database bdtk
+     * @param int $id
+     * @return object
+     */
+
+    public static function searchBDByISBN($id) {
+        $connexionPDO = connexionBDD::getConnexion();
+
+        $sql = 'SELECT * FROM album WHERE ISBN=:idVoulu';
+        $res = $connexionPDO->prepare($sql);
+        $res->execute(array(':idVoulu'=>$id));
+
+        // Lit le résultat
+        $album = $res->fetch(PDO::FETCH_ASSOC);
+
+        if($album) {
+
+            $album = new BD (...(array_values($album)));
+        } else {
+            throw new BDMgrException("Aucun album trouvé avec cet ISBN");
+        }
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $album;
+    }
 
     /**
      * Ajoute une BD dans la liste des albums
@@ -13,9 +66,7 @@ class BDMgr {
         $connexionPDO = connexionBDD::getConnexion(); 
    
         try {
-            $sql = "INSERT INTO `album` (`ISBN`, `Titre_album`, `Numero_album`, 
-                `Prix`, `Resume`, `ID_image`, `Id_mini_image`, `idSerie`, `idAuteur`) 
-                VALUES (:isbn, :titre, :num, :prix, :myresume, :myimage, :miniature, :serie, :auteur)";
+            $sql = "CALL prcAddBd(:isbn, :titre, :num, :prix, :myresume, :myimage, :miniature, :serie, :auteur)";
             $res = $connexionPDO->prepare($sql);
 
             $res->execute(array(":isbn"=>$bd->getISBN(), ":titre"=>$bd->getTitreAlbum(), 
@@ -27,12 +78,22 @@ class BDMgr {
 
             $res->closeCursor();
             connexionBDD::disconnect();
+            return $nombre;
+
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new BDMgrException("Erreur : Il semble que la BD correspondant à cet ISBN existe déjà");
+                throw new BDMgrException("Erreur : La BD correspondant à cet ISBN existe déjà");
+            } elseif($e->getCode() == 45000) {
+                if(stristr($e->getMessage(), 'isbn') !== false) {
+                    throw new BDMgrException("Erreur : La BD correspondant à cet ISBN existe déjà");
+                } elseif(stristr($e->getMessage(), 'tome') !== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà ce numero d'album");
+                } elseif(stristr($e->getMessage(), 'titre') !== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà un album avec ce titre");
+                }
             }
         }
-        return $nombre;
+        
     }
 
 
@@ -47,11 +108,9 @@ class BDMgr {
 
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-            JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-            JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE :titreVoulu";
+        $sql = "CALL prcSearchTitle(:titreVoulu)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':titreVoulu'=>'%'.$titleSearch.'%'));
+        $res->execute(array(':titreVoulu'=>$titleSearch));
             $res->setFetchMode($choix);
 
         // Lit le résultat
@@ -78,11 +137,9 @@ class BDMgr {
     public static function searchBDBySerie($serieSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE :serieVoulue";
+        $sql = "CALL prcSearchSerie(:serieVoulue)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':serieVoulue'=>'%'.$serieSearch.'%'));
+        $res->execute(array(':serieVoulue'=>$serieSearch));
         $res->setFetchMode($choix);
 
         // Lit le résultat
@@ -108,11 +165,9 @@ class BDMgr {
     public static function searchBDByAuthor($authorSearch, $choix = PDO::FETCH_ASSOC) {
         $connexionPDO = connexionBDD::getConnexion();
 
-        $sql = "SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
-        JOIN `auteur` au ON al.idAuteur = au.idAuteur 
-        JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE :auteurVoulu";
+        $sql = "CALL prcSearchAuthor(:auteurVoulu)";
         $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':auteurVoulue'=>'%'.$authorSearch.'%'));
+        $res->execute(array(':auteurVoulu'=>'%'.$authorSearch.'%'));
         $res->setFetchMode($choix);
 
         // Lit le résultat
@@ -132,41 +187,120 @@ class BDMgr {
      * @param float $newPrice
      * @param string $newTitle, $newImage, $newMiniImage, $newResume
      * @param int $searchResultISBN
-     * @return bool
+     * @return int $nombre
      */
 
-    public static function updateBD($newTitle, $newAuthorID, $newSerieID, $newPrice, $newNumber, 
-                        $newImage, $newMiniImage, $newResume, $searchResultISBN) {
+    public static function updateBD($newTitle, $newNumber, $newPrice, $newResume, $newSerieID, $newAuthorID,  
+                        $newImage, $newMiniImage, $searchResultISBN) {
+        try {
+            $connexionPDO = connexionBDD::getConnexion();
+            $sql = "CALL prcUpdateBd(:titre, 
+                                    :numero, :prix, 
+                                :resum, :serie, :auteur, :imag, 
+                                :miniImage,
+                                :idVoulue)";
+            $res = $connexionPDO->prepare($sql);
+            $res->execute(array(':idVoulue'=>$searchResultISBN, ':titre'=>$newTitle, ':numero'=>$newNumber, 
+                                ':prix'=>$newPrice, ':resum'=>$newResume, ':serie'=>$newSerieID, ':auteur'=>$newAuthorID, 
+                                ':imag'=>$newImage, ':miniImage'=>$newMiniImage));
 
-        $connexionPDO = connexionBDD::getConnexion();
-        $sql = "UPDATE `album` SET `Titre_album` = :titre, 
-                            `Numero_album` = :numero, `Prix` = :prix, 
-                            `Resume` = :resum, `idSerie` = :serie, `idAuteur` = :auteur, `ID_image` = :imag, 
-                            `Id_mini_image` = :miniImage
-                            WHERE `ISBN` = :idVoulue";
-        $res = $connexionPDO->prepare($sql);
-        $res->execute(array(':idVoulue'=>$searchResultISBN, ':titre'=>$newTitle, ':numero'=>$newNumber, 
-                            ':prix'=>$newPrice, ':resum'=>$newResume, ':serie'=>$newSerieID, ':auteur'=>$newAuthorID, 
-                            ':imag'=>$newImage, ':miniImage'=>$newMiniImage));
-         
-        // Ferme le curseur et la connexion
-        $res->closeCursor(); // ferme le curseur
-        connexionBDD::disconnect();     // ferme la connexion
+            $nombre = $res->rowCount();
+
+            // Ferme le curseur et la connexion
+            $res->closeCursor(); // ferme le curseur
+            connexionBDD::disconnect();     // ferme la connexion
+            
+            return $nombre;
+
+        } catch (PDOException $e) {
+            if ($e->getCode() == 45000) {
+                if(stristr($e->getMessage(), 'auteur') !== false) {
+                    throw new BDMgrException("Erreur : L'auteur sélectionné n'est' pas dans la liste");
+                } elseif(stristr($e->getMessage(), 'série') !== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée n'est' pas dans la liste");
+                } elseif(stristr($e->getMessage(), 'tome')!== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà ce numero d'album");
+                } elseif(stristr($e->getMessage(), 'titre')!== false) {
+                    throw new BDMgrException("Erreur : La série sélectionnée contient déjà un album avec ce titre");
+                }
+            }
+        }
         
-        return true;
 
     }
 
 
-    // /**
-    //  * Supprime une BD de la liste des albums
-    //  * @param int $searchResultISBN
-    //  * @return bool
-    //  */
-    // function deleteBD($searchResultISBN) {
-    //     $sql = mysqli_query("DELETE * FROM `album` WHERE `ISBN` = $searchResultISBN");
-    //     return true;
-    // }
+    /**
+     * Supprime une BD de la liste des albums
+     * @param int $searchResultISBN
+     * @return int $nombre
+     */
+    public static function deleteBD($searchResultISBN) {
+        try {
+            $connexionPDO = connexionBDD::getConnexion();
+            $sql = "CALL prcDeleteBd(:idVoulue)";
+            $res = $connexionPDO->prepare($sql);
+            $res->execute(array(':idVoulue'=>$searchResultISBN));
+
+            $nombre = $res->rowCount();
+
+            // Ferme le curseur et la connexion
+            $res->closeCursor(); // ferme le curseur
+            connexionBDD::disconnect();     // ferme la connexion
+            
+            return $nombre;
+
+        } catch (PDOException $e) {
+            if ($e->getCode() == 45000) {
+                
+                throw new BDMgrException("Erreur : La BD selectionnée fait l'objet d'un emprunt en cours.");
+        
+            }
+        }
+    }
+
+    /**
+     * Recherche la liste des auteurs de toutes les BD
+     * @return array $tAuteurs
+     */
+    public static function getListAuteurs() {
+        $connexionPDO = connexionBDD::getConnexion();
+        $sql = "SELECT * FROM auteur";
+        $res = $connexionPDO->query($sql);
+        // Lit le résultat
+        $tAuteurs = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tAuteurs;
+    }
+
+    /**
+     * Recherche la liste des séries de toutes les BD
+     * @return array $tSeries
+     */
+    public static function getListSeries() {
+        $connexionPDO = connexionBDD::getConnexion();
+        $sql = "SELECT * FROM serie";
+        $res = $connexionPDO->query($sql);
+        // Lit le résultat
+        $tSeries = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ferme le curseur et la connexion
+        $res->closeCursor(); // ferme le curseur
+        connexionBDD::disconnect();     // ferme la connexion
+
+        // Retourne la / les BDs ou FALSE
+        return $tSeries;
+    }
+
+
+
 }
+
+
 
 ?>

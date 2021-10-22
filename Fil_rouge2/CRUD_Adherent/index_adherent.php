@@ -1,13 +1,29 @@
 <?php
 
 require_once 'Models/model_adherent.inc.php';
+require_once 'Emprunt&Retour/Models/model_emprunt&retour.inc.php';
 
 switch ($action) {
     case 'addAdherent' :
-        if (isset( $_POST["nom"])) {
-            echo "Check one";
+        if (isset($_POST["nomAdherent"])) {
+            $nomAdherent = $_POST["nomAdherent"];
+            $prenomAdherent = $_POST["prenomAdherent"];
+            $mdp = $_POST["mdp"];
+            $adresse1 = $_POST["adresse1"];
+            $adresse2 = $_POST["adresse2"];
+            $cp = $_POST["cp"];
+            $ville = $_POST["ville"];
+            $dateCo = $_POST["dateCo"];
             $addMessage = addAdherent($_POST);
-            echo $addMessage;
+        } else {
+            $nomAdherent = "";
+            $prenomAdherent = "";
+            $mdp = "";
+            $adresse1 = "";
+            $adresse2 = "";
+            $cp = "";
+            $ville = "";
+            $dateCo = "";
         }
         require 'Views/view_addAdherent.php';
         break;
@@ -15,6 +31,7 @@ switch ($action) {
     case 'searchAdherent' :
         if (isset($_POST["do"])) {
             $delMessage = deleteAdherent($_POST["idAdherent"]);
+            echo $delMessage;
         }
         if (isset($_POST["nomCherche"])) {
             $nomCherche = $_POST["nomCherche"];
@@ -31,6 +48,22 @@ switch ($action) {
         $dateEndCo = afficheDateEndCo($dateCo);
         $interval = getInterval($dateEndCo);
         $checkDateCo = checkDateCo($dateCo);
+        $idUser = $user->getIdUser();
+        $checkEmprunt = checkEmpruntEnCours($idUser);
+
+        if ($checkEmprunt) {
+            $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idUser);
+            $aAlbums = array();
+            foreach($aEmprunt as $emprunt) {
+                $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
+                $aAlbums[] = $exemplaire->getISBN();
+            }
+            $aBD = array();
+            foreach($aAlbums as $album) {
+                $bd = BDMgr::searchBDByISBN($album);
+                $aBD[] = $bd;
+            }
+        }
         require 'Views/view_displayAdherent.php';
         break;
 
@@ -41,7 +74,6 @@ switch ($action) {
         if (isset($_POST["idAdherent"])) {
             $idAdherent = $_POST["idAdherent"];
             $adherent = UserMgr::getUserById($idAdherent);
-            print_r($adherent);
         }
         $nom = afficheNom($adherent);
         $prenom = affichePrenom($adherent);
@@ -60,6 +92,21 @@ switch ($action) {
         $dateEndCo = afficheDateEndCo($dateCo);
         $interval = getInterval($dateEndCo);
         $checkDateCo = checkDateCo($dateCo);
+        $checkEmprunt = checkEmpruntEnCours($idAdherent);
+
+        if ($checkEmprunt) {
+            $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idAdherent);
+            $aAlbums = array();
+            foreach($aEmprunt as $emprunt) {
+                $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
+                $aAlbums[] = $exemplaire->getISBN();
+            }
+            $aBD = array();
+            foreach($aAlbums as $album) {
+                $bd = BDMgr::searchBDByISBN($album);
+                $aBD[] = $bd;
+            }
+        }
         require 'Views/view_modifyAdherent.php';
         break;
         
