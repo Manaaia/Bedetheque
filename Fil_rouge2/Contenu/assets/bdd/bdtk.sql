@@ -26,39 +26,39 @@ DELIMITER $$
 -- Procédures (FLAVIE)
 --
 DROP PROCEDURE IF EXISTS `prcDeleteBd`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcDeleteBd` (IN `id` BIGINT(13))
+CREATE PROCEDURE `prcDeleteBd` (IN `id` BIGINT(13))
 BEGIN
 DELETE FROM album WHERE isbn = id;
 END$$
 
 DROP PROCEDURE IF EXISTS `prcAddBd`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
+CREATE PROCEDURE `prcAddBd` (IN `newisbn` BIGINT(13), IN `title` VARCHAR(50), IN `num` CHAR(3), IN `price` DECIMAL(4,2), IN `newresume` VARCHAR(1500), IN `image` VARCHAR(100), IN `miniImage` VARCHAR(100), IN `newserie` INT, IN `newauthor` INT)  BEGIN
 	INSERT INTO album VALUES (newisbn, title, num, price, newresume, image, miniImage, newserie, newauthor);
 END$$
 
 DROP PROCEDURE IF EXISTS `prcSearchAuthor`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchAuthor` (IN `author` VARCHAR(50))  BEGIN
+CREATE PROCEDURE `prcSearchAuthor` (IN `author` VARCHAR(50))  BEGIN
 SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
         JOIN `auteur` au ON al.idAuteur = au.idAuteur 
         JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_auteur` LIKE CONCAT('%', author, '%');
 END$$
 
 DROP PROCEDURE IF EXISTS `prcSearchSerie`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchSerie` (IN `serie` VARCHAR(100))  BEGIN
+CREATE PROCEDURE `prcSearchSerie` (IN `serie` VARCHAR(100))  BEGIN
 SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
         JOIN `auteur` au ON al.idAuteur = au.idAuteur 
         JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Nom_serie` LIKE CONCAT('%', serie, '%');
 END$$
 
 DROP PROCEDURE IF EXISTS `prcSearchTitle`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcSearchTitle` (IN `title` VARCHAR(100))  BEGIN 
+CREATE PROCEDURE `prcSearchTitle` (IN `title` VARCHAR(100))  BEGIN 
 SELECT Titre_album, ISBN, Nom_serie, Nom_auteur FROM `album` al
             JOIN `auteur` au ON al.idAuteur = au.idAuteur 
             JOIN `serie` s ON al.idSerie = s.idSerie WHERE `Titre_album` LIKE CONCAT("%", title, "%");
 END$$
 
 DROP PROCEDURE IF EXISTS `prcUpdateBd`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcUpdateBd` (IN `title` VARCHAR(50), `num` CHAR(3), `price` DECIMAL(4,2), `newresume` VARCHAR(1500), `newserie` INT, `newauthor` INT, `image` VARCHAR(100), `miniImage` VARCHAR(100), `id` BIGINT(13))  BEGIN
+CREATE PROCEDURE `prcUpdateBd` (IN `title` VARCHAR(50), `num` CHAR(3), `price` DECIMAL(4,2), `newresume` VARCHAR(1500), `newserie` INT, `newauthor` INT, `image` VARCHAR(100), `miniImage` VARCHAR(100), `id` BIGINT(13))  BEGIN
 UPDATE `album` SET `Titre_album` = title, 
                             `Numero_album` = num, `Prix` = price, 
                             `Resume` = newresume, `idSerie` = newserie, `idAuteur` = newauthor, `ID_image` = image, 

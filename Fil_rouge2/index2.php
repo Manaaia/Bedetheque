@@ -1,5 +1,9 @@
 <?php
 
+// spl_autoload_register(function($classe) {
+//     include "../Models/" . $classe . ".class.php";
+// });
+
 require_once 'HeaderFooter/Models/connexionBDD.class.php';
 require_once 'CRUD_Adherent/Models/user.class.php';
 require_once 'CRUD_Adherent/Models/userMgr.class.php';
@@ -11,15 +15,13 @@ require_once 'CRUD_BD/Models/BDMgr.class.php';
 require_once 'CRUD_Exemplaire/Models/exemplaire.class.php';
 require_once 'CRUD_Exemplaire/Models/exemplaireMgr.class.php';
 // PB ICI
-require_once 'CRUD_Exemplaire/Models/etatMgr.class.php';
+//require_once 'CRUD_Exemplaire/Models/etatMgr.class.php';
 require_once 'EmpruntRetour/Models/bibliotheque.class.php';
 require_once 'EmpruntRetour/Models/bibliothequeMgr.class.php';
 // PB ICI
-require_once 'EmpruntRetour/Models/emprunt.class.php';
+//require_once 'Emprunt&Retour/Models/emprunt.class.php';
 require_once 'EmpruntRetour/Models/empruntMgr.class.php';
 require_once 'AccueilConnexion/Models/model_connexion.inc.php';
-
-
 
 
 session_start();
@@ -87,7 +89,7 @@ switch ($type) {
     case 'Emprunt':
         require 'HeaderFooter/Views/view_head.php';
         require 'HeaderFooter/index_header.php';
-        require 'EmpruntRetour/index_empruntRetour.php';
+        require 'EmpruntRetour/index_empruntretour.php';
         require 'HeaderFooter/Views/view_footer.php';
 
         break;

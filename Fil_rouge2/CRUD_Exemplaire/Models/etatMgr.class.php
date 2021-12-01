@@ -1,8 +1,9 @@
-<?php 
+<?php
 
-require_once('EtatMgrException.class.php');
+require_once('etatMgrException.class.php');
 
-class EtatMgr {
+class EtatMgr
+{
 
     // Getters
     /**
@@ -10,21 +11,22 @@ class EtatMgr {
      * @param int $id
      * @return string
      */
-    public static function getLabelEtat($id) {
+    public static function getLabelEtat($id)
+    {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT `Label etat` FROM etat WHERE idEtat = :idVoulu';
 
         $result = $connexionPDO->prepare($sql);
 
-        $result->execute(array(':idVoulu'=>$id));
+        $result->execute(array(':idVoulu' => $id));
 
         $label = $result->fetchColumn();
 
         $result->closeCursor();
         connexionBDD::disconnect();
 
-        if($label) {
+        if ($label) {
             return $label;
         } else {
             throw new EtatMgrException("Aucun etat correspondant");

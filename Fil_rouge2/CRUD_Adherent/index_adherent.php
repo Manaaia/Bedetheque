@@ -1,10 +1,10 @@
 <?php
 
 require_once 'Models/model_adherent.inc.php';
-require_once 'Emprunt&Retour/Models/model_emprunt&retour.inc.php';
+require_once 'EmpruntRetour/Models/model_empruntRetour.inc.php';
 
 switch ($action) {
-    case 'addAdherent' :
+    case 'addAdherent':
         if (isset($_POST["nomAdherent"])) {
             $nomAdherent = $_POST["nomAdherent"];
             $prenomAdherent = $_POST["prenomAdherent"];
@@ -28,7 +28,7 @@ switch ($action) {
         require 'Views/view_addAdherent.php';
         break;
 
-    case 'searchAdherent' :
+    case 'searchAdherent':
         if (isset($_POST["do"])) {
             $delMessage = deleteAdherent($_POST["idAdherent"]);
             echo $delMessage;
@@ -40,7 +40,7 @@ switch ($action) {
         require 'Views/view_searchAdherent.php';
         break;
 
-    case 'displayAdherent' :
+    case 'displayAdherent':
         $nom = afficheNom($user);
         $prenom = affichePrenom($user);
         $adresse = afficheAdresse($user);
@@ -54,12 +54,12 @@ switch ($action) {
         if ($checkEmprunt) {
             $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idUser);
             $aAlbums = array();
-            foreach($aEmprunt as $emprunt) {
+            foreach ($aEmprunt as $emprunt) {
                 $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
                 $aAlbums[] = $exemplaire->getISBN();
             }
             $aBD = array();
-            foreach($aAlbums as $album) {
+            foreach ($aAlbums as $album) {
                 $bd = BDMgr::searchBDByISBN($album);
                 $aBD[] = $bd;
             }
@@ -67,8 +67,8 @@ switch ($action) {
         require 'Views/view_displayAdherent.php';
         break;
 
-    case 'modifyAdherent' :
-        if (isset( $_POST["newNom"])) {
+    case 'modifyAdherent':
+        if (isset($_POST["newNom"])) {
             $modMessage = updateAdherent();
         }
         if (isset($_POST["idAdherent"])) {
@@ -78,7 +78,7 @@ switch ($action) {
         $nom = afficheNom($adherent);
         $prenom = affichePrenom($adherent);
         $adresse = afficheAdresse($adherent);
-        $aAdress = explode("<br/>",$adresse);
+        $aAdress = explode("<br/>", $adresse);
         $nEtRue = $aAdress[0];
         if (count($aAdress) == 4) {
             $adresse2 = $aAdress[1];
@@ -97,17 +97,16 @@ switch ($action) {
         if ($checkEmprunt) {
             $aEmprunt = EmpruntMgr::getCurrentEmpruntsByUser($idAdherent);
             $aAlbums = array();
-            foreach($aEmprunt as $emprunt) {
+            foreach ($aEmprunt as $emprunt) {
                 $exemplaire = ExemplaireMgr::getExemplaireById($emprunt['ID_exemplaire']);
                 $aAlbums[] = $exemplaire->getISBN();
             }
             $aBD = array();
-            foreach($aAlbums as $album) {
+            foreach ($aAlbums as $album) {
                 $bd = BDMgr::searchBDByISBN($album);
                 $aBD[] = $bd;
             }
         }
         require 'Views/view_modifyAdherent.php';
         break;
-        
 }

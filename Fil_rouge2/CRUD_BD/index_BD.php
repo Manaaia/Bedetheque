@@ -1,4 +1,3 @@
-<!-- FLAVIE -->
 <?php
 // SWITCH VALEUR ACTION DETERMINE AFFICHAGE ET FONCTIONNALITES
 switch ($action) {
@@ -303,5 +302,3 @@ switch ($action) {
         break;
     
 }
-
-?>

@@ -1,4 +1,3 @@
-<!-- FLAVIE -->
 <?php
 
 require_once('BDException.class.php');

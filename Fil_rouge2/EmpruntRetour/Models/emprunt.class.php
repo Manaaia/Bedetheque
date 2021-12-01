@@ -1,8 +1,9 @@
-<?php 
+<?php
 
-require_once('EmpruntException.class.php');
+require_once('empruntException.class.php');
 
-class Emprunt {
+class Emprunt
+{
 
     // Proprieties
     private $idEmprunt;
@@ -12,7 +13,8 @@ class Emprunt {
     private $idExemplaire;
 
     // Constructor
-    public function __construct ($idEmprunt = null, $dateEmprunt, $dateRetour = null, $idUser, $idExemplaire) {
+    public function __construct($idEmprunt = null, $dateEmprunt, $dateRetour = null, $idUser, $idExemplaire)
+    {
         $this->setIdEmprunt($idEmprunt);
         $this->setDateEmprunt($dateEmprunt);
         $this->setDateRetour($dateRetour);
@@ -26,11 +28,12 @@ class Emprunt {
      * @param int $idEmprunt
      * @return void
      */
-    private function setIdEmprunt($idEmprunt) {
-        if (preg_match("/[0-9]/",$idEmprunt) || $idEmprunt == null) {
+    private function setIdEmprunt($idEmprunt)
+    {
+        if (preg_match("/[0-9]/", $idEmprunt) || $idEmprunt == null) {
             $this->idEmprunt = $idEmprunt;
         } else {
-            throw new EmpruntException ("L'id emprunt ne doit être composé que de chiffres.");
+            throw new EmpruntException("L'id emprunt ne doit être composé que de chiffres.");
         }
     }
 
@@ -39,7 +42,8 @@ class Emprunt {
      * @param void
      * @return int $idEmprunt
      */
-    public function getIdEmprunt() {
+    public function getIdEmprunt()
+    {
         return $this->idEmprunt;
     }
 
@@ -48,11 +52,12 @@ class Emprunt {
      * @param string $dateEmprunt
      * @return void
      */
-    private function setDateEmprunt($dateEmprunt) {
-        if (preg_match("/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/",$dateEmprunt)) {
+    private function setDateEmprunt($dateEmprunt)
+    {
+        if (preg_match("/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/", $dateEmprunt)) {
             $this->dateEmprunt = $dateEmprunt;
         } else {
-            throw new EmpruntException ("La date doit être au format date 'yyyy-mm-dd'.");
+            throw new EmpruntException("La date doit être au format date 'yyyy-mm-dd'.");
         }
     }
 
@@ -61,7 +66,8 @@ class Emprunt {
      * @param void
      * @return string $dateEmprunt
      */
-    public function getDateEmprunt() {
+    public function getDateEmprunt()
+    {
         return $this->dateEmprunt;
     }
 
@@ -70,11 +76,12 @@ class Emprunt {
      * @param string $dateRetour
      * @return void
      */
-    private function setDateRetour($dateRetour) {
-        if (preg_match("/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/",$dateRetour) || $dateRetour == null) {
-            $this->dateRetour= $dateRetour;
+    private function setDateRetour($dateRetour)
+    {
+        if (preg_match("/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/", $dateRetour) || $dateRetour == null) {
+            $this->dateRetour = $dateRetour;
         } else {
-            throw new EmpruntException ("La date doit être au format date 'yyyy-mm-dd'.");
+            throw new EmpruntException("La date doit être au format date 'yyyy-mm-dd'.");
         }
     }
 
@@ -83,7 +90,8 @@ class Emprunt {
      * @param void
      * @return string $dateRetour
      */
-    public function getDateRetour() {
+    public function getDateRetour()
+    {
         return $this->dateRetour;
     }
 
@@ -92,7 +100,8 @@ class Emprunt {
      * @param int $idUser
      * @return void
      */
-    private function setIdUser($idUser) {
+    private function setIdUser($idUser)
+    {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT id_user FROM user WHERE id_role = 5';
@@ -106,14 +115,14 @@ class Emprunt {
         $result->closeCursor();
         connexionBDD::disconnect();
 
-        for ($i=0;$i<count($idList);$i++) {
-            if (in_array($idUser,$idList[$i])) {
+        for ($i = 0; $i < count($idList); $i++) {
+            if (in_array($idUser, $idList[$i])) {
                 $this->idUser = $idUser;
             }
         }
 
         if (!$this->idUser == $idUser) {
-            throw new ExemplaireException ("Cet adhérent n'existe pas.");
+            throw new ExemplaireException("Cet adhérent n'existe pas.");
         }
     }
 
@@ -122,7 +131,8 @@ class Emprunt {
      * @param void
      * @return int $idUser
      */
-    public function getIdUser() {
+    public function getIdUser()
+    {
         return $this->idUser;
     }
 
@@ -131,7 +141,8 @@ class Emprunt {
      * @param string $idExemplaire
      * @return void
      */
-    private function setIdExemplaire($idExemplaire) {
+    private function setIdExemplaire($idExemplaire)
+    {
         $connexionPDO = connexionBDD::getConnexion();
 
         $sql = 'SELECT ID_exemplaire FROM exemplaire';
@@ -145,14 +156,14 @@ class Emprunt {
         $result->closeCursor();
         connexionBDD::disconnect();
 
-        for ($i=0;$i<count($idList);$i++) {
-            if (in_array($idExemplaire,$idList[$i])) {
+        for ($i = 0; $i < count($idList); $i++) {
+            if (in_array($idExemplaire, $idList[$i])) {
                 $this->idExemplaire = $idExemplaire;
             }
         }
 
         if (!$this->idExemplaire == $idExemplaire) {
-            throw new ExemplaireException ("Cet exemplaire n'existe pas.");
+            throw new ExemplaireException("Cet exemplaire n'existe pas.");
         }
     }
 
@@ -161,7 +172,8 @@ class Emprunt {
      * @param void
      * @return int $idExemplaire
      */
-    public function getIdExemplaire() {
+    public function getIdExemplaire()
+    {
         return $this->idExemplaire;
     }
 }
