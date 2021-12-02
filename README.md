@@ -1,4 +1,4 @@
-# AFPA-Fil_rouge_2
+# Bédéthèque
 
 Website for management of comics in several libraries (users, cotisations, fines, borrows and returns, stocks, consultation, localisation, etc).
 
